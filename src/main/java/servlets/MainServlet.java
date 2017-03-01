@@ -10,13 +10,9 @@ import java.io.IOException;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/"})
 public class MainServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("test");
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("name", "Emperor protect.");
-
+        request.setCharacterEncoding("UTF-8");
+        request.setAttribute("text", request.getParameter("testText"));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
