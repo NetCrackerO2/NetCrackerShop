@@ -18,6 +18,6 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("data",
                 new Product[] { new Product("test_product1", lorem, 100), new Product("test_product2", lorem, 200) });
 
-        request.getRequestDispatcher("template.jsp").forward(request, response);
+        request.getRequestDispatcher("template_products.jsp").forward(request, response);
     }
 }
