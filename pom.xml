@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress MavenModelInspection -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -13,6 +14,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
@@ -46,9 +48,7 @@
 					<artifactId>maven-glassfish-plugin</artifactId>
 					<version>2.1</version>
 					<configuration>
-						<glassfishDirectory>${local.glassfish.home}</glassfishDirectory>
-						<user>admin</user>
-						<passwordFile>${local.glassfish.passfile}</passwordFile>
+                        <user>admin</user>
 						<domain>
 							<name>domain1</name>
 							<httpPort>8080</httpPort>

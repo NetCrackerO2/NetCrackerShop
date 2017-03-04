@@ -1,14 +1,22 @@
-package main.java.servlets;
+package servlets;
 
 public class Product {
     private String title;
     private String description;
     private double price;
+    private int count;
 
     public Product(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;
+    }
+
+    public Product(String title, String description, double price, int count) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.count = count;
     }
 
     public String getTitle() {
@@ -34,4 +42,8 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    private int getCount(){ return  count; }
+
+    private void setCount(int count){ this.count = count; }
 }

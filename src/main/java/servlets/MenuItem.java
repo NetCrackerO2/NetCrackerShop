@@ -1,4 +1,4 @@
-package main.java.servlets;
+package servlets;
 
 public class MenuItem {
     private String title;
