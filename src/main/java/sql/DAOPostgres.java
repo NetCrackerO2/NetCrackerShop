@@ -7,6 +7,11 @@ import java.sql.SQLException;
 public class DAOPostgres extends DAOBase
 {
     private  Connection  connection = null;
+    public static final String DEFAULT_HOST = "localhost";
+    public static final String DEFAULT_DATABASE = "shop";
+    public static final String DEFAULT_LOGIN = "postgres";
+    public static final String DEFAULT_PASSWORD = "admin";
+    public static final int DEFAULT_PORT = 5432;
 
     public DAOPostgres() {
         super ("org.postgresql.Driver");

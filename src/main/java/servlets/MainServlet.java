@@ -1,7 +1,5 @@
 package servlets;
 
-import servlets.MenuItem;
-import servlets.Product;
 import sql.DAOPostgres;
 import sql.Fields;
 
@@ -20,8 +18,8 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         DAOPostgres dp = new DAOPostgres();
-        dp.setURL("localhost", "shop", 5432);
-        dp.Connect("postgres", "popov");
+        dp.setURL(DAOPostgres.DEFAULT_HOST, DAOPostgres.DEFAULT_DATABASE, DAOPostgres.DEFAULT_PORT);
+        dp.Connect(DAOPostgres.DEFAULT_LOGIN, DAOPostgres.DEFAULT_PASSWORD);
 
         ResultSet rs = dp.selectTable(Fields.PRODUCT_TABLE);
 
