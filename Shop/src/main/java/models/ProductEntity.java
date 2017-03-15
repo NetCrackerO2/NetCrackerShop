@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product", schema = "public", catalog = "shop")
 @XmlRootElement
 public class ProductEntity {
-    private int id;
+    private Integer id;
     private String prodName;
     private String description;
     private int price;
@@ -16,12 +16,17 @@ public class ProductEntity {
     private CategoryEntity categoryByCategoryId;
 
     @Id
+    @SequenceGenerator(name = "product_id_seq",
+            sequenceName = "product_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "product_id_seq")
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

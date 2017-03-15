@@ -1,21 +1,36 @@
 import models.ProductEntity;
-import sql.AbstractDAO;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.*;
+import java.util.List;
+import java.util.Objects;
 
 @Path("/test")
 public class TestRest {
     @Inject
-    AbstractDAO dao;
+    ProductBean pb;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public ProductEntity function() {
-        ProductEntity pe = dao.get(1);
-        return pe;
+    @Produces("application/json;charset=utf-8")
+    public List<ProductEntity> function() {
+        return pb.getAll();
+    }
+
+    @GET
+    @Path("/add/")
+    public String function(@QueryParam("name") String name,
+                           @QueryParam("description") String description) {
+        if (name == null || Objects.equals(name, ""))
+            return null;
+
+        pb.create(name, description);
+        return null;
+    }
+
+    @GET
+    @Path("/get/{id}")
+    @Produces("application/json;charset=utf-8")
+    public ProductEntity getProduct(@PathParam("id") int id) {
+        return pb.get(id);
     }
 }
