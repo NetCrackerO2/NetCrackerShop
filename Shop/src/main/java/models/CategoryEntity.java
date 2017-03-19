@@ -1,15 +1,15 @@
 package models;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
-/**
- * Created by temon137 on 14.03.17.
- */
+
 @Entity
-@Table(name = "category", schema = "public", catalog = "shop")
+@Table(name = "categories", schema = "public", catalog = "shopDB")
 public class CategoryEntity {
     private int id;
-    private String categoryName;
+    private String name;
+    private CategoryEntity categoryByParentId;
 
     @Id
     @Column(name = "id")
@@ -22,13 +22,13 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "category_name")
-    public String getCategoryName() {
-        return categoryName;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CategoryEntity {
         CategoryEntity that = (CategoryEntity) o;
 
         if (id != that.id) return false;
-        if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
@@ -47,7 +47,18 @@ public class CategoryEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (categoryName != null ? categoryName.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @ManyToOne
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    public CategoryEntity getCategoryByParentId() {
+        return categoryByParentId;
+    }
+
+    public void setCategoryByParentId(CategoryEntity categoriesByParentId) {
+        this.categoryByParentId = categoriesByParentId;
     }
 }

@@ -2,14 +2,12 @@ package models;
 
 import javax.persistence.*;
 
-/**
- * Created by temon137 on 14.03.17.
- */
+
 @Entity
-@Table(name = "client", schema = "public", catalog = "shop")
+@Table(name = "clients", schema = "public", catalog = "shopDB")
 public class ClientEntity {
     private int id;
-    private String clientName;
+    private String name;
     private String defaultAddress;
 
     @Id
@@ -23,13 +21,13 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "client_name")
-    public String getClientName() {
-        return clientName;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -50,7 +48,7 @@ public class ClientEntity {
         ClientEntity that = (ClientEntity) o;
 
         if (id != that.id) return false;
-        if (clientName != null ? !clientName.equals(that.clientName) : that.clientName != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (defaultAddress != null ? !defaultAddress.equals(that.defaultAddress) : that.defaultAddress != null)
             return false;
 
@@ -60,7 +58,7 @@ public class ClientEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (clientName != null ? clientName.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (defaultAddress != null ? defaultAddress.hashCode() : 0);
         return result;
     }

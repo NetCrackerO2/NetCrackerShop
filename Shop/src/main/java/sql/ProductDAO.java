@@ -1,6 +1,7 @@
 package sql;
 
 
+import models.OrderEntity;
 import models.ProductEntity;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,6 +19,11 @@ public class ProductDAO extends AbstractDAO {
         }
     }
 
+
+    public ProductEntity create(ProductEntity pe) {
+        return persist(pe);
+    }
+
     public ProductEntity get(int id) {
         try {
             return em.createQuery("SELECT e from ProductEntity e where e.id=:token", ProductEntity.class)
@@ -28,7 +34,13 @@ public class ProductDAO extends AbstractDAO {
         }
     }
 
-    public ProductEntity create(ProductEntity pe) {
-        return persist(pe);
+    public List<OrderEntity> getOrders(int id) {
+        try {
+            return em.createQuery("SELECT e.orders from ProductEntity e join e.orders where e.id=:token")
+                    .setParameter("token", id)
+                    .getResultList();
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 }

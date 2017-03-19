@@ -1,9 +1,11 @@
+import models.OrderEntity;
 import models.ProductEntity;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 import java.util.Objects;
+
 
 @Path("/test")
 public class TestRest {
@@ -32,5 +34,21 @@ public class TestRest {
     @Produces("application/json;charset=utf-8")
     public ProductEntity getProduct(@PathParam("id") int id) {
         return pb.get(id);
+    }
+
+    @GET
+    @Path("/getorders/{id}")
+    @Produces("application/json;charset=utf-8")
+    public List<OrderEntity> getProductOrders(@PathParam("id") int id) {
+        return pb.getOrders(id);
+    }
+
+    @GET
+    @Path("/setdesc/{id}")
+    @Produces("application/json;charset=utf-8")
+    public String setProductDescription(@PathParam("id") int id,
+                                        @QueryParam("description") String description) {
+        pb.setDescription(id, description);
+        return null; //TODO replace this stub to something useful
     }
 }
