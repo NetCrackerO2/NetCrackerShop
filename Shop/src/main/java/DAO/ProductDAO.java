@@ -1,4 +1,4 @@
-package sql;
+package DAO;
 
 
 import models.OrderEntity;

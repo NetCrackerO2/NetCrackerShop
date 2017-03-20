@@ -1,0 +1,36 @@
+h1 {
+    margin: 2%;
+}
+
+nav {
+    background-color: #000;
+}
+
+nav > ul > li > a::after {
+    background-color: #FFF;
+}
+
+article {
+    min-width: 200px;
+    min-height: 20%;
+    width: 20%;
+    padding: 30px 30px 30px 30px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+article:last-of-type {
+    margin-bottom: 30px;
+}
+
+desc {
+    word-wrap: break-word;
+    display: block;
+}
+
+price {
+    color: green;
+    display: block;
+    font-size: 1.2em;
+}

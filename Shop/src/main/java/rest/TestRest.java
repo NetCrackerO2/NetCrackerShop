@@ -1,3 +1,7 @@
+package rest;
+
+
+import beans.ProductBean;
 import models.OrderEntity;
 import models.ProductEntity;
 

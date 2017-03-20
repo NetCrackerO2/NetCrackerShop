@@ -1,5 +1,5 @@
-function start() {
-    $.getJSON('http://localhost:8080/Shop/rest/test/', function (data) {
+function start(categoryId) {
+    $.getJSON('http://localhost:8080/Shop/rest/category/' + categoryId, function (data) {
         var items = document.getElementById("items");
 
         $.each(data, function (key, value) {
@@ -28,4 +28,26 @@ function start() {
             items.appendChild(newArticle);
         });
     });
+}
+
+function fillCategories() {
+    $.getJSON('http://localhost:8080/Shop/rest/category/', function (data) {
+        var categoriesSelect = document.categoriesForm.categories;
+
+        $.each(data, function (key, value) {
+            categoriesSelect.options[categoriesSelect.options.length] = new Option(value.name, value.id);
+        })
+    });
+}
+
+function fillProducts() {
+    var elements = document.getElementsByClassName("z1");
+    while (elements.length > 0) {
+        elements[0].remove();
+    }
+
+    var categoriesSelect = document.categoriesForm.categories;
+    var selectedIndex = categoriesSelect.selectedIndex;
+    var value = categoriesSelect.options[selectedIndex].value;
+    start(value);
 }
