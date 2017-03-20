@@ -15,6 +15,7 @@ public class OrderEntity {
     private String addres;
     private Date date;
     private String status;
+    private List<OrderProductEntity> orderProductsById;
     private ClientEntity clientByClientId;
     private List<ProductEntity> products = new ArrayList<ProductEntity>(0);
 
@@ -83,15 +84,26 @@ public class OrderEntity {
     }
 
     @XmlTransient
+    @OneToMany(mappedBy = "orderByOrderId")
+    public List<OrderProductEntity> getOrderProductsById() {
+        return orderProductsById;
+    }
+
+    public void setOrderProductsById(List<OrderProductEntity> orderProductsById) {
+        this.orderProductsById = orderProductsById;
+    }
+
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     public ClientEntity getClientByClientId() {
         return clientByClientId;
     }
 
-    public void setClientByClientId(ClientEntity clientsByClientId) {
-        this.clientByClientId = clientsByClientId;
+    public void setClientByClientId(ClientEntity clientByClientId) {
+        this.clientByClientId = clientByClientId;
     }
+
 
     @XmlTransient
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

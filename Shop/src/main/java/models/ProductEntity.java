@@ -3,8 +3,7 @@ package models;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 
 @Entity
@@ -15,8 +14,8 @@ public class ProductEntity {
     private Float price;
     private Integer count;
     private String description;
+    private Collection<OrderProductEntity> orderProductsById;
     private CategoryEntity categoryByCategoryId;
-    private List<OrderEntity> orders = new ArrayList<OrderEntity>(0);
 
     @Id
     @Column(name = "id")
@@ -95,26 +94,23 @@ public class ProductEntity {
     }
 
     @XmlTransient
+    @OneToMany(mappedBy = "productByProductId")
+    public Collection<OrderProductEntity> getOrderProductsById() {
+        return orderProductsById;
+    }
+
+    public void setOrderProductsById(Collection<OrderProductEntity> orderProductsById) {
+        this.orderProductsById = orderProductsById;
+    }
+
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     public CategoryEntity getCategoryByCategoryId() {
         return categoryByCategoryId;
     }
 
-    public void setCategoryByCategoryId(CategoryEntity categoriesByCategoryId) {
-        this.categoryByCategoryId = categoriesByCategoryId;
-    }
-
-    @XmlTransient
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "order_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    public List<OrderEntity> getOrders() {
-        return this.orders;
-    }
-
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
+    public void setCategoryByCategoryId(CategoryEntity categoryByCategoryId) {
+        this.categoryByCategoryId = categoryByCategoryId;
     }
 }

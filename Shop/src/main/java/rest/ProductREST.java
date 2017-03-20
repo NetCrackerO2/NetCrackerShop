@@ -2,8 +2,9 @@ package rest;
 
 
 import beans.ProductBean;
-import models.OrderEntity;
+import models.OrderProductEntity;
 import models.ProductEntity;
+import models.ProductInOrder;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -43,7 +44,7 @@ public class ProductREST {
     @GET
     @Path("/getorders/{id}")
     @Produces("application/json;charset=utf-8")
-    public List<OrderEntity> getProductOrders(@PathParam("id") int id) {
+    public List<OrderProductEntity> getProductOrders(@PathParam("id") int id) {
         return pb.getOrders(id);
     }
 
@@ -61,5 +62,12 @@ public class ProductREST {
     @Produces("application/json;charset=utf-8")
     public List<ProductEntity> getProducts(@PathParam("categoryId") int categoryId) {
         return pb.getProductsByCategory(categoryId);
+    }
+
+    @GET
+    @Path("/getinorder/{orderId}")
+    @Produces("application/json;charset=utf-8")
+    public List<ProductInOrder> getProductsInOrder(@PathParam("orderId") int orderId) {
+        return pb.getProductsInOrder(orderId);
     }
 }

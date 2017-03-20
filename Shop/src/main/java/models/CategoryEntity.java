@@ -1,7 +1,9 @@
 package models;
 
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collection;
 
 
 @Entity
@@ -10,6 +12,8 @@ public class CategoryEntity {
     private int id;
     private String name;
     private CategoryEntity categoryByParentId;
+    private Collection<CategoryEntity> categoriesById;
+    private Collection<ProductEntity> productsById;
 
     @Id
     @Column(name = "id")
@@ -58,7 +62,27 @@ public class CategoryEntity {
         return categoryByParentId;
     }
 
-    public void setCategoryByParentId(CategoryEntity categoriesByParentId) {
-        this.categoryByParentId = categoriesByParentId;
+    public void setCategoryByParentId(CategoryEntity categoryByParentId) {
+        this.categoryByParentId = categoryByParentId;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "categoryByParentId")
+    public Collection<CategoryEntity> getCategoriesById() {
+        return categoriesById;
+    }
+
+    public void setCategoriesById(Collection<CategoryEntity> categoriesById) {
+        this.categoriesById = categoriesById;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "categoryByCategoryId")
+    public Collection<ProductEntity> getProductsById() {
+        return productsById;
+    }
+
+    public void setProductsById(Collection<ProductEntity> productsById) {
+        this.productsById = productsById;
     }
 }

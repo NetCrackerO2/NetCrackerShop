@@ -1,9 +1,10 @@
 package beans;
 
 
-import models.OrderEntity;
-import models.ProductEntity;
 import DAO.ProductDAO;
+import models.OrderProductEntity;
+import models.ProductEntity;
+import models.ProductInOrder;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class ProductBean {
         return dao.get(id);
     }
 
-    public List<OrderEntity> getOrders(int id) {
+    public List<OrderProductEntity> getOrders(int id) {
         return dao.getOrders(id);
     }
 
@@ -42,5 +43,9 @@ public class ProductBean {
 
     public List<ProductEntity> getProductsByCategory(int id) {
         return dao.getProductsByCategory(id);
+    }
+
+    public List<ProductInOrder> getProductsInOrder(int orderId) {
+        return dao.getProductsInOrder(orderId);
     }
 }
