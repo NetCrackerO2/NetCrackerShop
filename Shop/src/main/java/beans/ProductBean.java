@@ -35,7 +35,12 @@ public class ProductBean {
         return dao.getOrders(id);
     }
 
-    public void setDescription(int id, String descriprion) {
-        dao.get(id).setDescription(descriprion);
+    public void setDescription(int id, String description) {
+        dao.get(id).setDescription(description);
+    }
+
+
+    public List<ProductEntity> getProductsByCategory(int id) {
+        return dao.getProductsByCategory(id);
     }
 }

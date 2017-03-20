@@ -18,8 +18,4 @@ public class CategoryBean {
     public List<CategoryEntity> getAll() {
         return dao.getAll();
     }
-
-    public List<ProductEntity> getProducts(int id) {
-        return dao.getProducts(id);
-    }
 }

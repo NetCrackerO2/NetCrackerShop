@@ -24,10 +24,5 @@ public class CategoryREST {
         return cb.getAll();
     }
 
-    @GET
-    @Path("/{id}")
-    @Produces("application/json;charset=utf-8")
-    public List<ProductEntity> getProducts(@PathParam("id") int id) {
-        return cb.getProducts(id);
-    }
+
 }

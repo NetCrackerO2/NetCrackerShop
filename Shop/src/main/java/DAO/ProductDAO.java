@@ -43,4 +43,14 @@ public class ProductDAO extends AbstractDAO {
             return null;
         }
     }
+
+    public List<ProductEntity> getProductsByCategory(int categoryId) {
+        try {
+            return em.createQuery("SELECT e from ProductEntity e where e.categoryByCategoryId.id=:token", ProductEntity.class)
+                    .setParameter("token", categoryId)
+                    .getResultList();
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
+    }
 }

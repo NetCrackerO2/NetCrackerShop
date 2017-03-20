@@ -18,14 +18,4 @@ public class CategoryDAO extends AbstractDAO {
             return null;
         }
     }
-
-    public List<ProductEntity> getProducts(int id) {
-        try {
-            return em.createQuery("SELECT e from ProductEntity e where e.categoryByCategoryId.id=:token", ProductEntity.class)
-                    .setParameter("token", id)
-                    .getResultList();
-        } catch (EntityNotFoundException e) {
-            return null;
-        }
-    }
 }

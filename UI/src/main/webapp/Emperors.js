@@ -1,5 +1,5 @@
 function start(categoryId) {
-    $.getJSON('http://localhost:8080/Shop/rest/category/' + categoryId, function (data) {
+    $.getJSON('http://localhost:8080/Shop/rest/product/getbycategory/' + categoryId, function (data) {
         var items = document.getElementById("items");
 
         $.each(data, function (key, value) {

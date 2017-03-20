@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Path("/test")
-public class TestRest {
+@Path("/product")
+public class ProductREST {
     @Inject
     ProductBean pb;
 
@@ -54,5 +54,12 @@ public class TestRest {
                                         @QueryParam("description") String description) {
         pb.setDescription(id, description);
         return null; //TODO replace this stub to something useful
+    }
+
+    @GET
+    @Path("/getbycategory/{categoryId}")
+    @Produces("application/json;charset=utf-8")
+    public List<ProductEntity> getProducts(@PathParam("categoryId") int categoryId) {
+        return pb.getProductsByCategory(categoryId);
     }
 }
