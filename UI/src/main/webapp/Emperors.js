@@ -7,7 +7,7 @@ function Page(url, title, request, callback){
 Page.prototype.suitable = function(url){
 	return this.urlRegExp.test(url);
 };
-Page.prototype.load = function(data, url){
+Page.prototype.load = function(data, url, push=true){
 	console.log("loaded " + url + " data: " + data);
 	var title = "";
 	if (typeof this.title === 'function') {
@@ -16,7 +16,8 @@ Page.prototype.load = function(data, url){
 		title = this.title;
 	}
 	document.title = title;
-	window.history.pushState(data, title, url);
+	if(push)
+		window.history.pushState(data, title, url);
 	$("#items").empty();
 	this.callback(this, data);
 };
@@ -58,7 +59,7 @@ var pager = {
 	}
 };
 window.onpopstate = function(e){
-	pager.getPageByUrl(document.location).load(e.state);
+	pager.getPageByUrl(document.location).load(e.state, document.location, false);
 };
 pager.add(new Page(
 	"/404",
@@ -89,26 +90,39 @@ pager.add(new Page(
 pager.add(new Page(
 	".*//[^/]+/category/([0-9]*)",
 	function(page, data){
-		return "Category, " + data.length + " items";
+		return "Category " + data.name;
 	},
-	"/Shop/rest/product/getbycategory/",
+	"/Shop/rest/category/get/",
 	function(page, data){
-		for(var i in data){
-			$("#items").append('<article class="z1">'+
-			'<h2>'+data[i].name+'</h2>'+
-			'<desc>'+data[i].description+'</desc>'+
-			'<price>'+data[i].price+'</price>'+
-			'</article>');
-		}
+		$.getJSON("/Shop/rest/product/getbycategory/" + data.id, function (data) {
+			for(var i in data){
+				$("#items").append('<article class="z1">'+
+				'<a class="product" href="http://localhost:8080/product/'+data[i].id+'"><h2>'+data[i].name+'</h2></a>'+
+				'<desc>'+data[i].description+'</desc>'+
+				'<price>'+data[i].price+'</price>'+
+				'</article>');
+				$(".product").each(function() {
+					$(this).click(function() {
+						pager.go($(this).attr('href'));
+						return false;
+					});
+				});
+			}
+		});
 	}
 ));
 pager.add(new Page(
 	".*//[^/]+/product/([0-9]*)",
 	function(page, data){
-		return "Product "+data.name;
+		return "Product " + data.name;
 	},
-	"/Shop/rest/product/",
+	"/Shop/rest/product/get/",
 	function(page, data){
+		$("#items").append('<article class="z1">'+
+		'<h2>'+data.name+'</h2>'+
+		'<desc>'+data.description+'</desc>'+
+		'<price>'+data.price+'</price>'+
+		'</article>');
 	}
 ));
 
