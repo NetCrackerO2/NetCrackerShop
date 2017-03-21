@@ -3,7 +3,7 @@ package models;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -12,8 +12,8 @@ public class CategoryEntity {
     private int id;
     private String name;
     private CategoryEntity categoryByParentId;
-    private Collection<CategoryEntity> categoriesById;
-    private Collection<ProductEntity> productsById;
+    private List<CategoryEntity> categoriesById;
+    private List<ProductEntity> productsById;
 
     @Id
     @SequenceGenerator(name = "categories_id_seq",
@@ -73,21 +73,21 @@ public class CategoryEntity {
 
     @XmlTransient
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoryByParentId")
-    public Collection<CategoryEntity> getCategoriesById() {
+    public List<CategoryEntity> getCategoriesById() {
         return categoriesById;
     }
 
-    public void setCategoriesById(Collection<CategoryEntity> categoriesById) {
+    public void setCategoriesById(List<CategoryEntity> categoriesById) {
         this.categoriesById = categoriesById;
     }
 
     @XmlTransient
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoryByCategoryId")
-    public Collection<ProductEntity> getProductsById() {
+    public List<ProductEntity> getProductsById() {
         return productsById;
     }
 
-    public void setProductsById(Collection<ProductEntity> productsById) {
+    public void setProductsById(List<ProductEntity> productsById) {
         this.productsById = productsById;
     }
 }

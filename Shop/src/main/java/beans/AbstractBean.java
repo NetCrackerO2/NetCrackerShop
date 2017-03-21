@@ -1,11 +1,11 @@
-package DAO;
+package beans;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 
-public class AbstractDAO {
+public class AbstractBean {
     @PersistenceContext
     protected EntityManager em;
 

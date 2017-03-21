@@ -1,28 +1,41 @@
 package beans;
 
 
-import DAO.OrderDAO;
 import models.OrderEntity;
+import models.ProductEntity;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 
 @Stateless
-public class OrderBean {
-    @Inject
-    OrderDAO dao;
+public class OrderBean extends AbstractBean {
 
     public OrderEntity get(int id) {
-        return dao.get(id);
+        try {
+            return em.find(OrderEntity.class, id);
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 
     public List<OrderEntity> getAll() {
-        return dao.getAll();
+        try {
+            return em.createQuery("SELECT e from OrderEntity e", OrderEntity.class)
+                    .getResultList();
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 
     public void addProductInOrder(int orderId, int productId, int count, float price) {
-        dao.addProductInOrder(orderId, productId, count, price);
+        try {
+            OrderEntity order = em.find(OrderEntity.class, orderId);
+            ProductEntity product = em.find(ProductEntity.class, productId);
+
+            order.addProduct(product, count, price);
+        } catch (EntityNotFoundException ignored) {
+        }
     }
 }

@@ -2,72 +2,65 @@ package rest;
 
 
 import beans.ProductBean;
-import models.OrderProductEntity;
 import models.ProductEntity;
 import models.ProductInOrder;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import java.util.List;
-import java.util.Objects;
 
 
 @Path("/product")
 public class ProductREST {
     @Inject
-    ProductBean pb;
+    ProductBean bean;
+
 
     @GET
     @Produces("application/json;charset=utf-8")
-    public List<ProductEntity> function() {
-        return pb.getAll();
+    public List<ProductEntity> getAll() {
+        return bean.getAll();
     }
 
     @GET
+    @Path("/get/{id}")
+    @Produces("application/json;charset=utf-8")
+    public ProductEntity get(@PathParam("id") int id) {
+        return bean.get(id);
+    }
+
+    /*@GET
     @Path("/add/")
     public String function(@QueryParam("name") String name,
                            @QueryParam("description") String description) {
         if (name == null || Objects.equals(name, ""))
             return null;
 
-        pb.create(name, description);
+        bean.create(name, description);
         return null;
-    }
+    }*/
 
-    @GET
-    @Path("/get/{id}")
-    @Produces("application/json;charset=utf-8")
-    public ProductEntity getProduct(@PathParam("id") int id) {
-        return pb.get(id);
-    }
-
-    @GET
+    /*@GET
     @Path("/getorders/{id}")
     @Produces("application/json;charset=utf-8")
     public List<OrderProductEntity> getProductOrders(@PathParam("id") int id) {
-        return pb.getOrders(id);
-    }
-
-    @GET
-    @Path("/setdesc/{id}")
-    @Produces("application/json;charset=utf-8")
-    public String setProductDescription(@PathParam("id") int id,
-                                        @QueryParam("description") String description) {
-        pb.setDescription(id, description);
-        return null; //TODO: заменить на что-нибудь
-    }
+        return bean.getOrders(id);
+    }*/
 
     @GET
     @Path("/getbycategory/{categoryId}")
     @Produces("application/json;charset=utf-8")
-    public List<ProductEntity> getProducts(@PathParam("categoryId") int categoryId) {
-        return pb.getProductsByCategory(categoryId);
+    public List<ProductEntity> getByCategory(@PathParam("categoryId") int categoryId) {
+        return bean.getByCategory(categoryId);
     }
 
     @GET
     @Path("/getinorder/{orderId}")
     @Produces("application/json;charset=utf-8")
-    public List<ProductInOrder> getProductsInOrder(@PathParam("orderId") int orderId) {
-        return pb.getProductsInOrder(orderId);
+    public List<ProductInOrder> getInOrder(@PathParam("orderId") int orderId) {
+        return bean.getInOrder(orderId);
     }
 }
