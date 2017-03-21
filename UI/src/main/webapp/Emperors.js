@@ -8,7 +8,7 @@ Page.prototype.suitable = function(url){
 	return this.urlRegExp.test(url);
 };
 Page.prototype.load = function(data, url){
-	console.log("loaded " + url);
+	console.log("loaded " + url + " data: " + data);
 	var title = "";
 	if (typeof this.title === 'function') {
 		title = this.title(this, data);
@@ -74,7 +74,31 @@ pager.add(new Page(
 	"/Shop/rest/category/",
 	function(page, data){
 		for(var i in data){
-			$("#items").append('<article class="z1"><h2>'+data[i].name+'</h2></article>');
+			$("#items").append('<article class="z1"><a class="category" href="http://localhost:8080/category/'+data[i].id+'">'+
+			'<h2>'+data[i].name+'</h2>'+
+			'</a></article>');
+			$(".category").each(function() {
+				$(this).click(function() {
+					pager.go($(this).attr('href'));
+					return false;
+				});
+			});
+		}
+	}
+));
+pager.add(new Page(
+	".*//[^/]+/category/([0-9]*)",
+	function(page, data){
+		return "Category, " + data.length + " items";
+	},
+	"/Shop/rest/product/getbycategory/",
+	function(page, data){
+		for(var i in data){
+			$("#items").append('<article class="z1">'+
+			'<h2>'+data[i].name+'</h2>'+
+			'<desc>'+data[i].description+'</desc>'+
+			'<price>'+data[i].price+'</price>'+
+			'</article>');
 		}
 	}
 ));
