@@ -20,6 +20,10 @@ Page.prototype.load = function(data, url, push=true){
 		window.history.pushState(data, title, url);
 	$("#items").empty();
 	this.callback(this, data);
+	$.getJSON("/Shop/rest/product/getinorder/1", function (data) {
+		$("#shopped").text(data.length);
+		console.log("order update "+data);
+	});
 };
 Page.prototype.go = function(url){
 	console.log("go to " + url);
@@ -122,7 +126,14 @@ pager.add(new Page(
 		'<h2>'+data.name+'</h2>'+
 		'<desc>'+data.description+'</desc>'+
 		'<price>'+data.price+'</price>'+
+		'<input type="number" id="count" min="1" max="100" /><button id="buy">🛒</a>'+
 		'</article>');
+		$("#buy").click(function() {
+			var count = $("#count").val();
+			$.getJSON("/Shop/rest/order/addproductinorder/1?productId=" + data.id + "&count="+count+"&price=13.13", function (data) {});
+			pager.getPageByUrl(document.location).load(data, document.location, false);
+			return false;
+		});
 	}
 ));
 
