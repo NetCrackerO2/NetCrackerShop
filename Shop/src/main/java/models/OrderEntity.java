@@ -20,6 +20,11 @@ public class OrderEntity {
     private List<ProductEntity> products = new ArrayList<ProductEntity>(0);
 
     @Id
+    @SequenceGenerator(name = "orders_id_seq",
+            sequenceName = "orders_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "orders_id_seq")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -94,7 +99,7 @@ public class OrderEntity {
     }
 
     @XmlTransient
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     public ClientEntity getClientByClientId() {
         return clientByClientId;
@@ -116,5 +121,17 @@ public class OrderEntity {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+
+    public void addProduct(ProductEntity product, int count, float price) {
+        OrderProductEntity association = new OrderProductEntity();
+        association.setOrderByOrderId(this);
+        association.setProductByProductId(product);
+        association.setCount(count);
+        association.setPrice(price);
+
+        this.orderProductsById.add(association);
+        product.getOrderProductsById().add(association);
     }
 }

@@ -54,7 +54,7 @@ public class ProductREST {
     public String setProductDescription(@PathParam("id") int id,
                                         @QueryParam("description") String description) {
         pb.setDescription(id, description);
-        return null; //TODO replace this stub to something useful
+        return null; //TODO: заменить на что-нибудь
     }
 
     @GET

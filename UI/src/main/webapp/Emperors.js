@@ -20,9 +20,15 @@ function start(categoryId) {
             newContent = document.createTextNode(value.price);
             newPrice.appendChild(newContent);
 
+            var newLink = document.createElement("a");
+            newLink.href = "http://localhost:8080/Shop/rest/order/addproductinorder/1?productId=" + value.id
+                + "&count=13&price=13.13";
+            newLink.textContent = "Добавить в корзину";
+
             newArticle.appendChild(newH2);
             newArticle.appendChild(newDesc);
             newArticle.appendChild(newPrice);
+            newArticle.appendChild(newLink);
 
 
             items.appendChild(newArticle);

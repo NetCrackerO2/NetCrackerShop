@@ -29,9 +29,10 @@ public class ProductDAO extends AbstractDAO {
 
     public ProductEntity get(int id) {
         try {
-            return em.createQuery("SELECT e from ProductEntity e where e.id=:token", ProductEntity.class)
+            return em.find(ProductEntity.class, id);
+            /*return em.createQuery("SELECT e from ProductEntity e where e.id=:token", ProductEntity.class)
                     .setParameter("token", id)
-                    .getSingleResult();
+                    .getSingleResult();*/
         } catch (EntityNotFoundException e) {
             return null;
         }

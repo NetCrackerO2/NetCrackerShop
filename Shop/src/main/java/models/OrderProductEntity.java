@@ -15,6 +15,11 @@ public class OrderProductEntity {
     private ProductEntity productByProductId;
 
     @Id
+    @SequenceGenerator(name = "order_product_id_seq",
+            sequenceName = "order_product_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "order_product_id_seq")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -67,7 +72,7 @@ public class OrderProductEntity {
     }
 
     @XmlTransient
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     public OrderEntity getOrderByOrderId() {
         return orderByOrderId;
@@ -78,7 +83,7 @@ public class OrderProductEntity {
     }
 
     @XmlTransient
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     public ProductEntity getProductByProductId() {
         return productByProductId;

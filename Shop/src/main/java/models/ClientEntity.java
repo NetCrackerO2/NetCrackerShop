@@ -15,6 +15,11 @@ public class ClientEntity {
     private Collection<OrderEntity> ordersById;
 
     @Id
+    @SequenceGenerator(name = "clients_id_seq",
+            sequenceName = "clients_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "clients_id_seq")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -68,7 +73,7 @@ public class ClientEntity {
     }
 
     @XmlTransient
-    @OneToMany(mappedBy = "clientByClientId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "clientByClientId")
     public Collection<OrderEntity> getOrdersById() {
         return ordersById;
     }

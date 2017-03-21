@@ -18,6 +18,11 @@ public class ProductEntity {
     private CategoryEntity categoryByCategoryId;
 
     @Id
+    @SequenceGenerator(name = "products_id_seq",
+            sequenceName = "products_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "products_id_seq")
     @Column(name = "id")
     public int getId() {
         return id;
@@ -94,7 +99,7 @@ public class ProductEntity {
     }
 
     @XmlTransient
-    @OneToMany(mappedBy = "productByProductId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "productByProductId")
     public Collection<OrderProductEntity> getOrderProductsById() {
         return orderProductsById;
     }
@@ -104,7 +109,7 @@ public class ProductEntity {
     }
 
     @XmlTransient
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     public CategoryEntity getCategoryByCategoryId() {
         return categoryByCategoryId;
