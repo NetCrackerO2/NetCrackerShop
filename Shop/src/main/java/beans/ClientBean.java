@@ -1,6 +1,7 @@
 package beans;
 
 
+import clientInfo.ClientInfo;
 import models.ClientEntity;
 
 
@@ -19,5 +20,14 @@ public class ClientBean extends GenericBean<ClientEntity> {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public ClientInfo getUserInfo(int clientId) {
+        ClientEntity client = get(clientId);
+        if (client == null) {
+            return null;
+        }
+
+        return new ClientInfo(client.getId());
     }
 }

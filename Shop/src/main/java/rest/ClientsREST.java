@@ -2,6 +2,8 @@ package rest;
 
 
 import beans.ClientBean;
+import clientInfo.ClientInfo;
+import clientInfo.NeedAuthorization;
 import models.ClientEntity;
 
 import javax.inject.Inject;
@@ -18,6 +20,9 @@ public class ClientsREST {
 
     @Inject
     ClientBean bean;
+
+    @Inject
+    ClientInfo clientInfo;
 
     @GET
     @Produces("application/json;charset=utf-8")
@@ -58,11 +63,8 @@ public class ClientsREST {
     @GET
     @Path("/foo")
     @Produces(MediaType.TEXT_PLAIN)
+    @NeedAuthorization
     public Response foo(@CookieParam("clientId") Cookie cookie) {
-        if (cookie == null) {
-            return Response.serverError().entity("ERROR").build();
-        } else {
-            return Response.ok(cookie.getValue()).build();
-        }
+        return Response.ok().entity(clientInfo.getId()).build();
     }
 }

@@ -1,6 +1,7 @@
 package beans;
 
 
+import models.ClientEntity;
 import models.OrderEntity;
 import models.ProductEntity;
 
@@ -18,7 +19,7 @@ public class OrderBean extends GenericBean<OrderEntity> {
     }
 
 
-    public OrderEntity get(int id) {
+    /*public OrderEntity get(int id) {
         try {
             return em.find(OrderEntity.class, id);
         } catch (EntityNotFoundException e) {
@@ -33,7 +34,7 @@ public class OrderBean extends GenericBean<OrderEntity> {
         } catch (EntityNotFoundException e) {
             return null;
         }
-    }
+    }*/
 
     public void addProductInOrder(int orderId, int productId, int count, float price) {
         try {
@@ -42,6 +43,26 @@ public class OrderBean extends GenericBean<OrderEntity> {
 
             order.addProduct(product, count, price);
         } catch (EntityNotFoundException ignored) {
+        }
+    }
+
+    public List<OrderEntity> getByClientId(int clientId) {
+        try {
+            List<OrderEntity> list = em.find(ClientEntity.class, clientId).getOrdersById();
+            list.size();
+            return list;
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
+    }
+
+    public Integer getLastOrderIdByClientId(int clientId) {
+        try {
+            return em.createQuery("Select MAX(e.id) from OrderEntity e where e.clientByClientId.id=:token", Integer.class)
+                    .setParameter("token", clientId)
+                    .getSingleResult();
+        } catch (EntityNotFoundException e) {
+            return null;
         }
     }
 }

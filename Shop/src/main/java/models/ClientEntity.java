@@ -3,7 +3,7 @@ package models;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -12,7 +12,7 @@ public class ClientEntity {
     private int id;
     private String name;
     private String defaultAddress;
-    private Collection<OrderEntity> ordersById;
+    private List<OrderEntity> ordersById;
 
     @Id
     @SequenceGenerator(name = "clients_id_seq",
@@ -74,11 +74,11 @@ public class ClientEntity {
 
     @XmlTransient
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "clientByClientId")
-    public Collection<OrderEntity> getOrdersById() {
+    public List<OrderEntity> getOrdersById() {
         return ordersById;
     }
 
-    public void setOrdersById(Collection<OrderEntity> ordersById) {
+    public void setOrdersById(List<OrderEntity> ordersById) {
         this.ordersById = ordersById;
     }
 }
