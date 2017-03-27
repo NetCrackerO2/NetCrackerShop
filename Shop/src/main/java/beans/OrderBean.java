@@ -10,7 +10,13 @@ import java.util.List;
 
 
 @Stateless
-public class OrderBean extends AbstractBean {
+public class OrderBean extends GenericBean<OrderEntity> {
+
+    @Override
+    protected Class<OrderEntity> getEntityClass() {
+        return OrderEntity.class;
+    }
+
 
     public OrderEntity get(int id) {
         try {
