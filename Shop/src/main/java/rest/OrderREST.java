@@ -1,6 +1,7 @@
 package rest;
 
 
+import beans.GenericBean;
 import beans.OrderBean;
 import models.OrderEntity;
 
@@ -11,21 +12,13 @@ import java.util.List;
 
 
 @Path("/order")
-public class OrderREST {
+public class OrderREST extends GenericREST<OrderEntity> {
     @Inject
     OrderBean bean;
 
-    @GET
-    @Produces("application/json;charset=utf-8")
-    public List<OrderEntity> getAll() {
-        return bean.getAll();
-    }
-
-    @GET
-    @Path("/get/{id}")
-    @Produces("application/json;charset=utf-8")
-    public OrderEntity getOrder(@PathParam("id") int id) {
-        return bean.get(id);
+    @Override
+    protected GenericBean<OrderEntity> getBean() {
+        return bean;
     }
 
     @GET

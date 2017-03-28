@@ -1,6 +1,7 @@
 package rest;
 
 
+import beans.GenericBean;
 import beans.ProductBean;
 import models.ProductEntity;
 import models.ProductInOrder;
@@ -14,22 +15,14 @@ import java.util.List;
 
 
 @Path("/product")
-public class ProductREST {
+public class ProductREST extends GenericREST<ProductEntity> {
     @Inject
     ProductBean bean;
 
 
-    @GET
-    @Produces("application/json;charset=utf-8")
-    public List<ProductEntity> getAll() {
-        return bean.getAll();
-    }
-
-    @GET
-    @Path("/get/{id}")
-    @Produces("application/json;charset=utf-8")
-    public ProductEntity get(@PathParam("id") int id) {
-        return bean.get(id);
+    @Override
+    protected GenericBean<ProductEntity> getBean() {
+        return bean;
     }
 
     /*@GET

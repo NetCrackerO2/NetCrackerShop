@@ -2,6 +2,7 @@ package rest;
 
 
 import beans.ClientBean;
+import beans.GenericBean;
 import clientInfo.ClientInfo;
 import clientInfo.NeedAuthorization;
 import models.ClientEntity;
@@ -12,11 +13,10 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 
 @Path("/client")
-public class ClientsREST {
+public class ClientsREST extends GenericREST<ClientEntity> {
 
     @Inject
     ClientBean bean;
@@ -24,17 +24,9 @@ public class ClientsREST {
     @Inject
     ClientInfo clientInfo;
 
-    @GET
-    @Produces("application/json;charset=utf-8")
-    public List<ClientEntity> getAll() {
-        return bean.getAll();
-    }
-
-    @GET
-    @Path("/get/{id}")
-    @Produces("application/json;charset=utf-8")
-    public ClientEntity get(@PathParam("id") int id) {
-        return bean.get(id);
+    @Override
+    protected GenericBean<ClientEntity> getBean() {
+        return bean;
     }
 
     @GET
