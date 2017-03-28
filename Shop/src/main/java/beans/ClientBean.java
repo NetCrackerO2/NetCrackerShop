@@ -4,8 +4,16 @@ package beans;
 import clientInfo.ClientInfo;
 import models.ClientEntity;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 
+
+@Named
 public class ClientBean extends GenericBean<ClientEntity> {
+
+    @Inject
+    ClientInfo clientInfo;
+
     @Override
     protected Class<ClientEntity> getEntityClass() {
         return ClientEntity.class;
@@ -29,5 +37,12 @@ public class ClientBean extends GenericBean<ClientEntity> {
         }
 
         return new ClientInfo(client.getId());
+    }
+
+    public void login(String login) {
+        if (clientInfo.isLoggedIn())
+            return;
+
+        clientInfo.setId(getByLogin(login).getId());
     }
 }

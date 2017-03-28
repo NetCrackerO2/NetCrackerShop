@@ -1,17 +1,14 @@
 package clientInfo;
 
 
-import javax.enterprise.context.RequestScoped;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-
-@RequestScoped
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-public class ClientInfo {
+@Named
+@SessionScoped
+public class ClientInfo implements Serializable {
 
     @XmlElement
     private Integer clientId;
