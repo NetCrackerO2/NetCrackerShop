@@ -8,8 +8,9 @@ import models.ProductEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import javax.inject.Named;
 
-
+@Named
 @Stateless
 public class OrderBean extends GenericBean<OrderEntity> {
 

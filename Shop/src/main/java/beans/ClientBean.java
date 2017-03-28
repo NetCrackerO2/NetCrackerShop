@@ -3,8 +3,9 @@ package beans;
 
 import clientInfo.ClientInfo;
 import models.ClientEntity;
+import javax.inject.Named;
 
-
+@Named
 public class ClientBean extends GenericBean<ClientEntity> {
     @Override
     protected Class<ClientEntity> getEntityClass() {
