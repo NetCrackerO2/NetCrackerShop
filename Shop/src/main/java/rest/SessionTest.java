@@ -2,12 +2,11 @@ package rest;
 
 
 import javax.ejb.Stateful;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 
 @Named
-@Stateful
 @SessionScoped
 public class SessionTest {
     public int getTest() {
