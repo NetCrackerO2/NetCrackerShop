@@ -4,11 +4,12 @@ package beans;
 import models.*;
 
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Named
 @Stateless
 public class ProductBean extends GenericBean<ProductEntity> {
 

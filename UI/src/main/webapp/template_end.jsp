@@ -1,5 +1,5 @@
 				</section>
 			</main>
-		</adaptive>
+		</vertical>
 	</body>
 </html>
