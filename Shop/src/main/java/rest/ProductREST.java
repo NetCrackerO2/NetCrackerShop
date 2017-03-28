@@ -19,6 +19,9 @@ public class ProductREST extends GenericREST<ProductEntity> {
     @Inject
     ProductBean bean;
 
+    @Inject
+    SessionTest ss;
+
 
     @Override
     protected GenericBean<ProductEntity> getBean() {
@@ -56,4 +59,21 @@ public class ProductREST extends GenericREST<ProductEntity> {
     public List<ProductInOrder> getInOrder(@PathParam("orderId") int orderId) {
         return bean.getInOrder(orderId);
     }
+
+    @GET
+    @Path("/test/")
+    @Produces("application/json;charset=utf-8")
+    public int getTest() {
+        int i = ss.getTest();
+        return i;
+    }
+
+    @GET
+    @Path("/test/{test}")
+    @Produces("application/json;charset=utf-8")
+    public String setTest(@PathParam("test") int test) {
+        ss.setTest(test);
+        return null; //TODO replace this stub to something useful
+    }
+
 }
