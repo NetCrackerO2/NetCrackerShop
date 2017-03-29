@@ -2,6 +2,7 @@
 <%@include file="../env.jsp" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/backet.css">
 <html>
 <head>
 	<title>Интернет магазина "NetCrackerShop"</title>
@@ -23,22 +24,46 @@
 		</form>
 	</div>
 	<div class="middle">
-	<div class="container">
 
+	<div class="container">
 			<main class="content">
-				<c:set var="products" value="${productBean.getAll()}"/>
-				<c:forEach items="${products}" var="item">
-					<article class="z1">
-						<h2><c:out value="${item.name}" /></h2>
-						<desc><c:out value="${item.description}" /></desc>
-						<price>$<c:out value="${item.price}" /></price>
-					</article>
-				</c:forEach>
+	<form name="orderButton" action="" method="post">
+	<table class="simple-little-table" cellspacing='0'>
+	<tr>
+		<th>ID</th>
+		<th>Наименование </th>
+		<th>Количество</th>
+		<th>Цена</th>
+	</tr><!-- Table Header -->
+ 	
+	<tr>
+		<td>1</td>
+		<td>Щебень</td>
+		<td>1000</td>
+		<td>5000$</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Щебень</td>
+		<td>1000</td>
+		<td>5000$</td>
+	</tr>
+	<tr>
+	<td></td>
+	<td></td>
+	<td>Итого:</td>
+	<td>10000$</td>
+	</tr>
+</table>
+	<div >
+		<input type="submit" name="submit" class="orderButton" value="Оформить заказ" class="button" />
+	</div>
+	</form>
 
 			</main><!-- .content -->
 		</div><!-- .container-->
 		<aside  id="CategoryBox" >
-		<div  id="categoryName" class="text1">Категории</div>
+		<div  id="categoryName" class="text1">Корзина</div>
             <c:set var="categories" value="${categoryBean.getAll()}"/>
             <c:forEach items="${categories}" var="category">
                 <div class="categoryItem text1"><c:out value="${category.name}"/></div>

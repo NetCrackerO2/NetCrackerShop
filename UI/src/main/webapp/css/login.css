@@ -5,9 +5,8 @@
 	height: 400px;
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	margin-top: -40px;
 	margin-left: -150px;
-	margin-top: -200px;
 }
 .login-form .headerLogin {
 	padding: 40px 30px 30px 30px;

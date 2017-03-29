@@ -103,11 +103,14 @@ body{
     line-height: 1.2;
 }
 
+
+
 /*Поиск*/
 #findBlock {
     width: 100%;
     float: right;
     position: relative;
+
 }
 
 .search {
@@ -209,7 +212,7 @@ article {
     border: 2px solid #383127;
     background: #e4dbbf;
     min-width: 200px;
-    min-height: 20%;
+    min-height: 10%;
     width: 20%;
     padding: 10px 30px 30px 30px;
     margin-bottom: 30px;
