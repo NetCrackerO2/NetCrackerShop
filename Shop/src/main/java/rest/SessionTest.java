@@ -1,14 +1,14 @@
 package rest;
 
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 
 
 @Named
 @SessionScoped
-public class SessionTest {
+public class SessionTest implements Serializable {
     public int getTest() {
         return test;
     }

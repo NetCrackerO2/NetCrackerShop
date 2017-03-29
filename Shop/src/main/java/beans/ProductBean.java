@@ -18,16 +18,6 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return ProductEntity.class;
     }
 
-    /*public List<OrderProductEntity> getOrders(int id) {
-        try {
-            // TODO: какое-то  с типизацией (с ней падает)
-            return em.createQuery("SELECT e.orderProductsById from ProductEntity e join e.orderProductsById where e.id=:token")
-                    .setParameter("token", id)
-                    .getResultList();
-        } catch (EntityNotFoundException e) {
-            return null;
-        }
-    }*/
 
     // Получение списка товаров определённой категории
     public List<ProductEntity> getByCategory(int categoryId) {
