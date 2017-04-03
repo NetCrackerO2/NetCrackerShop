@@ -13,7 +13,7 @@ public abstract class GenericBean<T> {
 
     protected abstract Class<T> getEntityClass();
 
-    public T create(T entity) {
+    public T persist(T entity) {
         em.persist(entity);
         em.flush();
         em.refresh(entity);
