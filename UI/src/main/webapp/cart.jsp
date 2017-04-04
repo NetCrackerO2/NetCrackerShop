@@ -6,6 +6,7 @@
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp"%>
+	<link rel="stylesheet" type="text/css" href="/css/Backet.css">
 	<form id="backetForm" name="orderButton" action="" method="post">
 		<table class="simple-little-table" cellspacing='0'>
 			<tr>
