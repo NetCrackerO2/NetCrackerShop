@@ -1,5 +1,6 @@
-				</section>
-			</main>
-		</vertical>
+			</div>
+			<footer>
+			 </footer>
+		</div>
 	</body>
 </html>

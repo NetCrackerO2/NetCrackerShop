@@ -6,15 +6,34 @@
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp"%>
-	<c:forEach items="${cartBean.cart}" var="cartItem">
-		<c:set var="item" value="${productBean.get(cartItem.productId)}" />
-		<article class="z1">
-			<a href="<c:url value="${detailsPrefix}${item.id}"/>">
-				<h2><c:out value="${item.name}" /></h2>
-			</a>
-			<desc><c:out value="${item.description}" /></desc>
-			<price>$<c:out value="${item.price}" /> x<c:out value="${cartItem.count}" /></price>
-
-		</article>
-	</c:forEach>
+	<form id="backetForm" name="orderButton" action="" method="post">
+		<table class="simple-little-table" cellspacing='0'>
+			<tr>
+				<th>ID</th>
+				<th>Наименование </th>
+				<th>Количество</th>
+				<th>Цена</th>
+			</tr>
+			<tbody>
+				<c:forEach items="${cartBean.cart}" var="cartItem">
+					<c:set var="item" value="${productBean.get(cartItem.productId)}" />
+					<tr>
+						<td>-inf</td>
+						<td><c:out value="${item.name}" /></td>
+						<td><c:out value="${item.description}" /></td>
+						<td>$<c:out value="${item.price}" /> x<c:out value="${cartItem.count}" /></td>
+					</tr>
+				</c:forEach>
+				<tr>
+				<td></td>
+				<td></td>
+				<td>Итого:</td>
+				<td>10000$</td>
+				<td><div >
+					<input type="submit" name="submit" class="button1" value="Оформить заказ" class="button" />
+				</div></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 <%@include file="template_end.jsp"%>
