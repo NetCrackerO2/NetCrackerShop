@@ -11,8 +11,9 @@
 		<h2><c:out value="${product.name}" /></h2>
 		<desc><c:out value="${product.description}" /></desc>
 		<price>$<c:out value="${product.price}" /></price>
-		<form method="POST" action="#">
-			<input type="number" id="count" min="1" max="100" /><button type=submit name=buy>&#x1F6D2;</button>
+		<form method="POST" action="/cart.jsp">
+			<input type="hidden" name="id" value="<c:out value="${product.id}" />" />
+			<input type="number" name="count" min="1" max="100" /><button type=submit name=buy>&#x1F6D2;</button>
 		</form>
 	</article>
 <%@include file="template_end.jsp"%>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ClientBean;
 import clientInfo.ClientInfo;
 
-@WebServlet(name = "MainServlet", urlPatterns = {"/auth.jsp"})
+@WebServlet(name = "AuthServlet", urlPatterns = {"/auth.jsp"})
 public class AuthServlet extends HttpServlet {
     @Inject 
     ClientBean clientBean;
