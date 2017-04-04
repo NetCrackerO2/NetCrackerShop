@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <form name="login-form" class="login-form" method="POST" action="/auth.jsp">
     <div class="contentLogin">
-        <input name="login" type="text" class="input username" value="Логин" onfocus="" />
+        <input name="login" type="text" class="input username" placeholder="Логин"/>
     </div>
     <div class="footerLogin">
         <input type="submit" name="submit" value="ВОЙТИ" class="button" />

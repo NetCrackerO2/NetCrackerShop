@@ -20,7 +20,7 @@
         <c:forEach items="${cartBean.cart}" var="cartItem">
             <c:set var="item" value="${productBean.get(cartItem.productId)}" />
             <tr>
-                <td>-inf</td>
+                <td><c:out value="${item.id}"/></td>
                 <td><a href="<c:url value="${detailsPrefix}${item.id}"/>"><c:out value="${item.name}" /></a></td>
                 <td><c:out value="${item.description}" /></td>
                 <td>$<c:out value="${item.price}" /> x<c:out value="${cartItem.count}" /></td>
@@ -32,7 +32,7 @@
             <td>Итого:</td>
             <td>10000$</td>
             <td><div >
-                <input type="submit" name="submit" class="button1" value="Оформить заказ" class="button" />
+                <input type="submit" name="createOrder" class="button1" value="Оформить заказ" class="button"/>
             </div></td>
         </tr>
         </tbody>

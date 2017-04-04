@@ -1,6 +1,7 @@
 package beans;
 
 
+import clientInfo.ClientInfo;
 import models.CartEntity;
 import models.OrderEntity;
 import models.ProductEntity;
@@ -23,6 +24,12 @@ public class CartBean extends GenericBean<CartEntity> {
     @Inject
     OrderBean orderBean;
 
+    @Inject
+    ClientBean clientBean;
+
+    @Inject
+    ClientInfo clientInfo;
+
     @Override
     protected Class<CartEntity> getEntityClass() {
         return CartEntity.class;
@@ -30,12 +37,9 @@ public class CartBean extends GenericBean<CartEntity> {
 
     // Возвращает наполнение корзины пользователя
     public List<CartEntity> getCart() {
-        //TODO: брать аутентифицированного пользователя
-        int clientId = 1;
-
         try {
             return em.createQuery("select e from CartEntity e where e.clientId=:token", CartEntity.class)
-                    .setParameter("token", clientId)
+                    .setParameter("token", clientInfo.getId())
                     .getResultList();
         } catch (EntityNotFoundException e) {
             return null;
@@ -44,18 +48,15 @@ public class CartBean extends GenericBean<CartEntity> {
 
     // Добавляет новый товар в корзину либо изменяет количество существующего
     public boolean addProductInCart(int productId, int count) {
-        //TODO: брать аутентифицированного пользователя
-        int clientId = 1;
-
         CartEntity cart;
         try {
             cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                    .setParameter("token1", clientId)
+                    .setParameter("token1", clientInfo.getId())
                     .setParameter("token2", productId)
                     .getSingleResult();
         } catch (EntityNotFoundException | NoResultException e) {
             cart = new CartEntity();
-            cart.setClientId(clientId);
+            cart.setClientId(clientInfo.getId());
             cart.setProductId(productId);
             cart.setCount(count);
             return persist(cart) != null;
@@ -67,11 +68,8 @@ public class CartBean extends GenericBean<CartEntity> {
 
     // Удаляет указанный товар из корзины пользователя, если он в ней есть
     public void removeProductFromCart(int productId) {
-        //TODO: брать аутентифицированного пользователя
-        int clientId = 1;
-
         CartEntity cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                .setParameter("token1", clientId)
+                .setParameter("token1", clientInfo.getId())
                 .setParameter("token2", productId)
                 .getSingleResult();
 
@@ -81,13 +79,12 @@ public class CartBean extends GenericBean<CartEntity> {
 
     // Оформляет заказ на основе корзины пользователя и очищает корзину
     public boolean createOrder() {
-        //TODO: брать аутентифицированного пользователя
-        int clientId = 1;
         String addres = "Testing addres";
         // TODO: deprecated объявление, не знаю, как надо нормально
         Date date = new Date(2017, 4, 13);
 
         OrderEntity order = new OrderEntity();
+        order.setClientByClientId(clientBean.get(clientInfo.getId()));
         order.setAddres(addres);
         order.setDate(date);
 

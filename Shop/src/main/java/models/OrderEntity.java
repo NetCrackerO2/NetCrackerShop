@@ -131,6 +131,9 @@ public class OrderEntity {
         association.setCount(count);
         association.setPrice(price);
 
+        if (this.orderProductsById == null)
+            this.orderProductsById = new ArrayList<>();
+
         this.orderProductsById.add(association);
         product.getOrderProductsById().add(association);
     }
