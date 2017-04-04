@@ -41,10 +41,15 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return new ClientInfo(client.getId());
     }
 
-    public void login(String login) {
+    public boolean login(String login) {
         if (clientInfo.isLoggedIn())
-            return;
+            return true;
 
-        clientInfo.setId(getByLogin(login).getId());
+        ClientEntity client = getByLogin(login);
+        if (client == null)
+            return false;
+
+        clientInfo.setId(client.getId());
+        return true;
     }
 }
