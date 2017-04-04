@@ -12,7 +12,13 @@ public class CartEntity {
     private int productId;
     private Integer count;
 
+
     @Id
+    @SequenceGenerator(name = "cart_id_seq",
+            sequenceName = "cart_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "cart_id_seq")
     @Column(name = "id")
     public int getId() {
         return id;

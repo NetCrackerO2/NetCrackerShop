@@ -4,11 +4,13 @@ package beans;
 import clientInfo.ClientInfo;
 import models.ClientEntity;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 
 @Named
+@Stateless
 public class ClientBean extends GenericBean<ClientEntity> {
 
     @Inject

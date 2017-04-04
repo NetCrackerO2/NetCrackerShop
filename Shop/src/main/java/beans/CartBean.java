@@ -5,12 +5,17 @@ import models.CartEntity;
 import models.OrderEntity;
 import models.ProductEntity;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import java.sql.Date;
 import java.util.List;
 
 
+@Named
+@Stateless
 public class CartBean extends GenericBean<CartEntity> {
     @Inject
     ProductBean productBean;
@@ -42,20 +47,22 @@ public class CartBean extends GenericBean<CartEntity> {
         //TODO: брать аутентифицированного пользователя
         int clientId = 1;
 
-        CartEntity cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                .setParameter("token1", clientId)
-                .setParameter("token2", productId)
-                .getSingleResult();
-
-        if (cart == null) {
+        CartEntity cart;
+        try {
+            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
+                    .setParameter("token1", clientId)
+                    .setParameter("token2", productId)
+                    .getSingleResult();
+        } catch (EntityNotFoundException | NoResultException e) {
             cart = new CartEntity();
+            cart.setClientId(clientId);
             cart.setProductId(productId);
             cart.setCount(count);
             return persist(cart) != null;
-        } else {
-            cart.setCount(count);
-            return true;
         }
+
+        cart.setCount(count);
+        return true;
     }
 
     // Удаляет указанный товар из корзины пользователя, если он в ней есть
