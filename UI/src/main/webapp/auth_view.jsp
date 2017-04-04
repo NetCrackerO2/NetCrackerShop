@@ -2,7 +2,7 @@
 
 <%@include file="template_start.jsp"%>
 	<article class="z1">
-        <form method="POST" action="/Shop/rest/auth/login">
+        <form method="POST" action="/auth.jsp">
 			<input name="login" /><button type=submit name=submit>LogIn</button>
 		</form>
 	</article>

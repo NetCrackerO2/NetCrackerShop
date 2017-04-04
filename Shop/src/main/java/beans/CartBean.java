@@ -29,7 +29,7 @@ public class CartBean extends GenericBean<CartEntity> {
     }
 
     // Возвращает наполнение корзины пользователя
-    public List<CartEntity> getСart() {
+    public List<CartEntity> getCart() {
         //TODO: брать аутентифицированного пользователя
         int clientId = 1;
 
@@ -91,7 +91,7 @@ public class CartBean extends GenericBean<CartEntity> {
         order.setAddres(addres);
         order.setDate(date);
 
-        List<CartEntity> cart = getСart();
+        List<CartEntity> cart = getCart();
         if (cart.size() == 0)
             return false;
 
