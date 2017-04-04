@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
 	<title><c:out value="${title}" /></title>
 </head>
 <body>

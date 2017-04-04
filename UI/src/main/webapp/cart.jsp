@@ -20,7 +20,7 @@
 					<c:set var="item" value="${productBean.get(cartItem.productId)}" />
 					<tr>
 						<td>-inf</td>
-						<td><c:out value="${item.name}" /></td>
+						<td><a href="<c:url value="${detailsPrefix}${item.id}"/>"><c:out value="${item.name}" /></a></td>
 						<td><c:out value="${item.description}" /></td>
 						<td>$<c:out value="${item.price}" /> x<c:out value="${cartItem.count}" /></td>
 					</tr>
