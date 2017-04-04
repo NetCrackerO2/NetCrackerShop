@@ -1,6 +1,8 @@
 package servlets;
 
-import java.io.IOException;
+
+import beans.ClientBean;
+import clientInfo.ClientInfo;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -8,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.ClientBean;
-import clientInfo.ClientInfo;
+import java.io.IOException;
 
 @WebServlet(name = "AuthServlet", urlPatterns = {"/auth.jsp"})
 public class AuthServlet extends HttpServlet {
@@ -19,6 +19,7 @@ public class AuthServlet extends HttpServlet {
     @Inject
     ClientInfo clientInfo;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if(request.getParameter("login") != null) {
             clientBean.login(request.getParameter("login"));
         }
