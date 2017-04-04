@@ -2,14 +2,13 @@
 <%@include file="../env.jsp" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/Backet.css">
 <html>
 <head>
 	<title>Интернет магазина "NetCrackerShop"</title>
 </head>
 
 <body>
-<div class="wrapper">
+<div id="wrapper">
 	<div id="header_main">
 		<div id="logo"><a href="Main.jsp" ><img id="logoImg"   src="../image/logo.png"></a></div>
 		<div id="home"><a href="login.jsp"><img class="icon"  src="../image/home.png"></a></div>
@@ -29,48 +28,44 @@
 			</form>
 		</div>
 	</nav>
-	<aside>	
-		<div  id="categoryName" class="text1">Корзина</div>
-		<div class="text3">Что-то будет...</div>
-	</aside>
+	<aside>
+	<div  id="categoryName" class="text1">Функции</div>
+		</aside>
 	<div class="main">
-	<form id="backetForm" name="orderButton" action="" method="post">
-	<table class="simple-little-table" cellspacing='0'>
-	<tr>
-		<th>ID</th>
-		<th>Наименование </th>
-		<th>Количество</th>
-		<th>Цена</th>
-	</tr><!-- Table Header -->
- 	<tbody>
-	<tr>
-		<td>1</td>
-		<td>Щебень</td>
-		<td>1000</td>
-		<td>5000$</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td>Щебень</td>
-		<td>1000</td>
-		<td>5000$</td>
-	</tr>
-	<tr>
-	<td></td>
-	<td></td>
-	<td>Итого:</td>
-	<td>10000$</td>
-	<td><div >
-		<input type="submit" name="submit" class="button1" value="Оформить заказ" class="button" />
-	</div></td>
-	</tr>
-	</tbody>
-	</table>
-	</form>
+		<form class="profile">
+			<table class="lk">
+				<caption class="text1">Личные данные</caption>
+				<tr>
+					<td><label>Имя</label> </td>
+					<td><input class="textfield" type="text" name="ename" value=""></td>
+				</tr>
+				<tr>
+					<td><label>Дата рождения </label> </td>
+					<td><input class="textfield" type="date" name="calendar" value="2012-06-01"></td>
+				</tr>
+				<br>
+				<tr>
+					<td><label>Пол </label> </td>
+					<td>
+						<p>
+						<input name="gender" type="radio" value="male"> Мужской</p>
+	   					 <p><input name="gender" type="radio" value="female"> Женский</p>
+					</td>
+				</tr>
+				<tr>
+					<td><label>Адрес</label> </td>
+					<td><input class="textfield" type="text" name="addres" value=""></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" name="submit" class="button1 saveChange" value="Сохранить" class="button" /></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<footer>
 	 	
 	 </footer>
-</div>
+ </div>
 </body>
 </html>
