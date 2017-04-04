@@ -1,12 +1,8 @@
+*{
+  box-sizing: border-box;
+}
 .orderButton{
-  position: absolute;
-  margin-left: 10px;
-  bottom: 105px;
-  padding: 11px 25px;
-
   font-family: 'Bree Serif', serif;
-  font-weight: 300;
-  font-size: 18px;
   color: #fff;
   text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
   
@@ -17,14 +13,13 @@
 }
 
 .simple-little-table {
-  margin-top: 25px;
-  margin-left:  100px;
+  font-size: 100%;
+  line-height: 1.5em;
+  width: 100%;
   float: left;
   font-family:Arial, Helvetica, sans-serif;
   color:#666;
   
- 
- 
   -moz-border-radius:3px;
   -webkit-border-radius:3px;
   border-radius:3px;
