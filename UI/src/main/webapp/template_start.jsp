@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href='https://fonts.googleapis.com/css?family=Roboto:700,400,300,500,100&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="http://asgreywolf.ru/stupid.css">
-	<link rel='stylesheet' type='text/css' href='styles.css'/>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/Backet.css">
 	<title><c:out value="${title}" /></title>
 </head>
 <body>
-	<vertical class="fill">
-		<nav class="dark z2">
-			<h1>SHOP</h1>
-			<ul class="adaptive">
-				<li>
-					<a href="/">Главная</a>
-				</li>
-				<li>
-					<a href="/admin.jsp">Администратор</a>
-				</li>
-				<li>
-					<a href="/cart.jsp">Корзина</a>
-				</li>
-			</ul>
-		</nav>
-		<main>
-			<div>
+	<div class="wrapper">
+		<div id="header_main">
+			<div id="logo"><a href="/" ><img id="logoImg"   src="../image/logo.png"></a></div>
+			<div id="home"><a href="auth.jsp"><img class="icon"  src="../image/home.png"></a></div>
+			<div id="backet"><a href="cart.jsp"><img class="icon"  src="../image/backet.png"></a></div>
+			<div id="cntBacket"><a href=""><img class="icon" src="../image/cntBacket.png"></a></div>
+			<div><label id="userName" class="text1">
 				<c:if test="${clientInfo.loggedIn}" >
-					Client Id: ${clientInfo.id}<br />
+					Client Id: <c:out value="${clientInfo.id}" /><br />
 				</c:if>
-				<%-- В корзине:
-				<span id="shopped">${client.orderItems}</span> --%>
+			</label></div>
+		</div>
+		<nav>
+			<div id="findBlock" >
+				<form action="" class="search">
+					<table>
+						<tr>
+						<td><input type="search" name="" placeholder="поиск" class="input" /></td>
+						<td><input type="submit" name="" value="" class="findButton" /></td>
+						</tr>
+					</table>
+				</form>
 			</div>
-			<section class="horizontal wrap">
+		</nav>
+		<aside>
+			<div  id="categoryName" class="text1"><c:out value="${title}" /></div>
+			<div class="text3">Что-то будет...</div>
+		</aside>
+		<div class="main">
