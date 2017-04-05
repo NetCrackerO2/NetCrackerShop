@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 
 
 /**
- * Данная аннотация ставится на те методы, для работы которых требуется авторизованный пользователь.
+ * Данная аннотация ставится на те методы или классы, для работы которых требуется авторизованный пользователь.
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NeedAuthorization {
 }

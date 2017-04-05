@@ -1,7 +1,9 @@
 package beans;
 
 
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAuthorization;
 import models.CartEntity;
 import models.OrderEntity;
 import models.ProductEntity;
@@ -9,6 +11,7 @@ import models.ProductEntity;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import java.sql.Date;
@@ -17,6 +20,8 @@ import java.util.List;
 
 @Named
 @Stateless
+@Interceptors(AuthorizationInterceptor.class)
+@NeedAuthorization
 public class CartBean extends GenericBean<CartEntity> {
     @Inject
     ProductBean productBean;
@@ -34,6 +39,7 @@ public class CartBean extends GenericBean<CartEntity> {
     protected Class<CartEntity> getEntityClass() {
         return CartEntity.class;
     }
+
 
     // Возвращает наполнение корзины пользователя
     public List<CartEntity> getCart() {
