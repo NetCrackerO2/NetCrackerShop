@@ -45,6 +45,7 @@
                     <td><c:out value="${item.description}"/></td>
                     <td><c:out value="${cartItem.count}"/></td>
                     <td><c:out value="${item.price}"/>$</td>
+                    <td><a href="<c:url value="/cart.jsp?remove=&id=${item.id}"/>">Удалить</a></td>
                 </tr>
             </c:forEach>
             <tr>

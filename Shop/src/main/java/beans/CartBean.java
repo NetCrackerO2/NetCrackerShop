@@ -74,13 +74,17 @@ public class CartBean extends GenericBean<CartEntity> {
 
     // Удаляет указанный товар из корзины пользователя, если он в ней есть
     public void removeProductFromCart(int productId) {
-        CartEntity cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                .setParameter("token1", clientInfo.getId())
-                .setParameter("token2", productId)
-                .getSingleResult();
+        CartEntity cart;
+        try {
+            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
+                    .setParameter("token1", clientInfo.getId())
+                    .setParameter("token2", productId)
+                    .getSingleResult();
+        } catch (EntityNotFoundException | NoResultException e) {
+            return;
+        }
 
-        if (cart != null)
-            em.remove(cart);
+        em.remove(cart);
     }
 
     // Оформляет заказ на основе корзины пользователя и очищает корзину
