@@ -11,12 +11,12 @@
 <div class="wrapper">
     <div id="header_main">
         <div id="logo"><a href="/" ><img id="logoImg" src="../image/logo.png"></a></div>
-        <div id="home"><a href="user_profile.jsp"><img class="icon" src="../image/home.png"></a></div>
-        <div id="backet"><a href="cart.jsp"><img class="icon"  src="../image/backet.png"></a></div>
-        <div id="cntBacket"><a href=""><img class="icon" src="../image/cntBacket.png"></a></div>
+        <div id="home"><a href="/"><img class="icon" src="../image/home.png"></a></div>
+        <div id="cart"><a href="cart.jsp"><img class="icon" src="../image/cart.png"></a></div>
+        <div id="cntCart"><a href="admin_view.jsp"><img class="icon" src="../image/cntCart.png"></a></div>
         <div><label id="userName" class="text1">
             <c:if test="${clientInfo.loggedIn}" >
-                Client Id: <c:out value="${clientInfo.id}" /><br />
+                Клиент: <c:out value="${clientInfo.name}"/><br/>
             </c:if>
         </label></div>
     </div>

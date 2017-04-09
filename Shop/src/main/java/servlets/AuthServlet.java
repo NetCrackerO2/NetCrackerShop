@@ -12,31 +12,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @WebServlet(name = "AuthServlet", urlPatterns = {"/auth.jsp"})
 public class AuthServlet extends HttpServlet {
-    @Inject 
+    @Inject
     ClientBean clientBean;
     @Inject
     ClientInfo clientInfo;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        if(request.getParameter("login") != null) {
+        if (request.getParameter("login") != null) {
             clientBean.login(request.getParameter("login"));
         }
-        if(clientInfo.isLoggedIn()){
+        if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        }
-        else
+        } else
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(clientInfo.isLoggedIn()){
+        if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        }
-        else
+        } else
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
     }
 }

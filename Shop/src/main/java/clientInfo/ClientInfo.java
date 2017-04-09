@@ -6,41 +6,53 @@ import javax.inject.Named;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
+
 @Named
 @SessionScoped
 public class ClientInfo implements Serializable {
 
     @XmlElement
-    private Integer clientId;
+    private Integer id;
+
+    @XmlElement
+    private String name;
 
 
     public ClientInfo() {
 
     }
 
-    public ClientInfo(Integer clientId) {
-        this.clientId = clientId;
-    }
+//    public ClientInfo(Integer id) {
+//        this.id = id;
+//    }
 
     public ClientInfo init(ClientInfo info) {
         if (info == null) {
             return this;
         }
 
-        this.clientId = info.clientId;
+        this.id = info.id;
         return this;
     }
 
 
     public boolean isLoggedIn() {
-        return clientId != null;
+        return id != null;
     }
 
     public int getId() {
-        return clientId;
+        return id;
     }
 
     public void setId(int id) {
-        clientId = id;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

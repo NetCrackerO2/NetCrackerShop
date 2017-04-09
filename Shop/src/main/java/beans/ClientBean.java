@@ -32,13 +32,15 @@ public class ClientBean extends GenericBean<ClientEntity> {
         }
     }
 
-    public ClientInfo getUserInfo(int clientId) {
-        ClientEntity client = get(clientId);
+    public boolean fillUserInfo(ClientEntity client) {
         if (client == null) {
-            return null;
+            return false;
         }
 
-        return new ClientInfo(client.getId());
+        clientInfo.setId(client.getId());
+        clientInfo.setName(client.getName());
+
+        return true;
     }
 
     public boolean login(String login) {
@@ -49,7 +51,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if (client == null)
             return false;
 
-        clientInfo.setId(client.getId());
+        fillUserInfo(client);
         return true;
     }
 }
