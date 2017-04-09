@@ -25,48 +25,48 @@
     <div id="categoryRef" class="select1 text3">Работа с категориями</div>
 </aside>
 <div class="main">
-        <form id="goodsForm" name="goodsForm" action="" method="">
-            <table id="goodsTable" class="simple-little-table" cellspacing='0'>
+    <form id="goodsForm" name="goodsForm" action="" method="">
+        <table id="goodsTable" class="simple-little-table" cellspacing='0'>
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Цена</th>
+            </tr><!-- Table Header -->
+            <c:forEach items="${productBean.getAll()}" var="item">
                 <tr>
-                    <th>ID</th>
-                    <th>Наименование</th>
-                    <th>Количество</th>
-                    <th>Цена</th>
-                </tr><!-- Table Header -->
-                <c:forEach items="${productBean.getAll()}" var="item">
-                    <tr>
-                        <td><c:out value="${item.id}"/></td>
-                        <td><c:out value="${item.name}"/></td>
-                        <td><c:out value="${item.count}"/></td>
-                        <td>$<c:out value="${item.price}"/></td>
-                        <td><input type="submit" name="del" class="button2 button1" value="Edit"/></td>
-                        <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <div>
-                <input type="submit" name="submit" class="button1" value="Сохранить"/>
-            </div>
-        </form>
-        <form id="categoryForm" name="categoryForm" action="" method="">
-            <table id="categoryTable" class="simple-little-table" cellspacing='0'>
+                    <td><c:out value="${item.id}"/></td>
+                    <td><c:out value="${item.name}"/></td>
+                    <td><c:out value="${item.count}"/></td>
+                    <td>$<c:out value="${item.price}"/></td>
+                    <td><input type="submit" name="del" class="button2 button1" value="Edit"/></td>
+                    <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
+                </tr>
+            </c:forEach>
+        </table>
+        <div>
+            <input type="submit" name="submit" class="button1" value="Сохранить"/>
+        </div>
+    </form>
+    <form id="categoryForm" name="categoryForm" action="" method="">
+        <table id="categoryTable" class="simple-little-table" cellspacing='0'>
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+            </tr><!-- Table Header -->
+            <c:forEach items="${categoryBean.getAll()}" var="item">
                 <tr>
-                    <th>ID</th>
-                    <th>Наименование</th>
-                </tr><!-- Table Header -->
-                <c:forEach items="${categoryBean.getAll()}" var="item">
-                    <tr>
-                        <td><c:out value="${item.id}"/></td>
-                        <td><c:out value="${item.name}"/></td>
-                        <td><input type="submit" name="del" class="button2 button1" value="Edit"/></td>
-                        <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <div>
-                <input type="submit" name="submit" class="button1" value="Сохранить"/>
-            </div>
-        </form>
-    </div>
-    <script src="../js/func.js"></script>
-    <%@include file="template_end.jsp" %>
+                    <td><c:out value="${item.id}"/></td>
+                    <td><c:out value="${item.name}"/></td>
+                    <td><input type="submit" name="del" class="button2 button1" value="Edit"/></td>
+                    <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
+                </tr>
+            </c:forEach>
+        </table>
+        <div>
+            <input type="submit" name="submit" class="button1" value="Сохранить"/>
+        </div>
+    </form>
+</div>
+<script src="../js/func.js"></script>
+<%@include file="template_end.jsp" %>

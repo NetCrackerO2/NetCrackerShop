@@ -36,7 +36,6 @@
             </tr>
             <tbody>
             <c:set var="sum" value="0"/>
-
             <c:forEach items="${cartBean.cart}" var="cartItem">
                 <c:set var="item" value="${productBean.get(cartItem.productId)}"/>
                 <c:set var="sum" value="${sum + item.price * cartItem.count}"/>
