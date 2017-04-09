@@ -80,14 +80,14 @@ header{
     line-height: 1px;
 }
 
-#backet {
+#cart {
     position: absolute;
     bottom: 17px;
     right: 70px;
     line-height: 1px;
 }
 
-#cntBacket {
+#cntCart {
     border-radius: 50%;
     position: absolute;
     bottom:  17px;
@@ -333,6 +333,6 @@ nav{
 	height: 10%;
 }
 
-.backetForm{
+.cartForm {
 	min-width: 100%;
 }

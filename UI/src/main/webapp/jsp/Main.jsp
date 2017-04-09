@@ -12,8 +12,8 @@
 	<div id="header_main">
 		<div id="logo"><a href="Main.jsp" ><img id="logoImg"   src="../image/logo.png"></a></div>
 		<div id="home"><a href="ProfileUser.jsp"><img class="icon"  src="../image/home.png"></a></div>
-		<div id="backet"><a href="Backet.jsp"><img class="icon"  src="../image/backet.png"></a></div>
-		<div id="cntBacket"><a href=""><img class="icon" src="../image/cntBacket.png"></a></div>
+		<div id="cart"><a href="Cart.jsp"><img class="icon" src="../image/cart.png"></a></div>
+		<div id="cntCart"><a href=""><img class="icon" src="../image/cntCart.png"></a></div>
 		<div><label id="userName" class="text1"><a href="AdminPageQ.jsp">Админка</a></label></div>
 	</div>
 	<nav>
