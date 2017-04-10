@@ -41,6 +41,7 @@
         </a>
         <desc><c:out value="${item.description}"/></desc>
         <price>$<c:out value="${item.price}"/></price>
+        <count><c:out value="${item.count}"/> шт.</count>
     </article>
     </c:forEach>
     <%@include file="template_end.jsp" %>

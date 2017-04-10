@@ -60,6 +60,11 @@
                     </div>
                 </td>
             </tr>
+            <c:if test="${isError==true}">
+                <tr>
+                    <td colspan="6"><p style="color:red;" align="center"><c:out value="${errorMessage}"/></p></td>
+                </tr>
+            </c:if>
             </tbody>
         </table>
     </form>

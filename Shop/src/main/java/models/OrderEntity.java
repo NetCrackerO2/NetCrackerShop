@@ -110,6 +110,11 @@ public class OrderEntity {
     }
 
 
+    /*TODO: додумать
+    Эта связь многие-ко-многим работает работает наполовину: в таблице order_product заполняет только
+    поля order_id и product_id. Остальные поля корректно заполняются, только если заполняется
+    и сохраняется объект OrderProductEntity (как в методе addProduct).
+     */
     @XmlTransient
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "order_product",

@@ -8,6 +8,7 @@ import models.CartEntity;
 import models.OrderEntity;
 import models.ProductEntity;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -88,30 +89,45 @@ public class CartBean extends GenericBean<CartEntity> {
     }
 
     // Оформляет заказ на основе корзины пользователя и очищает корзину
-    public boolean createOrder() {
+    public void createOrder() {
+        List<CartEntity> cart = getCart();
+        if (cart.size() == 0) {
+            throw new EJBException("Корзина пуста");
+        }
+
+        //TODO: нормальное получение адреса
         String addres = "Testing addres";
-        // TODO: deprecated объявление, не знаю, как надо нормально
-        Date date = new Date(2017, 4, 13);
+
+        java.util.Date currentDate = new java.util.Date();
+        Date date = new Date(currentDate.getTime());
 
         OrderEntity order = new OrderEntity();
         order.setClientByClientId(clientBean.get(clientInfo.getId()));
         order.setAddres(addres);
         order.setDate(date);
-
-        List<CartEntity> cart = getCart();
-        if (cart.size() == 0)
-            return false;
+        orderBean.persist(order);
 
         for (CartEntity entity : cart) {
             ProductEntity product = productBean.get(entity.getProductId());
+            if (product.getCount() < entity.getCount()) {
+                throw new EJBException("Нет в наличии необходимого количества "
+                        + product.getName()
+                        + ": есть "
+                        + product.getCount()
+                        + " шт., а надо "
+                        + entity.getCount()
+                        + " шт."
+                );
+            }
+
             int count = entity.getCount();
             float price = product.getPrice();
 
             order.addProduct(product, count, price);
-            removeProductFromCart(product.getId());
         }
 
-        orderBean.persist(order);
-        return true;
+        for (CartEntity entity : cart) {
+            removeProductFromCart(entity.getProductId());
+        }
     }
 }

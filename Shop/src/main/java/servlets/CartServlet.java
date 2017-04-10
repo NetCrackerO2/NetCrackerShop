@@ -25,14 +25,19 @@ public class CartServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("buy") != null) {
-            cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("count")));
-        }
-        if (request.getParameter("createOrder") != null) {
-            cartBean.createOrder();
-        }
-        if (request.getParameter("remove") != null) {
-            cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
+        try {
+            if (request.getParameter("buy") != null) {
+                cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("count")));
+            }
+            if (request.getParameter("createOrder") != null) {
+                cartBean.createOrder();
+            }
+            if (request.getParameter("remove") != null) {
+                cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
+            }
+        } catch (Exception e) {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", e.getMessage());
         }
         request.getRequestDispatcher("cart_view.jsp").forward(request, response);
     }
