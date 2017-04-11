@@ -1,8 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<%@include file="reqauth.jsp" %>
-
 <c:set var="categories" value="${categoryBean.getAll()}"/>
 <c:set var="title" value="Categories" scope="page"/>
 <c:set var="detailsPrefix">/products.jsp?category=</c:set>

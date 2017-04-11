@@ -1,8 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<%@include file="reqauth.jsp" %>
-
 <c:choose>
     <c:when test='${param.category != null}'>
         <fmt:parseNumber var="categoryId" integerOnly="true" type="number" value="${param.category}"/>
