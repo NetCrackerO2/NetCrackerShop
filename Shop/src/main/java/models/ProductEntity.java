@@ -112,7 +112,8 @@ public class ProductEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     public CategoryEntity getCategoryByCategoryId() {
-        categoryByCategoryId.getName();
+        if (categoryByCategoryId != null)
+            categoryByCategoryId.getName();
         return categoryByCategoryId;
     }
 
