@@ -14,6 +14,7 @@
         <div id="home"><a href="/"><img class="icon" src="../image/home.png"></a></div>
         <div id="cart"><a href="cart.jsp"><img class="icon" src="../image/cart.png"></a></div>
         <div id="cntCart"><a href="admin_view.jsp"><img class="icon" src="../image/cntCart.png"></a></div>
+        <div id="orders"><a href="orders.jsp"><img class="icon" src="../image/cntCart.png"></a></div>
         <div><label id="userName" class="text1">
             <c:if test="${clientInfo.loggedIn}">
                 Клиент: <c:out value="${clientInfo.name}"/><br/>

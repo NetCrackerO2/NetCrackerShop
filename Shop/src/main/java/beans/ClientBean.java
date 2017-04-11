@@ -1,16 +1,20 @@
 package beans;
 
 
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAuthorization;
 import models.ClientEntity;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 
 
 @Named
 @Stateless
+@Interceptors(AuthorizationInterceptor.class)
 public class ClientBean extends GenericBean<ClientEntity> {
 
     @Inject
@@ -42,5 +46,10 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
         clientInfo.init(client);
         return true;
+    }
+
+    @NeedAuthorization
+    public ClientInfo getClientInfo() {
+        return clientInfo;
     }
 }

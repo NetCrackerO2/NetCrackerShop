@@ -112,6 +112,7 @@ public class ProductEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     public CategoryEntity getCategoryByCategoryId() {
+        categoryByCategoryId.getName();
         return categoryByCategoryId;
     }
 
