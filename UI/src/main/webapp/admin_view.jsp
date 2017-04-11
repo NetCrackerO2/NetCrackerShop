@@ -4,6 +4,7 @@
 <%@include file="reqauth.jsp" %>
 
 <c:set var="title" value="Admin panel" scope="page"/>
+<c:set var="pathStack" value="${['Admin']}" scope="page"/>
 <link rel="stylesheet" type="text/css" href="/css/cart.css">
 <%@include file="template_start.jsp" %>
 <nav>

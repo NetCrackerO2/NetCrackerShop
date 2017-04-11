@@ -19,5 +19,9 @@
                 Клиент: <c:out value="${clientInfo.name}"/><br/>
             </c:if>
         </label></div>
+		<div>
+			<c:forEach items="${pathStack}" var="item">
+				<a href="ВНИКУДА">-><c:out value="${item}"/></a>
+			</c:forEach>
+		</div>
     </div>
-

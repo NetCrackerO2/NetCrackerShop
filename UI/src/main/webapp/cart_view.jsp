@@ -4,6 +4,7 @@
 <%@include file="reqauth.jsp" %>
 
 <c:set var="title" value="Shopping Cart" scope="page"/>
+<c:set var="pathStack" value="${['Shopping Cart']}" scope="page"/>
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
