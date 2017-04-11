@@ -16,5 +16,10 @@
         <div class="footerLogin">
             <input type="submit" name="submit" value="ВОЙТИ" class="button"/>
         </div>
+        <c:if test="${isError==true}">
+            <div>
+                <p style="color:red;" align="center"><c:out value="${errorMessage}"/></p>
+            </div>
+        </c:if>
     </form>
     <%@include file="template_end.jsp" %>

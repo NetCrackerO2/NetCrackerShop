@@ -28,8 +28,11 @@ public class AuthServlet extends HttpServlet {
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        } else
+        } else {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", "Неверный логин");
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
