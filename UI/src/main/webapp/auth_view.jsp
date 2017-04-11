@@ -10,8 +10,7 @@
             <h1>Авторизация</h1>
         </div>
         <div class="contentLogin">
-            <input name="login" type="text" class="input username" placeholder="Логин" value="Логин"
-                   onfocus="this.value=''"/>
+            <input name="login" type="text" class="input username" placeholder="Логин"/>
         </div>
         <div class="footerLogin">
             <input type="submit" name="submit" value="ВОЙТИ" class="button"/>

@@ -17,6 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 @Named
@@ -89,14 +90,15 @@ public class CartBean extends GenericBean<CartEntity> {
     }
 
     // Оформляет заказ на основе корзины пользователя и очищает корзину
-    public void createOrder() {
+    public void createOrder(String addres) {
         List<CartEntity> cart = getCart();
         if (cart.size() == 0) {
             throw new EJBException("Корзина пуста");
         }
 
-        //TODO: нормальное получение адреса
-        String addres = "Testing addres";
+        if (addres == null || Objects.equals(addres, "")) {
+            addres = clientInfo.getAddres();
+        }
 
         java.util.Date currentDate = new java.util.Date();
         Date date = new Date(currentDate.getTime());

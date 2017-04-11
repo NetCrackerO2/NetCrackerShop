@@ -1,6 +1,8 @@
 package clientInfo;
 
 
+import models.ClientEntity;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,21 +19,24 @@ public class ClientInfo implements Serializable {
     @XmlElement
     private String name;
 
+    @XmlElement
+    private String addres;
+
 
     public ClientInfo() {
 
     }
 
-//    public ClientInfo(Integer id) {
-//        this.id = id;
-//    }
 
-    public ClientInfo init(ClientInfo info) {
-        if (info == null) {
+    public ClientInfo init(ClientEntity client) {
+        if (client == null) {
             return this;
         }
 
-        this.id = info.id;
+        setId(client.getId());
+        setName(client.getName());
+        setAddres(client.getDefaultAddress());
+
         return this;
     }
 
@@ -54,5 +59,13 @@ public class ClientInfo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddres() {
+        return addres;
+    }
+
+    public void setAddres(String addres) {
+        this.addres = addres;
     }
 }
