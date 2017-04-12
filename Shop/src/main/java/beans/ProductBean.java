@@ -63,4 +63,16 @@ public class ProductBean extends GenericBean<ProductEntity> {
 
         return productsInOrder;
     }
+
+    //Добавление продукта в бд
+    public void addProduct(int id,String name,int price,int count,int category_id){
+        em.createNativeQuery("Insert into public.products (id,name,price,count,category_id) " +
+                "VALUES(:id,:name,:price,:count,:category_id)")
+                .setParameter("id",id)
+                .setParameter("name",name)
+                .setParameter("price",price)
+                .setParameter("count",count)
+                .setParameter("category_id",category_id)
+                .executeUpdate();
+    }
 }

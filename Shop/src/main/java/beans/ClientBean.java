@@ -52,4 +52,12 @@ public class ClientBean extends GenericBean<ClientEntity> {
     public ClientInfo getClientInfo() {
         return clientInfo;
     }
+
+    public void addClient(int id,String name,String defaultAddress){
+        em.createNativeQuery("Insert into public.clients (id,name,default_address) VALUES(:id,:name,:defaultAddress)")
+                .setParameter("id",id)
+                .setParameter("name",name)
+                .setParameter("defaultAddress",defaultAddress)
+                .executeUpdate();
+    }
 }

@@ -290,6 +290,7 @@ nav::before,
 
 .button2{
 	width: 70px;
+    padding: 0 5px;
 }
 .button1 {
 	font-family: 'Bree Serif', serif;
@@ -305,7 +306,6 @@ nav::before,
   float: right;
 }
 
-
 .textfield,.lk{
 width: 150px;
 border-spacing: 22px 11px; /* Расстояние между ячейками */ 
@@ -317,7 +317,9 @@ border: 1px solid #353032;
 
 }
 
-#categoryForm,#goodsForm{
+#categoryTable,
+#goodsTable,
+#clientsTable{
 	display: none;
 }
 
@@ -333,6 +335,11 @@ nav{
 	height: 10%;
 }
 
-.cartForm {
-	min-width: 100%;
+.addClientForm,
+.addCategoryForm,
+.addProductForm{
+    display: none;
+    position: absolute;
+    left: 25%;
+    top: 25%;
 }

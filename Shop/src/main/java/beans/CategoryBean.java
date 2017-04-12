@@ -17,4 +17,11 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
     /*public List<ProductEntity> getProductsById(int id) {
         return get(id).getProductsById();
     }*/
+    //Добавление продукта в бд
+    public void addCategory(int id,String name){
+        em.createNativeQuery("Insert into public.categories (id,name) VALUES(:id,:name)")
+                .setParameter("id",id)
+                .setParameter("name",name)
+                .executeUpdate();
+    }
 }
