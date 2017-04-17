@@ -90,65 +90,65 @@
         <h2>Добавить пользователя</h2>
         <table id="addClientsTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
-                <td class="col">ID</td>
-                <td class="col"><input name="idClientNew" type="text"></td>
-            </tr>
-            <tr class="row">
                 <td class="col">Имя</td>
-                <td class="col"><input name="nameClientNew" type="text"></td>
+                <td class="col"><input name="clientName" type="text"></td>
             </tr>
             <tr class="row">
                 <td class="col">Адрес</td>
-                <td class="col"><input name="addressClientNew" type="text"></td>
+                <td class="col"><input name="clientDefaultAddress" type="text"></td>
             </tr>
         </table>
         <input type="button" name="cancel" class="cancel button2 button1" value="Отмена"/></td>
-        <input type="submit" name="add" class="saveAdd button2 button1" value="Добавить"/></td>
+        <input type="submit" name="addClient" class="saveAdd button2 button1" value="Добавить"/></td>
     </form>
     <form action="AddCategoryServlet" class="addCategoryForm">
         <h2>Добавить категорию</h2>
         <table id="addCategoryTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
-                <td class="col">ID</td>
-                <td class="col"><input name="idCategoryNew" type="text"></td>
+                <td class="col">Название</td>
+                <td class="col"><input name="categoryName" type="text"></td>
             </tr>
             <tr class="row">
-                <td class="col">Название</td>
-                <td class="col"><input name="nameCategoryNew" type="text"></td>
+                <td class="col">parentID</td>
+                <td class="col"><input name="parentCategoryId" type="text"></td>
             </tr>
         </table>
         <input type="button" name="cancel" class="cancel button2 button1" value="Отмена"/></td>
-        <input type="submit" name="add" class="saveAdd button2 button1" value="Добавить"/></td>
+        <input type="submit" name="addCategory" class="saveAdd button2 button1" value="Добавить"/></td>
     </form>
     <form action="AddProductServlet" class="addProductForm">
         <h2>Добавить продукт</h2>
         <table id="addProductTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
-                <td class="col">ID</td>
-                <td class="col"><input name="idProductNew" type="text"></td>
+                <td class="col">Название</td>
+                <td class="col"><input name="productName" type="text"></td>
             </tr>
             <tr class="row">
-                <td class="col">Название</td>
-                <td class="col"><input name="nameProductNew" type="text"></td>
+                <td class="col">Описание</td>
+                <td class="col"><input name="productDescription" type="text"></td>
             </tr>
             <tr class="row">
                 <td class="col">Цена</td>
-                <td class="col"><input name="priceProductNew" type="text"></td>
+                <td class="col"><input name="productPrice" type="text"></td>
             </tr>
             <tr class="row">
                 <td class="col">Количество</td>
-                <td class="col"><input name="countProductNew" type="text"></td>
+                <td class="col"><input name="productCount" type="text"></td>
             </tr>
             <tr class="row">
                 <td class="col">Категория</td>
-                <td class="col"><input name="category_id" type="text"></td>
+                <td class="col"><input name="productCategoryId" type="text"></td>
             </tr>
             <input type="button" name="cancel" class="cancel button2 button1" value="Отмена"/></td>
-            <input type="submit" name="add" class="saveAdd button2 button1" value="Добавить"/></td>
+            <input type="submit" name="addProduct" class="saveAdd button2 button1" value="Добавить"/></td>
         </table>
 
     </form>
-
+    <c:if test="${isError==true}">
+        <div>
+            <p style="color:red;" align="center"><c:out value="${errorMessage}"/></p>
+        </div>
+    </c:if>
 </div>
 <script src="js/func.js"></script>
 <%@include file="template_end.jsp" %>

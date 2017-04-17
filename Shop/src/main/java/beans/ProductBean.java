@@ -3,7 +3,9 @@ package beans;
 
 import models.*;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 @Named
 @Stateless
 public class ProductBean extends GenericBean<ProductEntity> {
+    @Inject
+    CategoryBean categoryBean;
 
     @Override
     protected Class<ProductEntity> getEntityClass() {
@@ -22,10 +26,11 @@ public class ProductBean extends GenericBean<ProductEntity> {
     // Получение списка товаров определённой категории
     public List<ProductEntity> getByCategory(int categoryId) {
         try {
-            List<ProductEntity> list = em.createQuery("SELECT e from CategoryEntity e where e.id=:token", CategoryEntity.class)
-                    .setParameter("token", categoryId)
-                    .getSingleResult()
-                    .getProductsById();
+            List<ProductEntity> list = em.createQuery("SELECT e from CategoryEntity e where e.id=:token",
+                                                      CategoryEntity.class)
+                                         .setParameter("token", categoryId)
+                                         .getSingleResult()
+                                         .getProductsById();
             list.size();
             return list;
         } catch (EntityNotFoundException e) {
@@ -38,8 +43,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
         OrderEntity order;
         try {
             order = em.createQuery("SELECT e from OrderEntity e where e.id=:token", OrderEntity.class)
-                    .setParameter("token", orderId)
-                    .getSingleResult();
+                      .setParameter("token", orderId)
+                      .getSingleResult();
         } catch (EntityNotFoundException e) {
             return null;
         }
@@ -64,15 +69,37 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return productsInOrder;
     }
 
-    //Добавление продукта в бд
-    public void addProduct(int id,String name,int price,int count,int category_id){
-        em.createNativeQuery("Insert into public.products (id,name,price,count,category_id) " +
-                "VALUES(:id,:name,:price,:count,:category_id)")
-                .setParameter("id",id)
-                .setParameter("name",name)
-                .setParameter("price",price)
-                .setParameter("count",count)
-                .setParameter("category_id",category_id)
-                .executeUpdate();
+    public ProductEntity addProduct(String name,
+                                    String description,
+                                    int count,
+                                    float price,
+                                    int categoryId) throws EJBException {
+        ProductEntity product = new ProductEntity();
+
+        if (name.equals("")) {
+            throw new EJBException("Недопустимое имя клиента.");
+        }
+        product.setName(name);
+
+        product.setDescription(description);
+
+        if (count < 0) {
+            throw new EJBException("Недопустимое количество товара.");
+        }
+        product.setCount(count);
+
+        if (price < 0) {
+            throw new EJBException("Недопустимая стоимость товара.");
+        }
+        product.setPrice(price);
+
+        CategoryEntity category = categoryBean.get(categoryId);
+        if (category == null) {
+            throw new EJBException("Такой категории не существует! Id = " + categoryId);
+        }
+        product.setCategoryByCategoryId(category);
+        category.getProductsById().add(product);
+
+        return persist(product);
     }
 }

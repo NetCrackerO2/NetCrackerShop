@@ -3,6 +3,7 @@ package beans;
 
 import models.CategoryEntity;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
@@ -14,14 +15,21 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         return CategoryEntity.class;
     }
 
-    /*public List<ProductEntity> getProductsById(int id) {
-        return get(id).getProductsById();
-    }*/
-    //Добавление продукта в бд
-    public void addCategory(int id,String name){
-        em.createNativeQuery("Insert into public.categories (id,name) VALUES(:id,:name)")
-                .setParameter("id",id)
-                .setParameter("name",name)
-                .executeUpdate();
+    public CategoryEntity addCategory(String name,
+                                      Integer parentCategoryId) throws EJBException {
+        CategoryEntity category = new CategoryEntity();
+
+        if (name.equals("")) {
+            throw new EJBException("Недопустимое имя категории.");
+        }
+        category.setName(name);
+
+        if (parentCategoryId != null) {
+            category.setCategoryByParentId(
+                    get(parentCategoryId)
+            );
+        }
+
+        return persist(category);
     }
 }

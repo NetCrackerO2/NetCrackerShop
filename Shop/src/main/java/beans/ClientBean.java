@@ -6,6 +6,7 @@ import clientInfo.ClientInfo;
 import clientInfo.NeedAuthorization;
 import models.ClientEntity;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,8 +29,8 @@ public class ClientBean extends GenericBean<ClientEntity> {
     public ClientEntity getByLogin(String login) {
         try {
             return em.createQuery("SELECT e from ClientEntity e where e.name=:token", getEntityClass())
-                    .setParameter("token", login)
-                    .getSingleResult();
+                     .setParameter("token", login)
+                     .getSingleResult();
             //TODO: нормальная обработка исключения
         } catch (Exception e) {
             return null;
@@ -37,12 +38,14 @@ public class ClientBean extends GenericBean<ClientEntity> {
     }
 
     public boolean login(String login) {
-        if (clientInfo.isLoggedIn())
+        if (clientInfo.isLoggedIn()) {
             return true;
+        }
 
         ClientEntity client = getByLogin(login);
-        if (client == null)
+        if (client == null) {
             return false;
+        }
 
         clientInfo.init(client);
         return true;
@@ -53,11 +56,20 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return clientInfo;
     }
 
-    public void addClient(int id,String name,String defaultAddress){
-        em.createNativeQuery("Insert into public.clients (id,name,default_address) VALUES(:id,:name,:defaultAddress)")
-                .setParameter("id",id)
-                .setParameter("name",name)
-                .setParameter("defaultAddress",defaultAddress)
-                .executeUpdate();
+    public ClientEntity addClient(String name,
+                                  String defaultAddres) {
+        ClientEntity client = new ClientEntity();
+
+        if (name.equals("")) {
+            throw new EJBException("Недопустимое имя клиента.");
+        }
+        client.setName(name);
+
+        if (defaultAddres.equals("")) {
+            throw new EJBException("Недопустимый адрес.");
+        }
+        client.setDefaultAddress(defaultAddres);
+
+        return persist(client);
     }
 }
