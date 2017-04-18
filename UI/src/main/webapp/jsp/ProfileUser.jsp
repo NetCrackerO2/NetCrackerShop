@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td><label>Адрес</label> </td>
-					<td><input class="textfield" type="text" name="addres" value=""></td>
+                    <td><input class="textfield" type="text" name="address" value=""></td>
 				</tr>
 				<tr>
 					<td></td>

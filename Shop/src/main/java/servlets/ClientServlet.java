@@ -1,6 +1,7 @@
 package servlets;
 
 import beans.ClientBean;
+import clientInfo.ClientInfo;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class ClientServlet extends HttpServlet {
     @Inject
     ClientBean clientBean;
+    @Inject
+    ClientInfo clientInfo;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +35,11 @@ public class ClientServlet extends HttpServlet {
                 );
             } else if (request.getParameter("removeClient") != null) {
                 clientBean.remove(Integer.parseInt(request.getParameter("clientId")));
+                if (clientInfo.getId() == Integer.parseInt(request.getParameter("clientId"))) {
+                    clientInfo.logout();
+                }
+            } else if (request.getParameter("logout") != null) {
+                clientInfo.logout();
             }
         } catch (NumberFormatException e) {
             request.setAttribute("isError", true);
