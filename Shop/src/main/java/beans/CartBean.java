@@ -99,7 +99,7 @@ public class CartBean extends GenericBean<CartEntity> {
         }
 
         if (addres == null || Objects.equals(addres, "")) {
-            addres = clientInfo.getAddres();
+            addres = clientInfo.getAddress();
         }
 
         java.util.Date currentDate = new java.util.Date();

@@ -34,6 +34,7 @@
                 <th>Описание</th>
                 <th>Количество</th>
                 <th>Цена</th>
+                <th>Стоимость</th>
             </tr>
             <tbody>
             <c:set var="sum" value="0"/>
@@ -44,12 +45,19 @@
                     <td><c:out value="${item.id}"/></td>
                     <td><a href="<c:url value="${detailsPrefix}${item.id}"/>"><c:out value="${item.name}"/></a></td>
                     <td><c:out value="${item.description}"/></td>
-                    <td><c:out value="${cartItem.count}"/></td>
+                    <td>
+                        <c:out value="${cartItem.count}"/>
+                        <c:if test="${cartItem.count > item.count}">
+                             но на складе осталось только <c:out value="${item.count}"/>
+                        </c:if>
+                    </td>
                     <td><c:out value="${item.price}"/>$</td>
+                    <td><c:out value="${item.price * cartItem.count}"/>$</td>
                     <td><a href="<c:url value="/cart.jsp?remove=&id=${item.id}"/>">Удалить</a></td>
                 </tr>
             </c:forEach>
             <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
