@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "AddClientServlet", urlPatterns = {"/AddClientServlet"})
-public class AddClientServlet extends HttpServlet {
+@WebServlet(name = "ClientServlet", urlPatterns = {"/clientsServlet.jsp"})
+public class ClientServlet extends HttpServlet {
     @Inject
     ClientBean clientBean;
 
@@ -25,15 +25,20 @@ public class AddClientServlet extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        if (request.getParameter("addClient") != null) {
-            try {
+        try {
+            if (request.getParameter("addClient") != null) {
                 clientBean.addClient(request.getParameter("clientName"),
                                      request.getParameter("clientDefaultAddress")
                 );
-            } catch (Exception e) {
-                request.setAttribute("isError", true);
-                request.setAttribute("errorMessage", e.getMessage());
+            } else if (request.getParameter("removeClient") != null) {
+                clientBean.remove(Integer.parseInt(request.getParameter("clientId")));
             }
+        } catch (NumberFormatException e) {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", "Введены некорректные значения.");
+        } catch (Exception e) {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", e.getMessage());
         }
 
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);

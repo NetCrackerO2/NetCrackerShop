@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "AddCategoryServlet", urlPatterns = {"/AddCategoryServlet"})
-public class AddCategoryServlet extends HttpServlet {
+@WebServlet(name = "CategoryServlet", urlPatterns = {"/categoriesServlet.jsp"})
+public class CategoryServlet extends HttpServlet {
     @Inject
     CategoryBean categoryBean;
 
@@ -32,7 +32,12 @@ public class AddCategoryServlet extends HttpServlet {
                         request.getParameter("categoryName"),
                         parentId.equals("") ? null : Integer.parseInt(parentId)
                 );
+            } else if (request.getParameter("removeCategory") != null) {
+                categoryBean.remove(Integer.parseInt(request.getParameter("categoryId")));
             }
+        } catch (NumberFormatException e) {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", "Введены некорректные значения.");
         } catch (Exception e) {
             request.setAttribute("isError", true);
             request.setAttribute("errorMessage", e.getMessage());

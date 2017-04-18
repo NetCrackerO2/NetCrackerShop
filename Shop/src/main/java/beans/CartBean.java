@@ -47,8 +47,8 @@ public class CartBean extends GenericBean<CartEntity> {
     public List<CartEntity> getCart() {
         try {
             return em.createQuery("select e from CartEntity e where e.clientId=:token", CartEntity.class)
-                    .setParameter("token", clientInfo.getId())
-                    .getResultList();
+                     .setParameter("token", clientInfo.getId())
+                     .getResultList();
         } catch (EntityNotFoundException e) {
             return null;
         }
@@ -58,10 +58,11 @@ public class CartBean extends GenericBean<CartEntity> {
     public boolean addProductInCart(int productId, int count) {
         CartEntity cart;
         try {
-            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                    .setParameter("token1", clientInfo.getId())
-                    .setParameter("token2", productId)
-                    .getSingleResult();
+            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2",
+                                  CartEntity.class)
+                     .setParameter("token1", clientInfo.getId())
+                     .setParameter("token2", productId)
+                     .getSingleResult();
         } catch (EntityNotFoundException | NoResultException e) {
             cart = new CartEntity();
             cart.setClientId(clientInfo.getId());
@@ -78,10 +79,11 @@ public class CartBean extends GenericBean<CartEntity> {
     public void removeProductFromCart(int productId) {
         CartEntity cart;
         try {
-            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2", CartEntity.class)
-                    .setParameter("token1", clientInfo.getId())
-                    .setParameter("token2", productId)
-                    .getSingleResult();
+            cart = em.createQuery("select e from CartEntity e where e.clientId=:token1 and e.productId=:token2",
+                                  CartEntity.class)
+                     .setParameter("token1", clientInfo.getId())
+                     .setParameter("token2", productId)
+                     .getSingleResult();
         } catch (EntityNotFoundException | NoResultException e) {
             return;
         }
@@ -105,7 +107,7 @@ public class CartBean extends GenericBean<CartEntity> {
 
         OrderEntity order = new OrderEntity();
         order.setClientByClientId(clientBean.get(clientInfo.getId()));
-        order.setAddres(addres);
+        order.setAddress(addres);
         order.setDate(date);
         orderBean.persist(order);
 
@@ -113,12 +115,12 @@ public class CartBean extends GenericBean<CartEntity> {
             ProductEntity product = productBean.get(entity.getProductId());
             if (product.getCount() < entity.getCount()) {
                 throw new EJBException("Нет в наличии необходимого количества "
-                        + product.getName()
-                        + ": есть "
-                        + product.getCount()
-                        + " шт., а надо "
-                        + entity.getCount()
-                        + " шт."
+                                               + product.getName()
+                                               + ": есть "
+                                               + product.getCount()
+                                               + " шт., а надо "
+                                               + entity.getCount()
+                                               + " шт."
                 );
             }
 

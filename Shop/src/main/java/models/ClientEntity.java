@@ -73,7 +73,7 @@ public class ClientEntity {
     }
 
     @XmlTransient
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "clientByClientId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clientByClientId")
     public List<OrderEntity> getOrdersById() {
         return ordersById;
     }
