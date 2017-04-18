@@ -8,10 +8,6 @@
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
-<aside>
-    <div id="categoryName" class="text1"><c:out value="${title}"/></div>
-    <div class="text3">Что-то будет...</div>
-</aside>
 <div class="main">
     <link rel="stylesheet" type="text/css" href="/css/cart.css">
     <form id="cartForm" name="orderButton" action="" method="post">
