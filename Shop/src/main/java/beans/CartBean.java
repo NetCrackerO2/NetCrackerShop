@@ -6,6 +6,7 @@ import clientInfo.ClientInfo;
 import clientInfo.NeedAuthorization;
 import models.CartEntity;
 import models.OrderEntity;
+import models.OrderProductEntity;
 import models.ProductEntity;
 
 import javax.ejb.EJBException;
@@ -92,14 +93,14 @@ public class CartBean extends GenericBean<CartEntity> {
     }
 
     // Оформляет заказ на основе корзины пользователя и очищает корзину
-    public void createOrder(String addres) {
+    public void createOrder(String address) {
         List<CartEntity> cart = getCart();
         if (cart.size() == 0) {
             throw new EJBException("Корзина пуста");
         }
 
-        if (addres == null || Objects.equals(addres, "")) {
-            addres = clientInfo.getAddres();
+        if (address == null || Objects.equals(address, "")) {
+            address = clientInfo.getAddress();
         }
 
         java.util.Date currentDate = new java.util.Date();
@@ -107,9 +108,9 @@ public class CartBean extends GenericBean<CartEntity> {
 
         OrderEntity order = new OrderEntity();
         order.setClientByClientId(clientBean.get(clientInfo.getId()));
-        order.setAddress(addres);
+        order.setAddress(address);
         order.setDate(date);
-        orderBean.persist(order);
+
 
         for (CartEntity entity : cart) {
             ProductEntity product = productBean.get(entity.getProductId());
@@ -127,8 +128,18 @@ public class CartBean extends GenericBean<CartEntity> {
             int count = entity.getCount();
             float price = product.getPrice();
 
-            order.addProduct(product, count, price);
+            OrderProductEntity association = new OrderProductEntity();
+            association.setOrderByOrderId(order);
+            association.setProductByProductId(product);
+            association.setCount(count);
+            association.setPrice(price);
+            em.persist(association);
+
+            order.getOrderProductsById().add(association);
+            product.getOrderProductsById().add(association);
         }
+
+        orderBean.persist(order);
 
         for (CartEntity entity : cart) {
             removeProductFromCart(entity.getProductId());

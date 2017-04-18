@@ -15,9 +15,9 @@ public class OrderEntity {
     private String address;
     private Date date;
     private String status;
-    private List<OrderProductEntity> orderProductsById;
+    private List<OrderProductEntity> orderProductsById = new ArrayList<>(0);
     private ClientEntity clientByClientId;
-    private List<ProductEntity> products = new ArrayList<ProductEntity>(0);
+    private List<ProductEntity> products = new ArrayList<>(0);
 
     @Id
     @SequenceGenerator(name = "orders_id_seq",
@@ -126,20 +126,5 @@ public class OrderEntity {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
-    }
-
-
-    public void addProduct(ProductEntity product, int count, float price) {
-        OrderProductEntity association = new OrderProductEntity();
-        association.setOrderByOrderId(this);
-        association.setProductByProductId(product);
-        association.setCount(count);
-        association.setPrice(price);
-
-        if (this.orderProductsById == null)
-            this.orderProductsById = new ArrayList<>();
-
-        this.orderProductsById.add(association);
-        product.getOrderProductsById().add(association);
     }
 }

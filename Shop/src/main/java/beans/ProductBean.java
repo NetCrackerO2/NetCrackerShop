@@ -77,7 +77,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         ProductEntity product = new ProductEntity();
 
         if (name.equals("")) {
-            throw new EJBException("Недопустимое имя клиента.");
+            throw new EJBException("Недопустимое название товара.");
         }
         product.setName(name);
 

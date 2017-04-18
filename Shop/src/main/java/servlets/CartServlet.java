@@ -32,7 +32,7 @@ public class CartServlet extends HttpServlet {
                 cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("count")));
             }
             if (request.getParameter("createOrder") != null) {
-                cartBean.createOrder(request.getParameter("addres"));
+                cartBean.createOrder(request.getParameter("address"));
             }
             if (request.getParameter("remove") != null) {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));

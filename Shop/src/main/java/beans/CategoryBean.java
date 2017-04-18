@@ -20,7 +20,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         CategoryEntity category = new CategoryEntity();
 
         if (name.equals("")) {
-            throw new EJBException("Недопустимое имя категории.");
+            throw new EJBException("Недопустимое название категории.");
         }
         category.setName(name);
 

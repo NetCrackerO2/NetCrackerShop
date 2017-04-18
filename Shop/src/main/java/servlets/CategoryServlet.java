@@ -2,6 +2,7 @@ package servlets;
 
 import beans.CategoryBean;
 
+import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
+
+import static servlets.ParameterGetter.getConvertedParameter;
+import static servlets.ParameterGetter.getStringParameter;
 
 
 @WebServlet(name = "CategoryServlet", urlPatterns = {"/categoriesServlet.jsp"})
@@ -27,17 +32,21 @@ public class CategoryServlet extends HttpServlet {
 
         try {
             if (request.getParameter("addCategory") != null) {
-                String parentId = request.getParameter("parentCategoryId");
                 categoryBean.addCategory(
-                        request.getParameter("categoryName"),
-                        parentId.equals("") ? null : Integer.parseInt(parentId)
+                        getStringParameter(request, "categoryName"),
+                        Objects.equals(getStringParameter(request, "parentCategoryId"), "") ?
+                                null :
+                                getConvertedParameter(request, "parentCategoryId", Integer::valueOf)
                 );
             } else if (request.getParameter("removeCategory") != null) {
-                categoryBean.remove(Integer.parseInt(request.getParameter("categoryId")));
+                categoryBean.remove(getConvertedParameter(request, "categoryId", Integer::valueOf));
             }
-        } catch (NumberFormatException e) {
+        } catch (NullPointerException e) {
             request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Введены некорректные значения.");
+            request.setAttribute("errorMessage", "Отсутствует необходимый параметр: " + e.getMessage());
+        } catch (ConverterException e) {
+            request.setAttribute("isError", true);
+            request.setAttribute("errorMessage", "Некорректное значение параметра: " + e.getMessage());
         } catch (Exception e) {
             request.setAttribute("isError", true);
             request.setAttribute("errorMessage", e.getMessage());
