@@ -1,11 +1,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<fmt:parseNumber var="productId" integerOnly="true" type="number" value="${param.id}"/>
-<c:set var="product" value="${productBean.get(productId)}"/>
-<c:set var="pathStack" value="${['Categories', product.getCategoryByCategoryId().getName(), product.getName()]}"
-       scope="page"/>
-<c:set var="title" value="${product.name}" scope="page"/>
+<c:set var="pathStack" value="${['Search']}" scope="page"/>
+<c:set var="title" value="Search" scope="page"/>
 
 <%@include file="template_start.jsp" %>
 <aside>
