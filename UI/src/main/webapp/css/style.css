@@ -358,3 +358,11 @@ nav{
     left: 25%;
     top: 25%;
 }
+
+.error {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	padding: 10px;
+	background-color: red;
+}
