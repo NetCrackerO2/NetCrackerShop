@@ -8,18 +8,6 @@
 <c:set var="title" value="${product.name}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
-<nav>
-    <div id="findBlock">
-        <form action="" class="search">
-            <table>
-                <tr>
-                    <td><input type="search" name="" placeholder="поиск" class="input"/></td>
-                    <td><input type="submit" name="" value="" class="findButton"/></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</nav>
 <aside>
     <div id="categoryName" class="text1"><c:out value="${title}"/></div>
     <div class="text3">Что-то будет...</div>
@@ -31,7 +19,7 @@
         <price>$<c:out value="${product.price}"/></price>
         <form method="POST" action="/cart.jsp">
             <input type="hidden" name="id" value="<c:out value="${product.id}" />"/>
-            <input type="number" name="count" min="1" max="100" value="1"/>
+            <input type="number" name="count" min="1" max="<c:out value="${product.count}" />" value="1"/>
             <button type=submit name=buy>&#x1F6D2;</button>
         </form>
     </article>

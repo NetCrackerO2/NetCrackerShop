@@ -8,18 +8,6 @@
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
-<nav>
-    <div id="findBlock">
-        <form action="" class="search">
-            <table>
-                <tr>
-                    <td><input type="search" name="" placeholder="поиск" class="input"/></td>
-                    <td><input type="submit" name="" value="" class="findButton"/></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</nav>
 <aside>
     <div id="categoryName" class="text1"><c:out value="${title}"/></div>
     <div class="text3">Что-то будет...</div>
@@ -34,6 +22,7 @@
                 <th>Описание</th>
                 <th>Количество</th>
                 <th>Цена</th>
+                <th>Стоимость</th>
             </tr>
             <tbody>
             <c:set var="sum" value="0"/>
@@ -44,12 +33,19 @@
                     <td><c:out value="${item.id}"/></td>
                     <td><a href="<c:url value="${detailsPrefix}${item.id}"/>"><c:out value="${item.name}"/></a></td>
                     <td><c:out value="${item.description}"/></td>
-                    <td><c:out value="${cartItem.count}"/></td>
+                    <td>
+                        <c:out value="${cartItem.count}"/>
+                        <c:if test="${cartItem.count > item.count}">
+                             но на складе осталось только <c:out value="${item.count}"/>
+                        </c:if>
+                    </td>
                     <td><c:out value="${item.price}"/>$</td>
+                    <td><c:out value="${item.price * cartItem.count}"/>$</td>
                     <td><a href="<c:url value="/cart.jsp?remove=&id=${item.id}"/>">Удалить</a></td>
                 </tr>
             </c:forEach>
             <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

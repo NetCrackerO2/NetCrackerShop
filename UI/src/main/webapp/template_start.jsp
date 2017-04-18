@@ -21,9 +21,21 @@
                 <a href="clientsServlet.jsp?logout=">Выйти</a>
             </c:if>
         </label></div>
-		<div>
-			<c:forEach items="${pathStack}" var="item">
-				<a href="ВНИКУДА">-><c:out value="${item}"/></a>
-			</c:forEach>
-		</div>
+        <div>
+            <c:forEach items="${pathStack}" var="item">
+                <a href="ВНИКУДА">-><c:out value="${item}"/></a>
+            </c:forEach>
+        </div>
     </div>
+    <nav>
+        <div id="findBlock">
+            <form action="SearchServlet" class="search">
+                <table>
+                    <tr>
+                        <td><input type="search" name="findInput" placeholder="поиск" class="input"/></td>
+                        <td><input type="submit" name="findProduct" value="" class="findButton"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </nav>
