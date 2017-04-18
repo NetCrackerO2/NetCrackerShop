@@ -2,6 +2,7 @@ package servlets;
 
 import beans.CategoryBean;
 import beans.ProductBean;
+import clientInfo.ClientInfo;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ public class ProductServlet extends HttpServlet {
     @Inject
     CategoryBean categoryBean;
     @Inject
-    CategoryBean clientBean;
+    ClientInfo clientInfo;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -46,14 +47,11 @@ public class ProductServlet extends HttpServlet {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
             }
         } catch (NullPointerException e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Отсутствует необходимый параметр: " + e.getMessage());
+            clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
         } catch (ConverterException e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Некорректное значение параметра: " + e.getMessage());
+            clientInfo.setErrorMessage("Некорректное значение параметра: " + e.getMessage());
         } catch (Exception e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", e.getMessage());
+            clientInfo.setErrorMessage(e.getMessage());
         }
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);
     }

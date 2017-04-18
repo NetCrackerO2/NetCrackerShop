@@ -3,6 +3,7 @@ package servlets;
 
 import beans.CartBean;
 import beans.ProductBean;
+import clientInfo.ClientInfo;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,6 +20,8 @@ public class CartServlet extends HttpServlet {
     CartBean cartBean;
     @Inject
     ProductBean productBean;
+    @Inject
+    ClientInfo clientInfo;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -39,8 +42,7 @@ public class CartServlet extends HttpServlet {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
             }
         } catch (Exception e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", e.getMessage());
+            clientInfo.setErrorMessage(e.getMessage());
         }
 
         request.getRequestDispatcher("cart_view.jsp").forward(request, response);

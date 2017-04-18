@@ -1,6 +1,7 @@
 package servlets;
 
 import beans.ProductBean;
+import clientInfo.ClientInfo;
 import models.ProductEntity;
 
 import javax.inject.Inject;
@@ -19,6 +20,8 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     @Inject
     ProductBean productBean;
+    @Inject
+    ClientInfo clientInfo;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,11 +31,9 @@ public class SearchServlet extends HttpServlet {
                 list = productBean.filterProductByName(request.getParameter("findInput"), list);
                 request.setAttribute("nameFind", request.getParameter("findInput"));
             } catch (NumberFormatException e) {
-                request.setAttribute("isError", true);
-                request.setAttribute("errorMessage", "Введены некорректные значения. Научись читать и писать.");
+                clientInfo.setErrorMessage("Введены некорректные значения. Научись читать и писать.");
             } catch (Exception e) {
-                request.setAttribute("isError", true);
-                request.setAttribute("errorMessage", e.getMessage());
+                clientInfo.setErrorMessage(e.getMessage());
             }
         }
         if (request.getParameter("findProductWide") != null) {
@@ -49,11 +50,9 @@ public class SearchServlet extends HttpServlet {
                 if (!request.getParameter("countFilter").equals(""))
                     list = productBean.filterByCount(Integer.parseInt(request.getParameter("countFilter")), list);
             } catch (NumberFormatException e) {
-                request.setAttribute("isError", true);
-                request.setAttribute("errorMessage", "Введены некорректные значения. Научись читать и писать.");
+                clientInfo.setErrorMessage("Введены некорректные значения. Научись читать и писать.");
             } catch (Exception e) {
-                request.setAttribute("isError", true);
-                request.setAttribute("errorMessage", e.getMessage());
+                clientInfo.setErrorMessage(e.getMessage());
             }
         }
         request.setAttribute("products", list);

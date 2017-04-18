@@ -29,8 +29,7 @@ public class AuthServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
         } else {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Неверный логин");
+            clientInfo.setErrorMessage("Неверный логин");
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
         }
     }
