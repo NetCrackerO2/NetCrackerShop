@@ -50,7 +50,6 @@ public class ProductServlet extends HttpServlet {
             request.setAttribute("isError", true);
             request.setAttribute("errorMessage", e.getMessage());
         }
-
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);
     }
 }

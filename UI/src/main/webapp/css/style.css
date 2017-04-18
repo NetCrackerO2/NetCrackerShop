@@ -17,8 +17,6 @@ h2{
 }
 body{
     width: 100%;
-    
-    
 }
 aside{
 	text-align: center;
@@ -32,7 +30,7 @@ aside{
 
 .main{
 	padding-left: 2%; 
-	width: 50%;
+	width: 80%;
 	float: left;
 }
 
@@ -46,7 +44,6 @@ header{
 #wrapper{
     line-height: 1;
     height:100%;
-
 
 }
 
@@ -315,6 +312,24 @@ border: 1px solid #353032;
 .profile{
 	margin-left: 20em;
 
+}
+.filterTable{
+    width: 80%;
+    margin: 5px;
+}
+.findForm{
+    width: 100%;
+}
+.table{
+    display: table;
+    width: 100%;
+}
+.row{
+    display: table-row;
+}
+.col{
+    vertical-align: middle;
+    display: table-cell;
 }
 
 #categoryTable,
