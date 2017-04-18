@@ -20,7 +20,7 @@ public class ClientInfo implements Serializable {
     private String name;
 
     @XmlElement
-    private String addres;
+    private String address;
 
 
     public ClientInfo() {
@@ -35,7 +35,7 @@ public class ClientInfo implements Serializable {
 
         setId(client.getId());
         setName(client.getName());
-        setAddres(client.getDefaultAddress());
+        setAddress(client.getDefaultAddress());
 
         return this;
     }
@@ -45,11 +45,17 @@ public class ClientInfo implements Serializable {
         return id != null;
     }
 
+    public void logout() {
+        setId(null);
+        setName(null);
+        setAddress(null);
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,11 +67,11 @@ public class ClientInfo implements Serializable {
         this.name = name;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

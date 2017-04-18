@@ -19,7 +19,7 @@
         <c:forEach var="order" items="${orderBean.getByClientId(clientBean.getClientInfo().id)}">
             <tr>
                 <td><c:out value="${order.id}"/></td>
-                <td><c:out value="${order.addres}"/></td>
+                <td><c:out value="${order.address}"/></td>
                 <td><c:out value="${order.date}"/></td>
             </tr>
 

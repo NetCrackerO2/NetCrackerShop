@@ -72,7 +72,7 @@ public class OrderProductEntity {
     }
 
     @XmlTransient
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     public OrderEntity getOrderByOrderId() {
         return orderByOrderId;
@@ -83,7 +83,7 @@ public class OrderProductEntity {
     }
 
     @XmlTransient
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     public ProductEntity getProductByProductId() {
         return productByProductId;

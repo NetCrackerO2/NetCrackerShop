@@ -61,7 +61,7 @@ public class CategoryEntity {
     }
 
     @XmlTransient
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     public CategoryEntity getCategoryByParentId() {
         return categoryByParentId;
@@ -72,7 +72,7 @@ public class CategoryEntity {
     }
 
     @XmlTransient
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoryByParentId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryByParentId")
     public List<CategoryEntity> getCategoriesById() {
         return categoriesById;
     }
@@ -82,7 +82,7 @@ public class CategoryEntity {
     }
 
     @XmlTransient
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoryByCategoryId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryByCategoryId")
     public List<ProductEntity> getProductsById() {
         return productsById;
     }

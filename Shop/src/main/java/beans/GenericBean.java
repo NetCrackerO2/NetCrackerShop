@@ -23,7 +23,7 @@ public abstract class GenericBean<T> {
     public List<T> getAll() {
         try {
             return em.createQuery("SELECT e from " + getEntityClass().getSimpleName() + " e", getEntityClass())
-                    .getResultList();
+                     .getResultList();
         } catch (EntityNotFoundException e) {
             return null;
         }
@@ -34,6 +34,14 @@ public abstract class GenericBean<T> {
             return em.find(getEntityClass(), id);
         } catch (EntityNotFoundException e) {
             return null;
+        }
+    }
+
+    public void remove(int id) {
+        T entity = get(id);
+
+        if (entity != null) {
+            em.remove(entity);
         }
     }
 }

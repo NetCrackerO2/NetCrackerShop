@@ -17,7 +17,8 @@
         <div id="orders"><a href="orders.jsp"><img class="icon" src="../image/cntCart.png"></a></div>
         <div><label id="userName" class="text1">
             <c:if test="${clientInfo.loggedIn}">
-                Клиент: <c:out value="${clientInfo.name}"/><br/>
+                Клиент: <c:out value="${clientInfo.name}"/>
+                <a href="clientsServlet.jsp?logout=">Выйти</a>
             </c:if>
         </label></div>
         <div>

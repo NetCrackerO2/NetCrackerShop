@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "orders", schema = "public", catalog = "shopDB")
 public class OrderEntity {
     private int id;
-    private String addres;
+    private String address;
     private Date date;
     private String status;
     private List<OrderProductEntity> orderProductsById;
@@ -36,12 +36,12 @@ public class OrderEntity {
 
     @Basic
     @Column(name = "addres")
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String addres) {
+        this.address = addres;
     }
 
     @Basic
@@ -72,7 +72,7 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
 
         if (id != that.id) return false;
-        if (addres != null ? !addres.equals(that.addres) : that.addres != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
 
@@ -82,7 +82,7 @@ public class OrderEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (addres != null ? addres.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
@@ -99,7 +99,7 @@ public class OrderEntity {
     }
 
     @XmlTransient
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     public ClientEntity getClientByClientId() {
         return clientByClientId;
@@ -116,7 +116,7 @@ public class OrderEntity {
     и сохраняется объект OrderProductEntity (как в методе addProduct).
      */
     @XmlTransient
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_product",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))

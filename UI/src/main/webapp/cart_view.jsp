@@ -57,6 +57,6 @@
             </tbody>
         </table>
         <p>Адрес доставки товаров:</p>
-        <input name="addres" type="text" class="input addres" placeholder="г. Припять, энергоблок №4"/>
+        <input name="address" type="text" class="input address" placeholder="г. Припять, энергоблок №4"/>
     </form>
     <%@include file="template_end.jsp" %>

@@ -28,8 +28,10 @@
                 <td name="nameProduct" class="editable"><c:out value="${item.name}"/></td>
                 <td name="countProduct" class="editable"><c:out value="${item.count}"/></td>
                 <td name="priceProduct" class="editable">$<c:out value="${item.price}"/></td>
-                <td><input type="submit" name="del" class="button2 button1 editButton" value="Edit"/></td>
-                <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
+                <td><input type="submit" name="edit" class="button2 button1 editButton" value="Edit"/></td>
+                <td>
+                    <a href="<c:url value="/productsServlet.jsp?removeProduct=&productId=${item.id}"/>">Удалить</a>
+                </td>
             </tr>
         </c:forEach>
         <tr>
@@ -37,7 +39,6 @@
         </tr>
 
     </table>
-    </form>
     <table id="categoryTable" class="simple-little-table" cellspacing='0'>
         <tr>
             <th>ID</th>
@@ -47,8 +48,10 @@
             <tr>
                 <td class="editable"><c:out value="${item.id}"/></td>
                 <td class="editable"><c:out value="${item.name}"/></td>
-                <td><input type="submit" name="del" class="button2 button1 editButton" value="Edit"/></td>
-                <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
+                <td><input type="submit" name="edit" class="button2 button1 editButton" value="Edit"/></td>
+                <td>
+                    <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>">Удалить</a>
+                </td>
             </tr>
         </c:forEach>
         <tr>
@@ -61,20 +64,22 @@
             <th>Имя</th>
             <th>Адрес</th>
         </tr><!-- Table Header -->
-        <c:forEach items="${clientBean.getAll()}" var="client">
+        <c:forEach items="${clientBean.getAll()}" var="item">
             <tr>
-                <td class="editable"><c:out value="${client.id}"/></td>
-                <td class="editable"><c:out value="${client.name}"/></td>
-                <td class="editable"><c:out value="${client.defaultAddress}"/></td>
-                <td><input type="submit" name="del" class="button2 button1 editButton" value="Edit"/></td>
-                <td><input type="submit" name="del" class="delete button2 button1" value="Del"/></td>
+                <td class="editable"><c:out value="${item.id}"/></td>
+                <td class="editable"><c:out value="${item.name}"/></td>
+                <td class="editable"><c:out value="${item.defaultAddress}"/></td>
+                <td><input type="submit" name="edit" class="button2 button1 editButton" value="Edit"/></td>
+                <td>
+                    <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>">Удалить</a>
+                </td>
             </tr>
         </c:forEach>
         <tr>
             <td><input type="submit" name="add" class="add button2 button1" value="Add"/></td>
         </tr>
     </table>
-    <form action="AddClientServlet" class="addClientForm">
+    <form action="clientsServlet.jsp" class="addClientForm">
         <h2>Добавить пользователя</h2>
         <table id="addClientsTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
@@ -89,7 +94,7 @@
         <input type="button" name="cancel" class="cancel button2 button1" value="Отмена"/></td>
         <input type="submit" name="addClient" class="saveAdd button2 button1" value="Добавить"/></td>
     </form>
-    <form action="AddCategoryServlet" class="addCategoryForm">
+    <form action="categoriesServlet.jsp" class="addCategoryForm">
         <h2>Добавить категорию</h2>
         <table id="addCategoryTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
@@ -104,7 +109,7 @@
         <input type="button" name="cancel" class="cancel button2 button1" value="Отмена"/></td>
         <input type="submit" name="addCategory" class="saveAdd button2 button1" value="Добавить"/></td>
     </form>
-    <form action="AddProductServlet" class="addProductForm">
+    <form action="productsServlet.jsp" class="addProductForm">
         <h2>Добавить продукт</h2>
         <table id="addProductTable" class="simple-little-table" cellspacing='0'>
             <tr class="row">
