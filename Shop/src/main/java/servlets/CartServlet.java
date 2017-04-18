@@ -33,6 +33,7 @@ public class CartServlet extends HttpServlet {
             }
             if (request.getParameter("createOrder") != null) {
                 cartBean.createOrder(request.getParameter("address"));
+                request.getRequestDispatcher("orders.jsp").forward(request, response);
             }
             if (request.getParameter("remove") != null) {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
