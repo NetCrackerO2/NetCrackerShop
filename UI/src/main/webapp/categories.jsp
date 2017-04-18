@@ -7,21 +7,9 @@
 <c:set var="detailsPrefix">/products.jsp?category=</c:set>
 
 <%@include file="template_start.jsp" %>
-<nav>
-    <div id="findBlock">
-        <form action="" class="search">
-            <table>
-                <tr>
-                    <td><input type="search" name="" placeholder="поиск" class="input"/></td>
-                    <td><input type="submit" name="" value="" class="findButton"/></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</nav>
 <aside>
     <div id="categoryName" class="text1"><c:out value="${title}"/></div>
-    <div class="text3">Что-то будет...</div>
+    <div class="text3"><a href="search.jsp">Поиск</a></div>
 </aside>
 <div class="main">
     <c:forEach items="${categories}" var="item">
