@@ -22,6 +22,9 @@ public class ClientInfo implements Serializable {
     @XmlElement
     private String address;
 
+    @XmlElement
+    private String errorMessage = "";
+
 
     public ClientInfo() {
 
@@ -73,5 +76,13 @@ public class ClientInfo implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
