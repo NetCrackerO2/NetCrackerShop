@@ -72,4 +72,13 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
         return persist(client);
     }
+    public void setName(int id,String name) {
+        ClientEntity entity = get(id);
+
+        if (entity != null) {
+            em.getTransaction().begin();
+            entity.setName(name);
+            em.getTransaction().commit();
+        }
+    }
 }

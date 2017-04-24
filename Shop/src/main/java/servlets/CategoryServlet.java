@@ -52,6 +52,6 @@ public class CategoryServlet extends HttpServlet {
             clientInfo.setErrorMessage(e.getMessage());
         }
 
-        request.getRequestDispatcher("admin_view.jsp").forward(request, response);
+        request.getRequestDispatcher("admin_category.jsp").forward(request, response);
     }
 }

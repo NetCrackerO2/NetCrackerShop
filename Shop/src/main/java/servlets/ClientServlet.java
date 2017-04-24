@@ -26,6 +26,7 @@ public class ClientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+
     }
 
     protected void doGet(HttpServletRequest request,
@@ -35,7 +36,7 @@ public class ClientServlet extends HttpServlet {
         try {
             if (request.getParameter("addClient") != null) {
                 clientBean.addClient(getStringParameter(request, "clientName"),
-                                     getStringParameter(request, "clientDefaultAddress")
+                        getStringParameter(request, "clientDefaultAddress")
                 );
             } else if (request.getParameter("removeClient") != null) {
                 Integer clientId = getConvertedParameter(request, "clientId", Integer::valueOf);
@@ -57,6 +58,6 @@ public class ClientServlet extends HttpServlet {
             request.setAttribute("errorMessage", e.getMessage());
         }
 
-        request.getRequestDispatcher("admin_view.jsp").forward(request, response);
+        request.getRequestDispatcher("admin_clients.jsp").forward(request, response);
     }
 }

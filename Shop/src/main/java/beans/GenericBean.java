@@ -37,6 +37,7 @@ public abstract class GenericBean<T> {
         }
     }
 
+
     public void remove(int id) {
         T entity = get(id);
 
