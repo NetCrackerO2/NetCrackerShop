@@ -1,6 +1,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
+<%@include file="reqauth.jsp" %>
+
 <fmt:parseNumber var="productId" integerOnly="true" type="number" value="${param.id}"/>
 <c:set var="product" value="${productBean.get(productId)}"/>
 <c:set var="pathStack" value="${['Categories', product.getCategoryByCategoryId().getName(), product.getName()]}"
