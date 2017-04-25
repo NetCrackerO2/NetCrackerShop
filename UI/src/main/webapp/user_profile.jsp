@@ -5,31 +5,36 @@
 <c:set var="objStack" value="${[title,'user_profile.jsp']}" scope="page"/>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
 
+<%@include file="reqauth.jsp" %>
+
 <%@include file="template_start.jsp" %>
 <!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h2 class="text3">Личные данные</h2>
-        <form action="clientInfoServlet.jsp" class="saveUserInfoForm">
+        <form action="clientsServlet.jsp" class="saveUserInfoForm">
             <table class="lk table">
                 <tr>
                     <td><label>ID</label></td>
-                    <td><input type="text" class="textfield" name="idUser" value="${clientInfo.id}" readonly>
+                    <td><input type="text" class="textfield" name="clientId"
+                                       value="${clientBean.getClientInfo().id}" readonly>
                     </td>
                 </tr>
                 <tr>
                     <td><label>Имя</label></td>
-                    <td><input class="textfield" type="text" name="nameUser" value="${clientInfo.name}"></td>
+                    <td><input class="textfield" type="text" name="clientName"
+                                       value="${clientBean.getClientInfo().name}"></td>
                 </tr>
                 <tr>
                     <td><label>Адрес</label></td>
-                    <td><input class="textfield" type="text" name="addressUser" value="${clientInfo.address}"/>
+                    <td><input class="textfield" type="text" name="clientDefaultAddress"
+                                       value="${clientBean.getClientInfo().address}"/>
                     </td>
 
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input class="btn btn-primary" type="submit" name="saveChangeInfo" value="Сохранить"/>
+                    <td><input class="btn btn-primary" type="submit" name="editClient" value="Сохранить"/>
                     </td>
                 </tr>
             </table>

@@ -3,69 +3,71 @@
 
 <%@include file="reqauth.jsp" %>
 
-<c:set var="title" value="Админка-продукты" scope="page"/>
-<c:set var="objStack" value="${[title,'admin_view.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
+<c:set var="title" value="Admin panel" scope="page"/>
+<c:set var="pathStack" value="${['Admin']}" scope="page"/>
+
 <%@include file="template_start.jsp" %>
-<div class="row path">
-    <ul class="list-inline">
-        <li><a href="index.jsp">Главная</a></li>
-        <span> > </span>
-        <li><a href="admin_view.jsp">Админка-категории</a></li>
+<!-- Главный Экран- -->
+<aside class="col-md-2">
+    <ul class="list-group submenu">
+        <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
+        <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
+        <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
     </ul>
 </div>
 <!-- Главный Экран- -->
-<div class="row">
-    <div class="col-md-6 col-md-offset-1">
-        <table id="productTable" class="table table-striped table-bordered" cellspacing='0'>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Наименование</th>
-                <th>Количество</th>
-                <th>Цена</th>
-            </tr><!-- Table Header -->
-            </thead>
-            <tbody>
-            <c:forEach items="${productBean.getAll()}" var="item">
-                <tr>
-                    <td name="idProduct" class="editable">
-                        <c:out value="${item.id}"/>
-                    </td>
-                    <td name="nameProduct" class="editable">
-                        <c:out value="${item.name}"/>
-                    </td>
-                    <td name="countProduct" class="editable">
-                        <c:out value="${item.count}"/>
-                    </td>
-                    <td name="priceProduct" class="editable">
-                        <c:out value="${item.price}"/>
-                    </td>
-                    <td>
-                        <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
-                    </td>
-                    <td>
-                        <a href="<c:url value="/productsServlet.jsp?removeProduct=&productId=${item.id}"/>"
-                           class="btn btn-primary">Удалить</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            <tr>
-                <td>
-                    <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-2 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <table id="productTable" class="table table-striped table-bordered" cellspacing='0'>
+                    <thead>
+                    <tr>
+                        <td>
+                            <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Наименование</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                    <th colspan="2">Редактирование</th>
+                    </tr><!-- Table Header -->
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${productBean.getAll()}" var="item">
+                        <tr>
+                            <td name="idProduct" class="editable">
+                                <c:out value="${item.id}"/>
+                            </td>
+                            <td name="nameProduct" class="editable">
+                                <c:out value="${item.name}"/>
+                            </td>
+                            <td name="countProduct" class="editable">
+                                <c:out value="${item.count}"/>
+                            </td>
+                            <td name="priceProduct" class="editable">
+                                <c:out value="${item.price}"/>
+                            </td>
+                            <td>
+                                <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/productsServlet.jsp?removeProduct=&productId=${item.id}"/>"
+                                   class="btn btn-primary">Удалить</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+            </div><div class="col-md-2 col-md-offset-1">
         <ul class="list-group submenu">
             <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
             <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
             <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
         </ul>
+        </div>
     </div>
-</div>
 </section>
 
 

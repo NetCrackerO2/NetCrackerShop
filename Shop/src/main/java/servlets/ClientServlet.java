@@ -26,7 +26,6 @@ public class ClientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-
     }
 
     protected void doGet(HttpServletRequest request,
@@ -36,7 +35,7 @@ public class ClientServlet extends HttpServlet {
         try {
             if (request.getParameter("addClient") != null) {
                 clientBean.addClient(getStringParameter(request, "clientName"),
-                        getStringParameter(request, "clientDefaultAddress")
+                                     getStringParameter(request, "clientDefaultAddress")
                 );
             } else if (request.getParameter("removeClient") != null) {
                 Integer clientId = getConvertedParameter(request, "clientId", Integer::valueOf);
@@ -44,6 +43,12 @@ public class ClientServlet extends HttpServlet {
                 if (clientInfo.getId() == clientId) {
                     clientInfo.logout();
                 }
+            } else if (request.getParameter("editClient") != null) {
+                clientBean.editClient(getConvertedParameter(request, "clientId", Integer::valueOf),
+                                      getStringParameter(request, "clientName"),
+                                      getStringParameter(request, "clientDefaultAddress")
+                );
+                clientInfo.init(clientBean.get(clientInfo.getId()));
             } else if (request.getParameter("logout") != null) {
                 clientInfo.logout();
             }

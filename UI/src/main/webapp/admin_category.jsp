@@ -3,51 +3,53 @@
 
 <%@include file="reqauth.jsp" %>
 
-<c:set var="title" value="Админка-категории" scope="page"/>
-<c:set var="objStack" value="${[title,'admin_category.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
-<%@include file="template_start.jsp" %>
-<div class="row path">
-    <ul class="list-inline">
-        <li><a href="index.jsp">Главная</a></li>
-        <span> > </span>
-        <li><a href="admin_category.jsp">Админка-категории</a></li>
-    </ul>
-</div>
-<div class="row">
-    <div class="col-md-6 col-md-offset-2">
-        <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Наименование</th>
-            </tr><!-- Table Header -->
-            </thead>
-            <tbody>
-            <c:forEach items="${categoryBean.getAll()}" var="item">
-                <tr>
-                    <td class="editable"><c:out value="${item.id}"/></td>
-                    <td class="editable"><c:out value="${item.name}"/></td>
-                    <td>
-                        <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
-                    </td>
-                    <td>
-                        <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
-                           class="btn btn-primary">Удалить</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            <tr>
-                <td>
-                    <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<c:set var="title" value="Admin panel" scope="page"/>
+<c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
-</div>
+<%@include file="template_start.jsp" %>
+<aside class="col-md-2">
+    <ul class="list-group submenu">
+        <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
+        <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
+        <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
+    </ul>
+</div >
+        <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+                <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
+                    <thead>
+                    <tr>
+                        <td>
+                            <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Наименование</th>
+                    <th colspan="2">Редактирование</th>
+                    </tr><!-- Table Header -->
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${categoryBean.getAll()}" var="item">
+                        <tr>
+                            <td class="editable"><c:out value="${item.id}"/></td>
+                            <td class="editable"><c:out value="${item.name}"/></td>
+                            <td>
+                                <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
+                                   class="btn btn-primary">Удалить</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </section>
 
 

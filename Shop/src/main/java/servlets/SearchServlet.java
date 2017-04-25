@@ -4,6 +4,7 @@ import beans.ProductBean;
 import clientInfo.ClientInfo;
 import models.ProductEntity;
 
+import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * Created by Дмитрий on 18.04.2017.
- */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
+
+@WebServlet(name = "SearchServlet", urlPatterns = {"/searchServlet.jsp"})
 public class SearchServlet extends HttpServlet {
     @Inject
     ProductBean productBean;
@@ -24,43 +25,73 @@ public class SearchServlet extends HttpServlet {
     ClientInfo clientInfo;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<ProductEntity> list = productBean.getAll();
-        if (request.getParameter("findProduct") != null) {
-            try {
-                list = productBean.filterProductByName(request.getParameter("findInput"), list);
-                request.setAttribute("nameFind", request.getParameter("findInput"));
-            } catch (NumberFormatException e) {
-                clientInfo.setErrorMessage("Введены некорректные значения. Научись читать и писать.");
-            } catch (Exception e) {
-                clientInfo.setErrorMessage(e.getMessage());
-            }
-        }
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
+        List<ProductEntity> list = null;
+
         if (request.getParameter("findProductWide") != null) {
             try {
-                if (!request.getParameter("nameFilter").equals(""))
-                    list = productBean.filterProductByName(request.getParameter("nameFilter"), list);
-                if (!request.getParameter("categoryFilter").equals(""))
-                    list = productBean.filterProductByCategory(
-                            request.getParameter("categoryFilter"), list);
-                if (!request.getParameter("minPriceFilter").equals("") && !request.getParameter("maxPriceFilter").equals(""))
-                    list = productBean.filterProductByPrice(
-                            Integer.parseInt(request.getParameter("minPriceFilter")),
-                            Integer.parseInt(request.getParameter("maxPriceFilter")), list);
-                if (!request.getParameter("countFilter").equals(""))
-                    list = productBean.filterByCount(Integer.parseInt(request.getParameter("countFilter")), list);
-            } catch (NumberFormatException e) {
-                clientInfo.setErrorMessage("Введены некорректные значения. Научись читать и писать.");
+                List<String[]> parameters = new ArrayList<>();
+                List<String[]> minMaxParameters = new ArrayList<>();
+                addItem(parameters, "name", request.getParameter("nameFilter"));
+                addItem(parameters, "category.name", request.getParameter("categoryFilter"));
+                addMinMaxItem(minMaxParameters,
+                              "price",
+                              request.getParameter("minPriceFilter"),
+                              request.getParameter("maxPriceFilter"));
+                addMinMaxItem(minMaxParameters,
+                              "count",
+                              "0",
+                              request.getParameter("countFilter"));
+
+                list = productBean.filterBy(parameters, minMaxParameters);
+            } catch (IllegalArgumentException | EJBException e) {
+                clientInfo.setErrorMessage("Введены некорректные параметры фильтрации.");
             } catch (Exception e) {
                 clientInfo.setErrorMessage(e.getMessage());
             }
         }
+
+        request.setAttribute("nameValue", request.getParameter("nameFilter"));
+        request.setAttribute("categoryValue", request.getParameter("categoryFilter"));
+        request.setAttribute("minPriceValue", request.getParameter("minPriceFilter"));
+        request.setAttribute("maxPriceValue", request.getParameter("maxPriceFilter"));
+        request.setAttribute("countValue", request.getParameter("countFilter"));
+
         request.setAttribute("products", list);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+    private void addItem(List<String[]> parameters, String parameterName, String parameterValue) {
+        if ((parameterName == null || parameterValue == null)
+                || (Objects.equals(parameterName, "") || Objects.equals(parameterValue, ""))) {
+            return;
+        }
+
+        parameters.add(new String[] {parameterName, parameterValue});
+    }
+
+    private void addMinMaxItem(List<String[]> minMaxParameters,
+                               String parameterName,
+                               String parameterMinValue,
+                               String parameterMaxValue) {
+        if (parameterName == null
+                || parameterMinValue == null
+                || parameterMaxValue == null
+                || Objects.equals(parameterName, "")
+                || Objects.equals(parameterMinValue, "")
+                || Objects.equals(parameterMaxValue, "")) {
+            return;
+        }
+
+        minMaxParameters.add(new String[] {parameterName, parameterMinValue, parameterMaxValue});
     }
 }
