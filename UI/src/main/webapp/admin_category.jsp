@@ -22,6 +22,11 @@
                 <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
                     <thead>
                     <tr>
+                        <td>
+                            <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>ID</th>
                         <th>Наименование</th>
                     </tr><!-- Table Header -->
@@ -40,11 +45,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <tr>
-                        <td>
-                            <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
 

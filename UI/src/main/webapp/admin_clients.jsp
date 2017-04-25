@@ -23,6 +23,11 @@
                 <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
                     <thead>
                     <tr>
+                        <td>
+                            <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>ID</th>
                         <th>Имя</th>
                         <th>Адрес</th>
@@ -43,11 +48,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <tr>
-                        <td>
-                            <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
