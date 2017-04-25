@@ -31,6 +31,7 @@
                         <th>ID</th>
                         <th>Имя</th>
                         <th>Адрес</th>
+                        <th colspan="2">Редактирование</th>
                     </tr><!-- Table Header -->
                     </thead>
                     <tbody>

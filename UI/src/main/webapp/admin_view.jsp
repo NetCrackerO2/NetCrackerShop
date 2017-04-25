@@ -31,6 +31,7 @@
                         <th>Наименование</th>
                         <th>Количество</th>
                         <th>Цена</th>
+                        <th colspan="2">Редактирование</th>
                     </tr><!-- Table Header -->
                     </thead>
                     <tbody>
