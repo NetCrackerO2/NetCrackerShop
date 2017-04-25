@@ -54,6 +54,12 @@ public class SearchServlet extends HttpServlet {
             }
         }
 
+        request.setAttribute("nameValue", request.getParameter("nameFilter"));
+        request.setAttribute("categoryValue", request.getParameter("categoryFilter"));
+        request.setAttribute("minPriceValue", request.getParameter("minPriceFilter"));
+        request.setAttribute("maxPriceValue", request.getParameter("maxPriceFilter"));
+        request.setAttribute("countValue", request.getParameter("countFilter"));
+
         request.setAttribute("products", list);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
