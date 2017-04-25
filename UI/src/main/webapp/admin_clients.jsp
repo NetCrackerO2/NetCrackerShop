@@ -7,60 +7,53 @@
 <c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
-<aside class="col-md-2">
-    <ul class="list-group submenu">
-        <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
-        <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
-        <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
-    </ul>
-</aside>
+
 <!-- Главный Экран- -->
-<section id="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-2">
 
-                <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
-                    <thead>
-                    <tr>
-                        <td>
-                            <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Имя</th>
-                        <th>Адрес</th>
-                    <th colspan="2">Редактирование</th>
-                    </tr><!-- Table Header -->
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${clientBean.getAll()}" var="item">
-                        <tr>
-                            <td class="editable"><c:out value="${item.id}"/></td>
-                            <td class="editable"><c:out value="${item.name}"/></td>
-                            <td class="editable"><c:out value="${item.defaultAddress}"/></td>
-                            <td>
-                                <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
-                            </td>
-                            <td>
-                                <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
-                                   class="btn btn-primary">Удалить</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
+            <thead>
+            <tr>
+                <td>
+                    <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                </td>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Адрес</th>
+                <th colspan="2">Редактирование</th>
+            </tr><!-- Table Header -->
+            </thead>
+            <tbody>
+            <c:forEach items="${clientBean.getAll()}" var="item">
+                <tr>
+                    <td class="editable"><c:out value="${item.id}"/></td>
+                    <td class="editable"><c:out value="${item.name}"/></td>
+                    <td class="editable"><c:out value="${item.defaultAddress}"/></td>
+                    <td>
+                        <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
+                    </td>
+                    <td>
+                        <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
+                           class="btn btn-primary">Удалить</a>
+                    </td>
+                </tr>
+            </c:forEach>
 
-                    </tbody>
-                </table>
-            </div>
-        <divclass="col-md-2 col-md-offset-1">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
         <ul class="list-group submenu">
             <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
             <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
             <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
         </ul>
     </div>
-    </div>
+</div>
+</div>
 </section>
 
 <footer class="navbar-fixed-bottom">
