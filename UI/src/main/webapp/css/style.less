@@ -1,66 +1,114 @@
-
 /*------------------Шапка---------------*/
-header{
-	margin-top: 10px;
-	h3{
-		color:#fff;
-	}
-	.main_header{
-		background-color: #2F717F;
-		a{
-			color:#fff;
-			&:hover{
-				color: #FFFFC4;
-			}
-		}
-	}
-	ul.sign{
-		text-align: right;
-		a{
-			color: #666666;
-			&:hover{
-				color: #2F717F;
-			}
-		}
-	}
-	ul.user{
-		text-align: right;
-		padding-top: 30px;
-	}
+header {
+  margin-top: 10px;
+  h3 {
+    color: #fff;
+  }
+  .main_header {
+    background-color: #2F717F;
+    a {
+      color: #fff;
+      &:hover {
+        color: #FFFFC4;
+      }
+    }
+  }
+  ul.sign {
+    text-align: right;
+    a {
+      color: #666666;
+      &:hover {
+        color: #2F717F;
+      }
+    }
+  }
+  ul.user {
+    text-align: right;
+    padding-top: 30px;
+    li {
+      color: #fff;
+    }
+  }
 }
 
 /*============    Навигация    ===========*/
-nav{
-	text-align: center;
-	margin: 3% 0;
-	ul.navigate a{
-		color: #2F717F;
-		padding:5px;
-		text-transform: uppercase;
-		&:hover{
-			background-color: #2F717F;
-			color:#fff;
-		}
-	}
+aside {
+
 }
 
-/*============    ГЛАВНЫЙ ЭКРАН    ===========*/	
-section#content{
+nav {
+  text-align: center;
+  margin: 20px 0 10px;
+  ul.navigate a {
+    color: #2F717F;
+    padding: 5px;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #2F717F;
+      color: #fff;
+    }
+  }
+  .search {
+    padding-bottom: 10px;
+    float: right;
+  }
+  .search .input:focus {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    background: #E8E8E8;
+    color: #333;
+  }
 
+  /* Кнопка Поиск */
+  .search .findButton {
+    width: 37px;
+    height: 100%;
+    cursor: pointer;
+    background: url(../image/go.png) 50% no-repeat;
+    opacity: 0.5;
+  }
+  .search .findButton:hover {
+    opacity: 0.8;
+  }
+}
+
+/*============    ГЛАВНЫЙ ЭКРАН    ===========*/
+section#content {
+  .path {
+    a {
+      padding: 5px;
+      text-transform: uppercase;
+      background-color: #2F717F;
+      color: #fff;
+    }
+  }
+  #clientsTable {
+    margin-top: 15px;
+  }
 }
 
 /*============   Базовые настройки    ===========*/
 a:hover,
 a:focus,
 a:visited,
-a:active{
-	text-decoration:none;
+a:active {
+  text-decoration: none;
 }
 
 /*============    Подвал    ===========*/
-footer{
-	// background-color: #666666;
-	// min-height: 15%;
+footer {
+  // background-color: #666666;
+  // min-height: 15%;
+}
+
+.error {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  background-color: red;
+  span {
+    color: #fff;
+  }
 }
 
 /*============    ШРИФТЫ    ===========*/
@@ -79,29 +127,28 @@ footer{
 
 /*============    ПОДВАЛ    ===========*/
 
-
 /*============    	ВСПЛЫВАЮЩИЕ ОКНА    ===========*/
 
 /*============    	АДАПТИВ    ===========*/
 
-@media(min-width:0px) and (max-width:320px) {
-	
+@media (min-width: 0px) and (max-width: 320px) {
+
 }
 
-@media(min-width:321px) and (max-width:480px) {
-	
+@media (min-width: 321px) and (max-width: 480px) {
+
 }
 
-@media(min-width:481px) and (max-width:768px) {
-	
+@media (min-width: 481px) and (max-width: 768px) {
+
 }
 
-@media(min-width:769px) and (max-width:992px) {
-	
+@media (min-width: 769px) and (max-width: 992px) {
+
 }
 
-@media(min-width:993px) and (max-width:1200px) {
-	
+@media (min-width: 993px) and (max-width: 1200px) {
+
 }
 
 

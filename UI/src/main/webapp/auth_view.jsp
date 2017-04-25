@@ -7,7 +7,6 @@
     <title><c:out value="${title}"/></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Заголовок </title>
 
 
     <link href="css/bootstrap.min.css" rel="stylesheet">

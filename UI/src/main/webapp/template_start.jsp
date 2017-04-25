@@ -5,7 +5,6 @@
     <title><c:out value="${title}"/></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Заголовок </title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -48,11 +47,28 @@
 <nav>
     <div class="container">
         <div class="row">
-            <ul class="list-inline navigate">
-                <li><a href="categories.jsp">Категории</a></li>
-                <li><a href="search.jsp">Поиск</a></li>
-                <li><a href="admin_view.jsp">Админка</a></li>
-            </ul>
+            <div class="text-right">
+                <form action="SearchServlet" class="search">
+                    <table>
+                        <tr>
+                            <td><input type="search" name="findInput" placeholder="поиск" class="input"/></td>
+                            <td><input type="submit" name="findProduct" value="" class="findButton"/></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <ul class="list-inline navigate">
+            <li><a href="categories.jsp">Категории</a></li>
+            <li><a href="search.jsp">Поиск</a></li>
+            <c:if test="${clientInfo.loggedIn}">
+                <li><a href="user_profile.jsp">Личный кабинет</a></li>
+            </c:if>
+            <li><a href="admin_view.jsp">Админка</a></li>
+        </ul>
+    </div>
 </nav>
+<section id="content">
+    <div class="container">
