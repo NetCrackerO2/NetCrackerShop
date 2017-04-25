@@ -10,12 +10,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <form action="SearchServlet" class="findForm">
+                <form method="POST" action="/searchServlet.jsp" class="findForm">
                     <div class="wrapper">
                         <div class="table filterTable">
                             <div class="row">
                                 <div class="col text3">Название</div>
-                                <div class="col"><input name="nameFilter" value="${findInput}" type="text"></div>
+                                <div class="col"><input name="nameFilter" type="text"></div>
                             </div>
                             <div class="row">
                                 <div class="col"><span class="text3">Категория</span></div>

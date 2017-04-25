@@ -5,7 +5,7 @@
 
 <fmt:parseNumber var="productId" integerOnly="true" type="number" value="${param.id}"/>
 <c:set var="product" value="${productBean.get(productId)}"/>
-<c:set var="pathStack" value="${['Categories', product.getCategoryByCategoryId().getName(), product.getName()]}"
+<c:set var="pathStack" value="${['Categories', product.getCategory().getName(), product.getName()]}"
        scope="page"/>
 <c:set var="title" value="${product.name}" scope="page"/>
 

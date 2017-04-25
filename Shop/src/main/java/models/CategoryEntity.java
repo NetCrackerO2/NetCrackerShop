@@ -82,7 +82,7 @@ public class CategoryEntity {
     }
 
     @XmlTransient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryByCategoryId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     public List<ProductEntity> getProductsById() {
         return productsById;
     }

@@ -15,7 +15,7 @@ public class ProductEntity {
     private Integer count;
     private String description;
     private Collection<OrderProductEntity> orderProductsById;
-    private CategoryEntity categoryByCategoryId;
+    private CategoryEntity category;
 
     @Id
     @SequenceGenerator(name = "products_id_seq",
@@ -111,13 +111,14 @@ public class ProductEntity {
     @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    public CategoryEntity getCategoryByCategoryId() {
-        if (categoryByCategoryId != null)
-            categoryByCategoryId.getName();
-        return categoryByCategoryId;
+    public CategoryEntity getCategory() {
+        if (category != null) {
+            category.getName();
+        }
+        return category;
     }
 
-    public void setCategoryByCategoryId(CategoryEntity categoryByCategoryId) {
-        this.categoryByCategoryId = categoryByCategoryId;
+    public void setCategory(CategoryEntity categoryByCategoryId) {
+        this.category = categoryByCategoryId;
     }
 }

@@ -1,6 +1,7 @@
 package beans;
 
 
+import clientInfo.ClientInfo;
 import models.*;
 
 import javax.ejb.EJBException;
@@ -9,9 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @Stateless
@@ -20,6 +19,9 @@ public class ProductBean extends GenericBean<ProductEntity> {
     CategoryBean categoryBean;
     @Inject
     ProductBean productBean;
+    @Inject
+    ClientInfo clientInfo;
+
     @Override
     protected Class<ProductEntity> getEntityClass() {
         return ProductEntity.class;
@@ -30,10 +32,10 @@ public class ProductBean extends GenericBean<ProductEntity> {
     public List<ProductEntity> getByCategory(int categoryId) {
         try {
             List<ProductEntity> list = em.createQuery("SELECT e from CategoryEntity e where e.id=:token",
-                    CategoryEntity.class)
-                    .setParameter("token", categoryId)
-                    .getSingleResult()
-                    .getProductsById();
+                                                      CategoryEntity.class)
+                                         .setParameter("token", categoryId)
+                                         .getSingleResult()
+                                         .getProductsById();
             list.size();
             return list;
         } catch (EntityNotFoundException e) {
@@ -46,8 +48,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
         OrderEntity order;
         try {
             order = em.createQuery("SELECT e from OrderEntity e where e.id=:token", OrderEntity.class)
-                    .setParameter("token", orderId)
-                    .getSingleResult();
+                      .setParameter("token", orderId)
+                      .getSingleResult();
         } catch (EntityNotFoundException e) {
             return null;
         }
@@ -100,32 +102,43 @@ public class ProductBean extends GenericBean<ProductEntity> {
         if (category == null) {
             throw new EJBException("Такой категории не существует! Id = " + categoryId);
         }
-        product.setCategoryByCategoryId(category);
+        product.setCategory(category);
         category.getProductsById().add(product);
 
         return persist(product);
     }
 
+    /*
     //Фильтрация списка товаров по имени
-    public List<ProductEntity> filterProductByName(String name,List<ProductEntity> list) {
-        list=list.stream().filter(s->(s.getName().contains(name))).collect(Collectors.toList());
+    public List<ProductEntity> filterProductByName(String name, List<ProductEntity> list) {
+        list = list.stream().filter(
+                s -> (s.getName().contains(name))
+        ).collect(Collectors.toList());
         return list;
     }
+
     //Фильтрация списка товаров по категориями
-    public List<ProductEntity> filterProductByCategory(String category,List<ProductEntity> list){
-        list=list.stream().filter(s->(s.getCategoryByCategoryId().getName().equals(category))).collect(Collectors.toList());
+    public List<ProductEntity> filterProductByCategory(String category, List<ProductEntity> list) {
+        list = list.stream().filter(
+                s -> (s.getCategory().getName().equals(category))
+        ).collect(Collectors.toList());
         return list;
     }
 
     //Фильтрация списка товаров по диапазону цен
-    public List<ProductEntity> filterProductByPrice(int priceMin, int priceMax,List<ProductEntity> list){
-        list=list.stream().filter(s->(s.getPrice()>=priceMin && s.getPrice()<=priceMax)).collect(Collectors.toList());
+    public List<ProductEntity> filterProductByPrice(int priceMin, int priceMax, List<ProductEntity> list) {
+        list = list.stream().filter(
+                s -> (s.getPrice() >= priceMin && s.getPrice() <= priceMax)
+        ).collect(Collectors.toList());
         return list;
     }
 
     //Фильтрация списка товаров по кол-ву товара на складе
-    public List<ProductEntity> filterByCount(int count, List<ProductEntity> list){
-        list=list.stream().filter(s->(s.getCount()>=count)).collect(Collectors.toList());
+    public List<ProductEntity> filterByCount(int count, List<ProductEntity> list) {
+        list = list.stream().filter(
+                s -> (s.getCount() >= count)
+        ).collect(Collectors.toList());
         return list;
     }
+    */
 }

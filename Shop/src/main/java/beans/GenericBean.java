@@ -4,6 +4,7 @@ package beans;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,5 +45,77 @@ public abstract class GenericBean<T> {
         if (entity != null) {
             em.remove(entity);
         }
+    }
+
+    public List<T> filterBy(List<String[]> parameters) {
+        return filterBy(parameters, null);
+    }
+
+    public List<T> filterBy(List<String[]> parameters, List<String[]> minMaxParameters) {
+        StringBuilder query = new StringBuilder().append("select e from ");
+        query.append(getEntityClass().getCanonicalName());
+        query.append(" e");
+
+        int parametersCount;
+        int minMaxParametersCount;
+
+        if (parameters == null) {
+            parametersCount = 0;
+        } else if (!parameters.stream().allMatch(item -> item.length == 2)) {
+            throw new IllegalArgumentException();
+        } else {
+            parametersCount = parameters.size();
+        }
+
+        if (minMaxParameters == null) {
+            minMaxParametersCount = 0;
+        } else if (!minMaxParameters.stream().allMatch(item -> item.length == 3)) {
+            throw new IllegalArgumentException();
+        } else {
+            minMaxParametersCount = minMaxParameters.size();
+        }
+
+        if (parametersCount + minMaxParametersCount > 0) {
+            query.append(" where");
+        }
+
+        //TODO: Это дохрена небезопасно, но кого это волнует?
+        for (int i = 0; i < parametersCount; i++) {
+            String[] parameter = parameters.get(i);
+
+            query.append(" lower(e.");
+            query.append(parameter[0]);
+            query.append(") like '%");
+            query.append(parameter[1].toLowerCase());
+            query.append("%'");
+
+            if (i != parametersCount - 1) {
+                query.append(" and");
+            }
+        }
+
+        for (int i = 0; i < minMaxParametersCount; i++) {
+            String[] minMaxParameter = minMaxParameters.get(i);
+
+            if (parametersCount != 0 || i != 0) {
+                query.append(" and");
+            }
+            query.append(" (e.");
+            query.append(minMaxParameter[0]);
+            query.append(" between '");
+            query.append(minMaxParameter[1]);
+            query.append("' and '");
+            query.append(minMaxParameter[2]);
+            query.append("')");
+        }
+
+        List<T> resultList = new ArrayList<>();
+        try {
+            resultList = em.createQuery(query.toString(), getEntityClass()).getResultList();
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
+        return resultList;
     }
 }
