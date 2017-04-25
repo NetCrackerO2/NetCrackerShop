@@ -22,10 +22,16 @@
                 <table id="productTable" class="table table-striped table-bordered" cellspacing='0'>
                     <thead>
                     <tr>
+                        <td>
+                            <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>ID</th>
                         <th>Наименование</th>
                         <th>Количество</th>
                         <th>Цена</th>
+                        <th colspan="2">Редактирование</th>
                     </tr><!-- Table Header -->
                     </thead>
                     <tbody>
@@ -52,11 +58,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <tr>
-                        <td>
-                            <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
