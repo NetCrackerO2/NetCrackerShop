@@ -48,6 +48,7 @@ public class ClientServlet extends HttpServlet {
                                       getStringParameter(request, "clientName"),
                                       getStringParameter(request, "clientDefaultAddress")
                 );
+                clientInfo.init(clientBean.get(clientInfo.getId()));
             } else if (request.getParameter("logout") != null) {
                 clientInfo.logout();
             }

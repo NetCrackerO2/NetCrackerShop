@@ -39,6 +39,7 @@
                         <li>Клиент:<a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
                         <li><a href="cart_view.jsp">Корзина</a></li>
                         <li><a href="orders.jsp">Заказы</a></li>
+                        <li><a href="user_profile.jsp">Личный кабинет</a></li>
                     </c:if>
                 </ul>
             </div>
