@@ -72,13 +72,15 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
         return persist(client);
     }
-    public void setName(int id,String name) {
+
+    public void editClient(int id, String name, String defaultAddress) {
         ClientEntity entity = get(id);
 
-        if (entity != null) {
-            em.getTransaction().begin();
-            entity.setName(name);
-            em.getTransaction().commit();
+        if (entity == null) {
+            return;
         }
+
+        entity.setName(name);
+        entity.setDefaultAddress(defaultAddress);
     }
 }
