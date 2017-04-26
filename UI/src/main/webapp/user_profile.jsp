@@ -8,6 +8,13 @@
 <%@include file="reqauth.jsp" %>
 
 <%@include file="template_start.jsp" %>
+<div class="row path">
+    <ul class="list-inline">
+        <li><a href="index.jsp">Главная</a></li>
+        <span> > </span>
+        <li><a href="user_profile.jsp">Личный кабинет</a></li>
+    </ul>
+</div>
 <!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -39,6 +46,11 @@
                 </tr>
             </table>
         </form>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <ul class="list-group submenu">
+            <li class="list-group-item"><a href="orders.jsp">История заказов</a></li>
+        </ul>
     </div>
 </div>
 </section>

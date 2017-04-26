@@ -35,10 +35,8 @@
             <div class="col-md-2 col-md-offset-8  ">
                 <ul class="user list-inline">
                     <c:if test="${clientInfo.loggedIn}">
-                        <li>Клиент:<a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
+                        <li>Здравствуйте, <a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
                         <li><a href="cart_view.jsp">Корзина</a></li>
-                        <li><a href="orders.jsp">Заказы</a></li>
-                        <li><a href="user_profile.jsp">Личный кабинет</a></li>
                     </c:if>
                 </ul>
             </div>
@@ -50,7 +48,7 @@
     <div class="container">
         <div class="row">
             <div class="text-right">
-                <form action="SearchServlet" class="search">
+                <form method="POST" action="/searchServlet.jsp" class="search">
                     <table>
                         <tr>
                             <td><input type="search" name="findInput" placeholder="поиск" class="input"/></td>

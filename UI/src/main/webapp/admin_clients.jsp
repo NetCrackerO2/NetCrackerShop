@@ -9,7 +9,13 @@
 <%@include file="template_start.jsp" %>
 
 <!-- Главный Экран- -->
-
+<div class="row path">
+    <ul class="list-inline">
+        <li><a href="index.jsp">Главная</a></li>
+        <span> > </span>
+        <li><a href="admin_clients.jsp">Админка-клиенты</a></li>
+    </ul>
+</div>
 <div class="row">
     <div class="col-md-6 col-md-offset-2">
         <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>

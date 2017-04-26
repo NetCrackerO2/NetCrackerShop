@@ -6,6 +6,13 @@
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
+<div class="row path">
+    <ul class="list-inline">
+        <li><a href="index.jsp">Главная</a></li>
+        <span> > </span>
+        <li><a href="search.jsp">Поиск</a></li>
+    </ul>
+</div>
 <!-- Главный Экран- -->
 <div class="row">
             <div class="col-md-6 col-md-offset-3">

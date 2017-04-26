@@ -52,7 +52,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="main">
                     <form name="login-form" class="login-form" method="POST" action="/auth.jsp">
                         <div class="headerLogin">
                             <h1>Авторизация</h1>
@@ -69,7 +68,6 @@
                             </div>
                         </c:if>
                     </form>
-                </div>
             </div>
         </div>
     </div>

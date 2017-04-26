@@ -7,6 +7,13 @@
 <c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
+<div class="row path">
+    <ul class="list-inline">
+        <li><a href="index.jsp">Главная</a></li>
+        <span> > </span>
+        <li><a href="admin_view.jsp">Админка-товары</a></li>
+    </ul>
+</div>
 <!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-2">

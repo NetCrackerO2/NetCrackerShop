@@ -21,7 +21,9 @@
     <div class="col-md-4 col-md-offset-3">
         <table class="table table-striped table-bordered">
             <thead>
-            <tr>Наименование</tr>
+            <tr>
+                <th>Наименование</th>
+            </tr>
             </thead>
             <tbody>
             <c:forEach items="${categories}" var="item">
