@@ -42,30 +42,30 @@
             </tr><!-- Table Header -->
             </thead>
             <tbody>
-            <c:forEach items="${products}" var="item">
-                <tr>
-                    <td>
-                        <c:out value="${item.name}"/>
-                    </td>
-                    <td>
-                        <desc><c:out value="${item.description}"/></desc>
-                    </td>
-                    <td>
-                        <price>$<c:out value="${item.price}"/></price>
-                    </td>
-                    <td>
-                        <count><c:out value="${item.count}"/> шт.</count>
-                    </td>
-                    <td>
-                        <form method="POST" action="/cart.jsp">
-                            <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                            <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
-                                   value="1"/>
-                            <button type=submit name=buy>&#x1F6D2;</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
+                <c:forEach items="${products}" var="item">
+                    <tr>
+                        <td>
+                            <c:out value="${item.name}"/>
+                        </td>
+                        <td>
+                            <desc><c:out value="${item.description}"/></desc>
+                        </td>
+                        <td>
+                            <price>$<c:out value="${item.price}"/></price>
+                        </td>
+                        <td>
+                            <count><c:out value="${item.count}"/> шт.</count>
+                        </td>
+                        <td>
+                            <form method="POST" action="/cart.jsp">
+                                <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
+                                <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
+                                       value="1"/>
+                                <button type=submit name=buy>&#x1F6D2;</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
 

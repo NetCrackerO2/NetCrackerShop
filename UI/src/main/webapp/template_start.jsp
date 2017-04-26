@@ -51,8 +51,8 @@
                 <form method="POST" action="/searchServlet.jsp" class="search">
                     <table>
                         <tr>
-                            <td><input type="search" name="findInput" placeholder="поиск" class="input"/></td>
-                            <td><input type="submit" name="findProduct" value="" class="findButton"/></td>
+                            <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
+                            <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
                         </tr>
                     </table>
                 </form>

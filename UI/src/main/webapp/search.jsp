@@ -4,6 +4,7 @@
 <c:set var="title" value="Поиск" scope="page"/>
 <c:set var="objStack" value="${[title,'search.jsp']}" scope="page"/>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
+<c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
 <div class="row path">
@@ -15,45 +16,87 @@
 </div>
 <!-- Главный Экран- -->
 <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <form method="POST"action="/searchServlet.jsp" class="findForm">
-                    <div class="wrapper">
-                        <div class="table filterTable">
-                            <div class="row">
-                                <div class="col text3">Название</div>
-                                <div class="col"><input name="nameFilter"  type="text"value="${nameValue}"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><span class="text3">Категория</span></div>
-                                <div class="col"><input name="categoryFilter" type="text" class="categoryId"value="${categoryValue}"></div>
-                                <div class="col"><span class="text3">Цена</span></div>
-                                <div class="col"><input name="minPriceFilter" type="text" class="minPrice"
-                                    value="${minPriceValue}"><span>-</span>
-                                    <input name="maxPriceFilter" type="text" class="maxPrice"value="${maxPriceValue}">
-                                </div>
-                                <div class="filterCount">
-                                    <div class="col"><span class="text3">Кол-во на складе:</span></div>
-                                    <div class="col"><input name="countFilter" type="text" class="countMin"value="${countValue}"></div>
-                                </div>
-                            </div>
-                        </div>
+    <section id="searchBox">
+        <hr>
+        <h3>Расширенный поиск товаров</h3>
+        <form method="POST" action="/searchServlet.jsp" class="findForm">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Категория</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td>
+                    <div class="col"><input name="nameFilter" type="text" value="${nameValue}"></div>
+                </td>
+                <td>
+                    <div class="col">
+                        <input name="categoryFilter" type="text" class="categoryId" value="${categoryValue}">
                     </div>
-                    <div class="row">
-                        <div class="col"><input name="findProductWide" type="submit" class="findButton"></div>
-                    </div>
-                </form>
-                <c:forEach items="${products}" var="item">
-                    <article class="z1">
-                        <a href="<c:url value="${detailsPrefix}${item.id}"/>">
-                            <h2><c:out value="${item.name}"/></h2>
-                        </a>
-                        <desc><c:out value="${item.description}"/></desc>
-                        <price>$<c:out value="${item.price}"/></price>
-                        <count><c:out value="${item.count}"/> шт.</count>
-                    </article>
-                </c:forEach>
+                </td>
+                <td>
+                    <input name="minPriceFilter" type="text" class="minPrice" value="${minPriceValue}">
+                    <span>-</span>
+                    <input name="maxPriceFilter" type="text" class="maxPrice" value="${maxPriceValue}">
+                </td>
+                <td>
+                    <input name="countFilter" type="text" class="countMin" value="${countValue}">
+                </tbody>
+            </table>
+            <div class="row" align="right">
+                <input name="findProductWide" value="Поиск" type="submit" class="btn btn-primary findButton">
+            </div>
+        </form>
+        <hr>
+        <c:if test='${products.isEmpty()==false}'>
+        <h3>Результат поиска</h3>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
+                    <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Описание</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                    </tr><!-- Table Header -->
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${products}" var="item">
+                        <tr>
+                            <td>
+                                <c:out value="${item.name}"/>
+                            </td>
+                            <td>
+                                <desc><c:out value="${item.description}"/></desc>
+                            </td>
+                            <td>
+                                <price>$<c:out value="${item.price}"/></price>
+                            </td>
+                            <td>
+                                <count><c:out value="${item.count}"/> шт.</count>
+                            </td>
+                            <td>
+                                <form method="POST" action="/cart.jsp">
+                                    <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
+                                    <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
+                                           value="1"/>
+                                    <button type=submit name=buy>&#x1F6D2;</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
+        </c:if>
+</div>
+</section>
+</div>
 </section>
 <%@include file="template_end.jsp" %>
