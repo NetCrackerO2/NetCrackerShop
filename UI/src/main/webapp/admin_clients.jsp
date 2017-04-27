@@ -47,7 +47,6 @@
                     </td>
                 </tr>
             </c:forEach>
-
             </tbody>
         </table>
     </div>
@@ -95,7 +94,7 @@
                             </tr>
                             <tr class="row">
                                 <td>
-                                    <input type="submit" name="addProduct" class="saveAdd btn btn-primary"
+                                    <input type="submit" name="addClient" class="saveAdd btn btn-primary"
                                            value="Добавить"/>
                                 </td>
                                 <td>

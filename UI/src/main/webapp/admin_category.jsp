@@ -20,8 +20,14 @@
         <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
             <thead>
             <tr>
+                <td>
+                    <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
+                </td>
+            </tr>
+            <tr>
                 <th>ID</th>
                 <th>Наименование</th>
+                <th colspan="2">Редактирование</th>
             </tr><!-- Table Header -->
             </thead>
             <tbody>
@@ -38,11 +44,6 @@
                     </td>
                 </tr>
             </c:forEach>
-            <tr>
-                <td>
-                    <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
@@ -82,7 +83,7 @@
                             </tr>
                             <tr class="row">
                                 <td>
-                                    <input type="submit" name="addProduct" class="saveAdd btn btn-primary"
+                                    <input type="submit" name="addCategory" class="saveAdd btn btn-primary"
                                            value="Добавить"/>
                                 </td>
                                 <td>
