@@ -1,7 +1,9 @@
 package servlets;
 
+import beans.CategoryBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
+import models.CategoryEntity;
 import models.ProductEntity;
 
 import javax.ejb.EJBException;
@@ -23,28 +25,30 @@ public class SearchServlet extends HttpServlet {
     ProductBean productBean;
     @Inject
     ClientInfo clientInfo;
-
+    @Inject
+    CategoryBean categoryBean;
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
         List<ProductEntity> list = null;
+        List<CategoryEntity> categoryList = categoryBean.getAll();
 
         if (request.getParameter("findProductWide") != null) {
             try {
                 List<String[]> parameters = new ArrayList<>();
                 List<String[]> minMaxParameters = new ArrayList<>();
                 addItem(parameters, "name", request.getParameter("nameFilter"));
-                addItem(parameters, "category.name", request.getParameter("categoryFilter"));
+                addItem(parameters, "category.name", request.getParameter("categorySelect"));
                 addMinMaxItem(minMaxParameters,
-                              "price",
-                              request.getParameter("minPriceFilter"),
-                              request.getParameter("maxPriceFilter"));
+                        "price",
+                        request.getParameter("minPriceFilter"),
+                        request.getParameter("maxPriceFilter"));
                 addMinMaxItem(minMaxParameters,
-                              "count",
-                              "0",
-                              request.getParameter("countFilter"));
+                        "count",
+                        "0",
+                        request.getParameter("countFilter"));
 
                 list = productBean.filterBy(parameters, minMaxParameters);
             } catch (IllegalArgumentException | EJBException e) {
@@ -53,13 +57,20 @@ public class SearchServlet extends HttpServlet {
                 clientInfo.setErrorMessage(e.getMessage());
             }
         }
+        CategoryEntity tmp = null;
+        for (int i = 0; i < categoryList.size(); i++){
+            if(categoryList.get(i).getName().equals(request.getParameter("categorySelect"))){
+                tmp = categoryList.get(0);
+                categoryList.set(0, categoryList.get(i));
+                categoryList.set(i, tmp);
+            }
 
+        }
         request.setAttribute("nameValue", request.getParameter("nameFilter"));
-        request.setAttribute("categoryValue", request.getParameter("categoryFilter"));
         request.setAttribute("minPriceValue", request.getParameter("minPriceFilter"));
         request.setAttribute("maxPriceValue", request.getParameter("maxPriceFilter"));
         request.setAttribute("countValue", request.getParameter("countFilter"));
-
+        request.setAttribute( "categories", categoryList);
         request.setAttribute("products", list);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
