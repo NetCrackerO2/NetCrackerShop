@@ -7,6 +7,7 @@
 <c:set var="objStack" value="${[title,'cart_view.jsp']}" scope="page"/>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
+<c:set var="isEnough" value="true"/>
 
 <%@include file="template_start.jsp" %>
 <div class="row path">
@@ -44,7 +45,8 @@
                         <td>
                             <c:out value="${cartItem.count}"/>
                             <c:if test="${cartItem.count > item.count}">
-                                но на складе осталось только <c:out value="${item.count}"/>
+                                <c:set var="isEnough" value="false"/>
+                                <font color="red">(на складе <c:out value="${item.count}"/>)</font>
                             </c:if>
                         </td>
                         <td><c:out value="${item.price}"/>$</td>
@@ -65,10 +67,12 @@
                     <td>Итого:</td>
                     <td><c:out value="${sum}"/>$</td>
                     <td>
-                        <div>
-                            <input type="submit" name="createOrder" class="btn btn-primary"
-                                   value="Оформить заказ" class="button"/>
-                        </div>
+                        <c:if test="${isEnough == true}">
+                            <div>
+                                <input type="submit" name="createOrder" class="btn btn-primary"
+                                       value="Оформить заказ" class="button"/>
+                            </div>
+                        </c:if>
                     </td>
                 </tr>
                 <c:if test="${isError==true}">

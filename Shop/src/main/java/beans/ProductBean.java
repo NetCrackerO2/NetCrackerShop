@@ -107,38 +107,4 @@ public class ProductBean extends GenericBean<ProductEntity> {
 
         return persist(product);
     }
-
-    /*
-    //Фильтрация списка товаров по имени
-    public List<ProductEntity> filterProductByName(String name, List<ProductEntity> list) {
-        list = list.stream().filter(
-                s -> (s.getName().contains(name))
-        ).collect(Collectors.toList());
-        return list;
-    }
-
-    //Фильтрация списка товаров по категориями
-    public List<ProductEntity> filterProductByCategory(String category, List<ProductEntity> list) {
-        list = list.stream().filter(
-                s -> (s.getCategory().getName().equals(category))
-        ).collect(Collectors.toList());
-        return list;
-    }
-
-    //Фильтрация списка товаров по диапазону цен
-    public List<ProductEntity> filterProductByPrice(int priceMin, int priceMax, List<ProductEntity> list) {
-        list = list.stream().filter(
-                s -> (s.getPrice() >= priceMin && s.getPrice() <= priceMax)
-        ).collect(Collectors.toList());
-        return list;
-    }
-
-    //Фильтрация списка товаров по кол-ву товара на складе
-    public List<ProductEntity> filterByCount(int count, List<ProductEntity> list) {
-        list = list.stream().filter(
-                s -> (s.getCount() >= count)
-        ).collect(Collectors.toList());
-        return list;
-    }
-    */
 }
