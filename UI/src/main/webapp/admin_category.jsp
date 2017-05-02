@@ -39,8 +39,15 @@
                         <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
                     </td>
                     <td>
-                        <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
-                           class="btn btn-primary">Удалить</a>
+                        <c:choose>
+                            <c:when test="${categoryBean.canRemove(item)}">
+                                <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
+                                   class="btn btn-primary">Удалить</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn">Удалить</a>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>

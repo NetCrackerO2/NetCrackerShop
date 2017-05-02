@@ -36,6 +36,6 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
     @Override
     public boolean canRemove(CategoryEntity entity) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }

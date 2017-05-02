@@ -153,6 +153,6 @@ public class CartBean extends GenericBean<CartEntity> {
     @Override
     public boolean canRemove(CartEntity entity) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }

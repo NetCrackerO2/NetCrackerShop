@@ -112,6 +112,6 @@ public class ProductBean extends GenericBean<ProductEntity> {
     @Override
     public boolean canRemove(ProductEntity entity) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }

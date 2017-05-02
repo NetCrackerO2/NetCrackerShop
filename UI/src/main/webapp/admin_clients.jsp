@@ -42,15 +42,15 @@
                         <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
                     </td>
                     <td>
-						<c:choose>
-							<c:when test="${clientBean.canRemove(item)}">
-	                            <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
-	                               class="btn btn-primary">Удалить</a>
-							</c:when>
-							<c:otherwise>
-	                            <a class="btn">Удалить</a>
-							</c:otherwise>
-						</c:choose>
+                        <c:choose>
+                            <c:when test="${clientBean.canRemove(item)}">
+                                <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
+                                   class="btn btn-primary">Удалить</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn">Удалить</a>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>
