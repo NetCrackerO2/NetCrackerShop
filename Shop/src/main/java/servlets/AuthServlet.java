@@ -24,17 +24,19 @@ public class AuthServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         if (request.getParameter("login") != null) {
             clientBean.login(request.getParameter("login"));
+            if (!clientInfo.isLoggedIn()) {
+                clientInfo.setErrorMessage("Неверный логин");
+            }
         }
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        } else {
-            clientInfo.setErrorMessage("Неверный логин");
+        } else
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
-        }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");

@@ -24,8 +24,8 @@
         <div class="row">
             <ul class="sign list-inline">
                 <c:if test="${!clientInfo.loggedIn}">
-                    <li><a href="auth_view.jsp">Войти</a></li>
-                    <li><a href="admin_view.jsp">Регистрация</a></li>
+                    <li><a href="auth.jsp">Войти</a></li>
+                    <li><a href="register.jsp">Регистрация</a></li>
                 </c:if>
                 <c:if test="${clientInfo.loggedIn}">
                     <li><a href="clientsServlet.jsp?logout=">Выйти</a></li>

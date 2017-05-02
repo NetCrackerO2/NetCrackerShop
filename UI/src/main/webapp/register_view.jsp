@@ -1,21 +1,24 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@include file="env.jsp" %>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<c:set var="title" value="Регистрация" scope="page"/>
 <html lang="ru">
 <head>
     <title><c:out value="${title}"/></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
 </head>
-<body ng-app="app" ng-controller="Ctrl">
+<body>
 <header>
     <div class="container">
         <div class="row">
@@ -36,7 +39,7 @@
             <div class="col-md-2 col-md-offset-8  ">
                 <ul class="user list-inline">
                     <c:if test="${clientInfo.loggedIn}">
-                        <li>Здравствуйте, <a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
+                        <li>Клиент:<a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
                         <li><a href="cart_view.jsp">Корзина</a></li>
                     </c:if>
                 </ul>
@@ -44,32 +47,31 @@
         </div>
     </div>
 </header>
-
-<nav>
+<!-- Главный Экран- -->
+<section id="content">
     <div class="container">
         <div class="row">
-            <div class="text-right">
-                <form method="POST" action="/searchServlet.jsp" class="search">
-                    <table>
-                        <tr>
-                            <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
-                            <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
-                        </tr>
-                    </table>
-                </form>
+            <div class="col-md-6 col-md-offset-3">
+                    <form name="login-form" class="login-form" method="POST" action="/register.jsp">
+                        <div class="headerLogin">
+                            <h1>Регистрация</h1>
+                        </div>
+                        <div class="contentLogin">
+                            <input name="login" type="text" class="input username" placeholder="Логин"/>
+	                        <input name="address" type="text" class="input username" placeholder="Адрес"/>
+                        </div>
+                        <div class="footerLogin">
+                            <input type="submit" name="submit" value="РЕГИСТРАЦИЯ" class="btn-primary button"/>
+                        </div>
+                        <c:if test="${isError==true}">
+                            <div>
+                                <p style="color:red;" align="center"><c:out value="${errorMessage}"/></p>
+                            </div>
+                        </c:if>
+                    </form>
             </div>
         </div>
     </div>
-    <div class="row">
-        <ul class="list-inline navigate">
-            <li><a href="categories.jsp">Категории</a></li>
-            <li><a href="search.jsp">Поиск</a></li>
-            <c:if test="${clientInfo.loggedIn}">
-                <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            </c:if>
-            <li><a href="admin_view.jsp">Админка</a></li>
-        </ul>
-    </div>
-</nav>
-<section id="content">
-    <div class="container">
+</section>
+
+<%@include file="template_end.jsp" %>

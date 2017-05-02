@@ -58,6 +58,9 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
     public ClientEntity addClient(String name,
                                   String defaultAddres) {
+        if (getByLogin(name) != null) {
+            throw new EJBException("Имя уже используется.");
+        }
         ClientEntity client = new ClientEntity();
 
         if (name.equals("")) {
