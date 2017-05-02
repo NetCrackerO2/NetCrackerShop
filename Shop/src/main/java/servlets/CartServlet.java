@@ -4,6 +4,7 @@ package servlets;
 import beans.CartBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
+import models.ProductInOrder;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart.jsp"})
@@ -42,6 +44,12 @@ public class CartServlet extends HttpServlet {
             if (request.getParameter("remove") != null) {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
             }
+            if (request.getParameter("orderInfoButton") != null) {
+                request.setAttribute("orderId",request.getParameter("orderId"));
+                request.getRequestDispatcher("order.jsp").forward(request, response);
+                return;
+            }
+
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
         }

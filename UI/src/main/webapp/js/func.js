@@ -86,7 +86,18 @@
 //     $('#productTable').css({'display': 'block'});
 //     $('.addProductForm').css({'display': 'none'});
 // })
-//
-//
-//
-//
+var app = angular.module('app', []);
+
+app.controller('Ctrl', ['$scope',
+    function ($scope) {
+        $('#order_info_Modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            $scope.$apply(function () {
+                var order_id = button.data('order-id');
+                $scope.test = order_id;
+                $( "body" ).data( "1", order_id );
+            });
+        });
+    }
+]);
+
