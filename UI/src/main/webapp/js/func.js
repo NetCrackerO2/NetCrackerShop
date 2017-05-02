@@ -100,41 +100,81 @@
 //         });
 //     }
 // ]);
+//Изменение товара
 $('.editProductButton').on('click', function () {
     var x = $(this).closest('tr');
     if (this.value == 'Изменить') {
         $(this).val("Сохранить");
-        x.find('.editable').css({'-webkit-user-modify':'read-write'});
+        x.find('.editable').css({'-webkit-user-modify': 'read-write'});
 
     } else {
         if (this.value == 'Сохранить') {
             $(this).val("Изменить");
-            x.find('.editable').css({'-webkit-user-modify':'read-only'});
-            try
-            {
-                var id=x.find('.id').html().trim();
-                var name=x.find('.name').html().trim();
-                var count=x.find('.count').html().trim();
-                var price=x.find('.price').html().trim();
+            x.find('.editable').css({'-webkit-user-modify': 'read-only'});
+            try {
+                var id = x.find('.id').html().trim();
+                var name = x.find('.name').html().trim();
+                var count = x.find('.count').html().trim();
+                var price = x.find('.price').html().trim();
                 request = new XMLHttpRequest();
-                // request.addEventListener("readystatechange", stateChange, false);
-                var param="&productId="+id+"&productName="+name+"&productCount="+count+"&productPrice="+price;
-                request.open('GET', '/productsServlet.jsp?editProduct=ok'+param, true);
+                var param = "&productId=" + id + "&productName=" + name + "&productCount=" + count + "&productPrice=" + price;
+                request.open('GET', '/productsServlet.jsp?editProduct=ok' + param, true);
                 request.send(null);
             }
-            catch(exception)
-            {
+            catch (exception) {
                 alert("Request failed");
             }
         }
     }
-    // x.find('input').val("Сохранить");
 })
-// //удалить строку таблицы
-// $('.editButton').on('click', function () {
-//     var x=$(this).closest('tr'); //продукт
-//     if(x.find('.editable').css('-webkit-user-modify')==='read-write')
-//         x.find('.editable').css({'-webkit-user-modify':'read-only'});
-//     else
-//         x.find('.editable').css({'-webkit-user-modify':'read-write'});
-// });
+    //Изменение категории
+    $('.editCategoryButton').on('click', function () {
+        var x = $(this).closest('tr');
+        if (this.value == 'Изменить') {
+            $(this).val("Сохранить");
+            x.find('.editable').css({'-webkit-user-modify': 'read-write'});
+
+        } else {
+            if (this.value == 'Сохранить') {
+                $(this).val("Изменить");
+                x.find('.editable').css({'-webkit-user-modify': 'read-only'});
+                try {
+                    var id = x.find('.id').html().trim();
+                    var name = x.find('.name').html().trim();
+                    request = new XMLHttpRequest();
+                    var param = "&categoryId=" + id + "&categoryName=" + name;
+                    request.open('GET', '/categoriesServlet.jsp?editCategory=ok' + param, true);
+                    request.send(null);
+                }
+                catch (exception) {
+                    alert("Request failed");
+                }
+            }
+        }
+    })
+
+//Изменение клиента
+    $('.editClientButton').on('click', function () {
+        var x = $(this).closest('tr');
+        if (this.value == 'Изменить') {
+            $(this).val("Сохранить");
+            x.find('.editable').css({'-webkit-user-modify': 'read-write'});
+        } else {
+            if (this.value == 'Сохранить') {
+                $(this).val("Изменить");
+                x.find('.editable').css({'-webkit-user-modify': 'read-only'});
+                try {
+                    var id = x.find('.id').html().trim();
+                    var name = x.find('.name').html().trim();
+                    var defaultAddress = x.find('.defaultAddress').html().trim();
+                    request = new XMLHttpRequest();
+                    var param = "&clientId=" + id + "&clientName=" + name + "&clientDefaultAddress=" + defaultAddress;
+                    request.open('GET', '/clientsServlet.jsp?editClient=ok' + param, true);
+                    request.send(null);
+                }
+                catch (exception) {
+                    alert("Request failed");
+                }
+            }
+        }
+    })

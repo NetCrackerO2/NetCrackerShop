@@ -33,6 +33,15 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         return persist(category);
     }
 
+    public void editCategory(int id,String name){
+        CategoryEntity categoryEntity=get(id);
+
+        if (categoryEntity==null){
+            return;
+        }
+
+        categoryEntity.setName(name);
+    }
     @Override
     public boolean canRemove(CategoryEntity entity) {
         // TODO Auto-generated method stub

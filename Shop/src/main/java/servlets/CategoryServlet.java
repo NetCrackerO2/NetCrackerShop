@@ -43,6 +43,10 @@ public class CategoryServlet extends HttpServlet {
                 );
             } else if (request.getParameter("removeCategory") != null) {
                 categoryBean.remove(getConvertedParameter(request, "categoryId", Integer::valueOf));
+            } else if (request.getParameter("editCategory") != null) {
+                categoryBean.editCategory(getConvertedParameter(request, "categoryId", Integer::valueOf),
+                        getStringParameter(request, "categoryName")
+                );
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

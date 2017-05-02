@@ -35,11 +35,11 @@
             <tbody>
             <c:forEach items="${clientBean.getAll()}" var="item">
                 <tr>
-                    <td class="editable"><c:out value="${item.id}"/></td>
-                    <td class="editable"><c:out value="${item.name}"/></td>
-                    <td class="editable"><c:out value="${item.defaultAddress}"/></td>
+                    <td class="id"><c:out value="${item.id}"/></td>
+                    <td class="name editable"><c:out value="${item.name}"/></td>
+                    <td class="defaultAddress editable"><c:out value="${item.defaultAddress}"/></td>
                     <td>
-                        <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
+                        <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
                     </td>
                     <td>
                         <c:choose>
@@ -48,7 +48,7 @@
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="btn">Удалить</a>
+                                <a class="btn btn-primary">Удалить</a>
                             </c:otherwise>
                         </c:choose>
                     </td>
