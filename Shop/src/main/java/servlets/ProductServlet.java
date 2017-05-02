@@ -1,6 +1,7 @@
 package servlets;
 
 import beans.CategoryBean;
+import beans.ClientBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
 import models.CategoryEntity;
@@ -40,13 +41,19 @@ public class ProductServlet extends HttpServlet {
         try {
             if (request.getParameter("addProduct") != null) {
                 productBean.addProduct(getStringParameter(request, "productName"),
-                                       getStringParameter(request, "productDescription"),
-                                       getConvertedParameter(request, "productCount", Integer::valueOf),
-                                       getConvertedParameter(request, "productPrice", Float::valueOf),
-                                       getCategoryIdByName(request.getParameter("categorySelect"))
+                        getStringParameter(request, "productDescription"),
+                        getConvertedParameter(request, "productCount", Integer::valueOf),
+                        getConvertedParameter(request, "productPrice", Float::valueOf),
+                        getCategoryIdByName(request.getParameter("categorySelect"))
                 );
             } else if (request.getParameter("removeProduct") != null) {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
+            } else if (request.getParameter("editProduct") != null) {
+                productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
+                        getStringParameter(request, "productName"),
+                        getConvertedParameter(request, "productCount", Integer::valueOf),
+                        getConvertedParameter(request, "productPrice", Float::valueOf)
+                );
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
@@ -58,10 +65,10 @@ public class ProductServlet extends HttpServlet {
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);
     }
 
-    private int getCategoryIdByName(String name){
+    private int getCategoryIdByName(String name) {
         List<CategoryEntity> tmp = categoryBean.getAll();
-        for (CategoryEntity i : tmp){
-            if(i.getName().equals(name))
+        for (CategoryEntity i : tmp) {
+            if (i.getName().equals(name))
                 return i.getId();
         }
         return -1;

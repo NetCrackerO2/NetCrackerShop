@@ -35,20 +35,20 @@
             <tbody>
             <c:forEach items="${productBean.getAll()}" var="item">
                 <tr>
-                    <td name="idProduct" class="editable">
+                    <td class="id"  name="idProduct">
                         <c:out value="${item.id}"/>
                     </td>
-                    <td name="nameProduct" class="editable">
+                    <td  name="nameProduct" class="name editable">
                         <c:out value="${item.name}"/>
                     </td>
-                    <td name="countProduct" class="editable">
+                    <td  name="countProduct" class="count editable">
                         <c:out value="${item.count}"/>
                     </td>
-                    <td name="priceProduct" class="editable">
+                    <td  name="priceProduct" class="price editable">
                         <c:out value="${item.price}"/>
                     </td>
                     <td>
-                        <input type="submit" name="edit" class="btn btn-primary editButton" value="Изменить"/>
+                        <input type="submit" name="edit" class="btn btn-primary editProductButton" value="Изменить"/>
                     </td>
                     <td>
                         <c:choose>

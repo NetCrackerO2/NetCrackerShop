@@ -109,6 +109,17 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
 
 
+    public void editProduct(int id,String name,int count,float price){
+        ProductEntity productEntity=get(id);
+
+        if (productEntity==null){
+            return;
+        }
+
+        productEntity.setName(name);
+        productEntity.setCount(count);
+        productEntity.setPrice(price);
+    }
     @Override
     public boolean canRemove(ProductEntity entity) {
         // TODO Auto-generated method stub
