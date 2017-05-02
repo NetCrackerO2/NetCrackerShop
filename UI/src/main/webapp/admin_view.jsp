@@ -105,7 +105,14 @@
                             </tr>
                             <tr class="row">
                                 <td class="col">Категория</td>
-                                <td class="col"><input name="productCategoryId" type="text"></td>
+                                <td class="col">
+                                    <select name="categorySelect">
+                                        <c:set var="categories" value="${categoryBean.getAll()}"/>
+                                        <c:forEach items="${categories}" var="item">
+                                            <option name="<c:out value="${item.name}"/>" value="<c:out value="${item.name}"/>"><c:out value="${item.name}"/></option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
                             </tr>
                             <tr class="row">
                                 <td>

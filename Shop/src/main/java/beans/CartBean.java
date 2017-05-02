@@ -114,7 +114,10 @@ public class CartBean extends GenericBean<CartEntity> {
 
         for (CartEntity entity : cart) {
             ProductEntity product = productBean.get(entity.getProductId());
-            if (product.getCount() < entity.getCount()) {
+            int count = entity.getCount();
+            float price = product.getPrice();
+
+            if (product.getCount() < count) {
                 throw new EJBException("Нет в наличии необходимого количества "
                                                + product.getName()
                                                + ": есть "
@@ -123,10 +126,10 @@ public class CartBean extends GenericBean<CartEntity> {
                                                + entity.getCount()
                                                + " шт."
                 );
+            } else {
+                product.setCount(product.getCount() - count);
             }
 
-            int count = entity.getCount();
-            float price = product.getPrice();
 
             OrderProductEntity association = new OrderProductEntity();
             association.setOrderByOrderId(order);

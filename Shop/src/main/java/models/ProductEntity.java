@@ -1,6 +1,7 @@
 package models;
 
 
+import javax.ejb.EJBException;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
@@ -59,6 +60,9 @@ public class ProductEntity {
     }
 
     public void setCount(Integer count) {
+        if (count < 0) {
+            throw new EJBException("Установка отрицательного количества товара невозможна.");
+        }
         this.count = count;
     }
 

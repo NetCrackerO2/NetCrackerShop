@@ -3,6 +3,7 @@ package servlets;
 import beans.CategoryBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
+import models.CategoryEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
@@ -41,7 +43,7 @@ public class ProductServlet extends HttpServlet {
                                        getStringParameter(request, "productDescription"),
                                        getConvertedParameter(request, "productCount", Integer::valueOf),
                                        getConvertedParameter(request, "productPrice", Float::valueOf),
-                                       getConvertedParameter(request, "productCategoryId", Integer::valueOf)
+                                       getCategoryIdByName(request.getParameter("categorySelect"))
                 );
             } else if (request.getParameter("removeProduct") != null) {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
@@ -54,5 +56,14 @@ public class ProductServlet extends HttpServlet {
             clientInfo.setErrorMessage(e.getMessage());
         }
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);
+    }
+
+    private int getCategoryIdByName(String name){
+        List<CategoryEntity> tmp = categoryBean.getAll();
+        for (CategoryEntity i : tmp){
+            if(i.getName().equals(name))
+                return i.getId();
+        }
+        return -1;
     }
 }
