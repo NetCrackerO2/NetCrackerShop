@@ -32,4 +32,10 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
 
         return persist(category);
     }
+
+    @Override
+    public boolean canRemove(CategoryEntity entity) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

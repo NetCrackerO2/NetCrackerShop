@@ -47,4 +47,10 @@ public class OrderBean extends GenericBean<OrderEntity> {
             return null;
         }
     }
+
+    @Override
+    public boolean canRemove(OrderEntity entity) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

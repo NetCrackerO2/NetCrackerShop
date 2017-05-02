@@ -1,6 +1,5 @@
 package beans;
 
-
 import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
 import clientInfo.NeedAuthorization;
@@ -11,7 +10,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
-
 
 @Named
 @Stateless
@@ -29,9 +27,8 @@ public class ClientBean extends GenericBean<ClientEntity> {
     public ClientEntity getByLogin(String login) {
         try {
             return em.createQuery("SELECT e from ClientEntity e where e.name=:token", getEntityClass())
-                     .setParameter("token", login)
-                     .getSingleResult();
-            //TODO: нормальная обработка исключения
+                    .setParameter("token", login).getSingleResult();
+            // TODO: нормальная обработка исключения
         } catch (Exception e) {
             return null;
         }
@@ -56,8 +53,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return clientInfo;
     }
 
-    public ClientEntity addClient(String name,
-                                  String defaultAddres) {
+    public ClientEntity addClient(String name, String defaultAddres) {
         if (getByLogin(name) != null) {
             throw new EJBException("Имя уже используется.");
         }
@@ -85,5 +81,11 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
         entity.setName(name);
         entity.setDefaultAddress(defaultAddress);
+    }
+
+    @Override
+    public boolean canRemove(ClientEntity entity) {
+        // TODO Auto-generated method stub
+        return clientInfo.getId() != entity.getId();
     }
 }

@@ -148,4 +148,11 @@ public class CartBean extends GenericBean<CartEntity> {
             removeProductFromCart(entity.getProductId());
         }
     }
+
+
+    @Override
+    public boolean canRemove(CartEntity entity) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

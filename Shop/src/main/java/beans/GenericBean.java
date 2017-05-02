@@ -13,6 +13,7 @@ public abstract class GenericBean<T> {
     protected EntityManager em;
 
     protected abstract Class<T> getEntityClass();
+    public abstract boolean canRemove(T entity);
 
     public T persist(T entity) {
         em.persist(entity);
