@@ -58,39 +58,49 @@ nav {
     color: #333;
   }
 
+  /* Кнопка Поиск */
+  .search .findButton {
+    width: 37px;
+    height: 100%;
+    cursor: pointer;
+    background: url(../image/go.png) 50% no-repeat;
+    opacity: 0.5;
+  }
 
-/* Кнопка Поиск */
-.search .findButton {
-  width: 37px;
-  height: 100%;
-  cursor: pointer;
-  background: url(../image/go.png) 50% no-repeat;
-  opacity: 0.5;
-}
-
-.search .findButton:hover {
-  opacity: 0.8;
-}
+  .search .findButton:hover {
+    opacity: 0.8;
+  }
 }
 
 /*============    ГЛАВНЫЙ ЭКРАН    ===========*/
+nav {
+  ul.breadCrumbs {
+    float: left;
+      a {
+        padding: 5px;
+        text-transform: uppercase;
+        background-color: #2F717F;
+        color: #fff;
+      }
+  }
+}
+
 section#content {
-  .path {
-    a {
-      padding: 5px;
-      text-transform: uppercase;
-      background-color: #2F717F;
-      color: #fff;
-    }
+  a {
+    padding: 5px;
+    text-transform: uppercase;
+    background-color: #2F717F;
+    color: #fff;
   }
-  #clientsTable {
-    margin-top: 15px;
-  }
+}
+
+#clientsTable {
+  margin-top: 15px;
 }
 
 .table {
   text-align: center;
-  thead th{
+  thead th {
     text-align: center;
   }
 }

@@ -10,13 +10,26 @@
 <c:set var="isEnough" value="true"/>
 
 <%@include file="template_start.jsp" %>
-<div class="row path">
-    <ul class="list-inline">
-        <li><a href="index.jsp">Главная</a></li>
-        <span> > </span>
-        <li><a href="cart_view.jsp">Корзина</a></li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <ul class="breadCrumbs list-inline">
+            <li><a href="index.jsp">Главная</a></li>
+            <span> > </span>
+            <li><a href="cart_view.jsp">Корзина</a></li>
+        </ul>
+        <div class="text-right">
+            <form method="POST" action="/searchServlet.jsp" class="search">
+                <table>
+                    <tr>
+                        <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
+                        <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </div>
+</nav>
 <!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
