@@ -1,5 +1,6 @@
 package servlets;
 
+import backup.ToXml;
 import beans.CategoryBean;
 import beans.ClientBean;
 import beans.ProductBean;
@@ -55,9 +56,15 @@ public class ProductServlet extends HttpServlet {
                         getConvertedParameter(request, "productPrice", Float::valueOf)
                 );
             }
-        } catch (NullPointerException e) {
+            else if (request.getParameter("exportProducts") != null) {
+                ToXml to=new ToXml();
+                to.exportProducts(productBean.getAll(),request.getServletContext().getRealPath("/products.xml"));
+            }
+        }
+        catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
-        } catch (ConverterException e) {
+        }
+        catch (ConverterException e) {
             clientInfo.setErrorMessage("Некорректное значение параметра: " + e.getMessage());
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());

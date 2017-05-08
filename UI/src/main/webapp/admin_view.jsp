@@ -46,6 +46,12 @@
                 <td>
                     <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
                 </td>
+                <td>
+                    <form action="productsServlet.jsp">
+                    <input type="submit" name="exportProducts" class="exportButton btn btn-primary"
+                           value="Экспорт"/>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <th>ID</th>
@@ -58,16 +64,16 @@
             <tbody>
             <c:forEach items="${productBean.getAll()}" var="item">
                 <tr>
-                    <td class="id"  name="idProduct">
+                    <td class="id" name="idProduct">
                         <c:out value="${item.id}"/>
                     </td>
-                    <td  name="nameProduct" class="name editable">
+                    <td name="nameProduct" class="name editable">
                         <c:out value="${item.name}"/>
                     </td>
-                    <td  name="countProduct" class="count editable">
+                    <td name="countProduct" class="count editable">
                         <c:out value="${item.count}"/>
                     </td>
-                    <td  name="priceProduct" class="price editable">
+                    <td name="priceProduct" class="price editable">
                         <c:out value="${item.price}"/>
                     </td>
                     <td>
@@ -139,7 +145,9 @@
                                     <select name="categorySelect">
                                         <c:set var="categories" value="${categoryBean.getAll()}"/>
                                         <c:forEach items="${categories}" var="item">
-                                            <option name="<c:out value="${item.name}"/>" value="<c:out value="${item.name}"/>"><c:out value="${item.name}"/></option>
+                                            <option name="<c:out value="${item.name}"/>"
+                                                    value="<c:out value="${item.name}"/>"><c:out
+                                                    value="${item.name}"/></option>
                                         </c:forEach>
                                     </select>
                                 </td>

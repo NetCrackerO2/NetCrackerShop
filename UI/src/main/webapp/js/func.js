@@ -105,12 +105,13 @@ $('.editProductButton').on('click', function () {
     var x = $(this).closest('tr');
     if (this.value == 'Изменить') {
         $(this).val("Сохранить");
-        x.find('.editable').css({'-webkit-user-modify': 'read-write'});
+        x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
+
 
     } else {
         if (this.value == 'Сохранить') {
             $(this).val("Изменить");
-            x.find('.editable').css({'-webkit-user-modify': 'read-only'});
+            x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
             try {
                 var id = x.find('.id').html().trim();
                 var name = x.find('.name').html().trim();

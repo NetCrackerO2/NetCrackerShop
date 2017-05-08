@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
         if (!clientInfo.isLoggedIn() && request.getParameter("login") != null) {
             try {
                 clientBean.addClient(request.getParameter("login"), request.getParameter("address"));
-//                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
                 response.setHeader("Location", "/auth.jsp");
                 return;
             } catch (Exception e) {

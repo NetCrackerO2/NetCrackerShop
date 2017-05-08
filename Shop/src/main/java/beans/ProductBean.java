@@ -108,7 +108,6 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return persist(product);
     }
 
-
     public void editProduct(int id,String name,int count,float price){
         ProductEntity productEntity=get(id);
 
@@ -125,4 +124,5 @@ public class ProductBean extends GenericBean<ProductEntity> {
         // TODO Auto-generated method stub
         return true;
     }
+
 }
