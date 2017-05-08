@@ -1,6 +1,8 @@
 package servlets;
 
+import backup.ToXml;
 import beans.ClientBean;
+import beans.OrderBean;
 import clientInfo.ClientInfo;
 
 import javax.faces.convert.ConverterException;
@@ -20,6 +22,8 @@ import static servlets.ParameterGetter.getStringParameter;
 public class ClientServlet extends HttpServlet {
     @Inject
     ClientBean clientBean;
+    @Inject
+    OrderBean orderBean;
     @Inject
     ClientInfo clientInfo;
 
@@ -51,6 +55,12 @@ public class ClientServlet extends HttpServlet {
                 clientInfo.init(clientBean.get(clientInfo.getId()));
             } else if (request.getParameter("logout") != null) {
                 clientInfo.logout();
+            }
+            else if (request.getParameter("exportClients") != null) {
+                ToXml.exportClients(clientBean.getAll(),request.getServletContext().getRealPath("/clients.xml"));
+            }
+            else if (request.getParameter("exportOrders") != null) {
+                ToXml.exportOrders(orderBean.getAll(),request.getServletContext().getRealPath("/orders.xml"));
             }
         } catch (NullPointerException e) {
             request.setAttribute("isError", true);

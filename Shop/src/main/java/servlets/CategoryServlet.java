@@ -1,5 +1,6 @@
 package servlets;
 
+import backup.ToXml;
 import beans.CategoryBean;
 import clientInfo.ClientInfo;
 
@@ -47,6 +48,9 @@ public class CategoryServlet extends HttpServlet {
                 categoryBean.editCategory(getConvertedParameter(request, "categoryId", Integer::valueOf),
                         getStringParameter(request, "categoryName")
                 );
+            }
+            else if (request.getParameter("exportCategories") != null) {
+                ToXml.exportCategories(categoryBean.getAll(),request.getServletContext().getRealPath("/categories.xml"));
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

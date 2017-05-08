@@ -46,6 +46,12 @@
                 <td>
                     <a href="#add_category_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
                 </td>
+                <td>
+                    <form action="categoriesServlet.jsp">
+                        <input type="submit" name="exportCategories" class="exportButton btn btn-primary"
+                               value="Экспорт"/>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <th>ID</th>

@@ -1,6 +1,7 @@
 package servlets;
 
 
+import backup.ToXml;
 import beans.CartBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
@@ -47,6 +48,11 @@ public class CartServlet extends HttpServlet {
             if (request.getParameter("orderInfoButton") != null) {
                 request.setAttribute("orderId",request.getParameter("orderId"));
                 request.getRequestDispatcher("order.jsp").forward(request, response);
+                return;
+            }
+            if (request.getParameter("exportCarts") != null) {
+                ToXml.exportCarts(cartBean.getAll(),request.getServletContext().getRealPath("/carts.xml"));
+                request.getRequestDispatcher("admin_clients.jsp").forward(request, response);
                 return;
             }
 

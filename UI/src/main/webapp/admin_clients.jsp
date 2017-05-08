@@ -47,6 +47,24 @@
                 <td>
                     <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
                 </td>
+                <td>
+                    <form action="clientsServlet.jsp">
+                        <input type="submit" name="exportClients" class="exportButton btn btn-primary"
+                               value="Экспорт клиентов"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="clientsServlet.jsp">
+                        <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
+                               value="Экспорт заказов"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="cart.jsp">
+                        <input type="submit" name="exportCarts" class="exportButton btn btn-primary"
+                               value="Экспорт корзин"/>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <th>ID</th>

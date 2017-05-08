@@ -57,8 +57,7 @@ public class ProductServlet extends HttpServlet {
                 );
             }
             else if (request.getParameter("exportProducts") != null) {
-                ToXml to=new ToXml();
-                to.exportProducts(productBean.getAll(),request.getServletContext().getRealPath("/products.xml"));
+                ToXml.exportProducts(productBean.getAll(),request.getServletContext().getRealPath("/products.xml"));
             }
         }
         catch (NullPointerException e) {
