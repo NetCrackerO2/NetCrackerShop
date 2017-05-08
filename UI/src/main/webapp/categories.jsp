@@ -27,10 +27,20 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <ul class="list-inline navigate">
+        <li><a href="categories.jsp">Категории</a></li>
+        <li><a href="search.jsp">Поиск</a></li>
+        <c:if test="${clientInfo.loggedIn}">
+            <li><a href="user_profile.jsp">Личный кабинет</a></li>
+            <li><a href="admin_view.jsp">Админка</a></li>
+        </c:if>
+    </ul>
+</div>
 </nav>
 <!-- Главный Экран- -->
 <div class="row">
-    <div class="col-md-4 col-md-offset-3">
+    <div class="col-md-4 col-md-offset-4">
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
