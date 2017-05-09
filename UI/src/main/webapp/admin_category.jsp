@@ -81,7 +81,7 @@
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="btn">Удалить</a>
+                                <a class="btn">Неудаляемо</a>
                             </c:otherwise>
                         </c:choose>
                     </td>

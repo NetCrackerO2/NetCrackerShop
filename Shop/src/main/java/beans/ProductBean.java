@@ -121,8 +121,16 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
     @Override
     public boolean canRemove(ProductEntity entity) {
-        // TODO Auto-generated method stub
-        return true;
-    }
+        boolean flag = true;
 
+        try {
+            flag = flag && em.createQuery("select e from OrderProductEntity e where e.productByProductId.id=:token",
+                                          OrderProductEntity.class)
+                             .setParameter("token", entity.getId())
+                             .getResultList().size() == 0;
+        } catch (EntityNotFoundException ignore) {
+        }
+
+        return flag;
+    }
 }

@@ -2,10 +2,12 @@ package beans;
 
 
 import models.CategoryEntity;
+import models.ProductEntity;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.persistence.EntityNotFoundException;
 
 @Named
 @Stateless
@@ -44,7 +46,16 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
     }
     @Override
     public boolean canRemove(CategoryEntity entity) {
-        // TODO Auto-generated method stub
-        return true;
+        boolean flag = true;
+
+        try {
+            flag = flag && em.createQuery("select e from ProductEntity e where e.category.id=:token",
+                                          ProductEntity.class)
+                             .setParameter("token", entity.getId())
+                             .getResultList().size() == 0;
+        } catch (EntityNotFoundException ignore) {
+        }
+
+        return flag;
     }
 }

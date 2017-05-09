@@ -100,7 +100,7 @@
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="btn btn-primary">Неудаляемо</a>
+                                <a class="btn">Неудаляемо</a>
                             </c:otherwise>
                         </c:choose>
                     </td>
