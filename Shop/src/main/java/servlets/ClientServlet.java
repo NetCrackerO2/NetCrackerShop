@@ -60,6 +60,9 @@ public class ClientServlet extends HttpServlet {
                 clientInfo.init(clientBean.get(clientInfo.getId()));
             } else if (request.getParameter("logout") != null) {
                 clientInfo.logout();
+                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+                response.setHeader("Location", "/");
+                return;
             }
             else if (request.getParameter("exportClients") != null) {
                 ToXml.exportClients(clientBean.getAll(),request.getServletContext().getRealPath("/clients.xml"));

@@ -53,7 +53,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return clientInfo;
     }
 
-    public ClientEntity addClient(String name, String defaultAddres) {
+    public ClientEntity addClient(String name, String defaultAddress) {
         if (getByLogin(name) != null) {
             throw new EJBException("Имя уже используется.");
         }
@@ -64,10 +64,10 @@ public class ClientBean extends GenericBean<ClientEntity> {
         }
         client.setName(name);
 
-        if (defaultAddres.equals("")) {
+        if (defaultAddress.equals("")) {
             throw new EJBException("Недопустимый адрес.");
         }
-        client.setDefaultAddress(defaultAddres);
+        client.setDefaultAddress(defaultAddress);
 
         return persist(client);
     }

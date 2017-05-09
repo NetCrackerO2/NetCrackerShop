@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RegistrationServlet", urlPatterns = { "/register.jsp" })
+@WebServlet(name = "RegistrationServlet", urlPatterns = {"/register.jsp"})
 public class RegistrationServlet extends HttpServlet {
     @Inject
     ClientBean clientBean;
@@ -21,6 +21,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
         if (!clientInfo.isLoggedIn() && request.getParameter("login") != null) {
             try {
                 clientBean.addClient(request.getParameter("login"), request.getParameter("address"));
@@ -31,20 +32,16 @@ public class RegistrationServlet extends HttpServlet {
                 clientInfo.setErrorMessage(e.getMessage());
             }
         }
-        then(request, response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        then(request, response);
-    }
-
-    protected void then(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        } else
+        } else {
             request.getRequestDispatcher("register_view.jsp").forward(request, response);
-
+        }
     }
 }
