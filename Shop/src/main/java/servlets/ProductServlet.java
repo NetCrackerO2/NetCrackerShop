@@ -44,12 +44,24 @@ public class ProductServlet extends HttpServlet {
 
         try {
             if (request.getParameter("addProduct") != null) {
+                request.setAttribute("productNameValue", request.getParameter("productName"));
+                request.setAttribute("productDescriptionValue", request.getParameter("productDescription"));
+                request.setAttribute("productPriceValue", request.getParameter("productCount"));
+                request.setAttribute("productCountValue", request.getParameter("productPrice"));
+                request.setAttribute("categorySelectValue", request.getParameter("categorySelect"));
+
                 productBean.addProduct(getStringParameter(request, "productName"),
                                        getStringParameter(request, "productDescription"),
                                        getConvertedParameter(request, "productCount", Integer::valueOf),
                                        getConvertedParameter(request, "productPrice", Float::valueOf),
                                        getCategoryIdByName(request.getParameter("categorySelect"))
                 );
+
+                request.setAttribute("productNameValue", "");
+                request.setAttribute("productDescriptionValue", "");
+                request.setAttribute("productPriceValue", "");
+                request.setAttribute("productCountValue", "");
+                request.setAttribute("categorySelectValue", "");
             } else if (request.getParameter("removeProduct") != null) {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
             } else if (request.getParameter("editProduct") != null) {

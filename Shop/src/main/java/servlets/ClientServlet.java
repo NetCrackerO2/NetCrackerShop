@@ -43,9 +43,15 @@ public class ClientServlet extends HttpServlet {
 
         try {
             if (request.getParameter("addClient") != null) {
+                request.setAttribute("clientNameValue", request.getParameter("clientName"));
+                request.setAttribute("clientDefaultAddressValue", request.getParameter("clientDefaultAddress"));
+
                 clientBean.addClient(getStringParameter(request, "clientName"),
                                      getStringParameter(request, "clientDefaultAddress")
                 );
+
+                request.setAttribute("clientNameValue", "");
+                request.setAttribute("clientDefaultAddressValue", "");
             } else if (request.getParameter("removeClient") != null) {
                 Integer clientId = getConvertedParameter(request, "clientId", Integer::valueOf);
                 clientBean.remove(clientId);

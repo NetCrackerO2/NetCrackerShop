@@ -142,11 +142,12 @@
                         <table id="addClientsTable" class="table text-center" cellspacing='0'>
                             <tr class="row">
                                 <td class="col">Имя</td>
-                                <td class="col"><input name="clientName" type="text"></td>
+                                <td class="col"><input name="clientName" type="text" value="${clientNameValue}"></td>
                             </tr>
                             <tr class="row">
                                 <td class="col">Адрес</td>
-                                <td class="col"><input name="clientDefaultAddress" type="text"></td>
+                                <td class="col"><input name="clientDefaultAddress" type="text"
+                                                       value="${clientDefaultAddressValue}"></td>
                             </tr>
                             <tr class="row">
                                 <td>

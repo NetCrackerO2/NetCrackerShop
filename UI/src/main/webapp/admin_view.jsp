@@ -131,19 +131,22 @@
                         <table id="addProductTable" class="table text-center" cellspacing='0'>
                             <tr class="row">
                                 <td class="col">Название</td>
-                                <td class="col"><input name="productName" type="text"></td>
+                                <td class="col"><input name="productName" type="text" value="${productNameValue}"></td>
                             </tr>
                             <tr class="row">
                                 <td class="col">Описание</td>
-                                <td class="col"><input name="productDescription" type="text"></td>
+                                <td class="col"><input name="productDescription" type="text"
+                                                       value="${productDescriptionValue}"></td>
                             </tr>
                             <tr class="row">
                                 <td class="col">Цена</td>
-                                <td class="col"><input name="productPrice" type="text"></td>
+                                <td class="col"><input name="productPrice" type="text" value="${productPriceValue}">
+                                </td>
                             </tr>
                             <tr class="row">
                                 <td class="col">Количество</td>
-                                <td class="col"><input name="productCount" type="text"></td>
+                                <td class="col"><input name="productCount" type="text" value="${productCountValue}">
+                                </td>
                             </tr>
                             <tr class="row">
                                 <td class="col">Категория</td>
@@ -152,8 +155,13 @@
                                         <c:set var="categories" value="${categoryBean.getAll()}"/>
                                         <c:forEach items="${categories}" var="item">
                                             <option name="<c:out value="${item.name}"/>"
-                                                    value="<c:out value="${item.name}"/>"><c:out
-                                                    value="${item.name}"/></option>
+                                                    value="<c:out value="${item.name}"/>"
+                                                    <c:if test="${item.name == categorySelectValue}">
+                                                        selected
+                                                    </c:if>
+                                            >
+                                                <c:out value="${item.name}"/>
+                                            </option>
                                         </c:forEach>
                                     </select>
                                 </td>

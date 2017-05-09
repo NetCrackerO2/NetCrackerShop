@@ -39,12 +39,18 @@ public class CategoryServlet extends HttpServlet {
 
         try {
             if (request.getParameter("addCategory") != null) {
+                request.setAttribute("categoryNameValue", request.getParameter("categoryName"));
+                request.setAttribute("parentCategoryIdValue", request.getParameter("parentCategoryId"));
+
                 categoryBean.addCategory(
                         getStringParameter(request, "categoryName"),
                         Objects.equals(getStringParameter(request, "parentCategoryId"), "") ?
                                 null :
                                 getConvertedParameter(request, "parentCategoryId", Integer::valueOf)
                 );
+
+                request.setAttribute("categoryNameValue", "");
+                request.setAttribute("parentCategoryIdValue", "");
             } else if (request.getParameter("removeCategory") != null) {
                 categoryBean.remove(getConvertedParameter(request, "categoryId", Integer::valueOf));
             } else if (request.getParameter("editCategory") != null) {

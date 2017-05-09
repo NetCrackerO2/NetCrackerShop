@@ -117,11 +117,13 @@
                         <table id="addCategoryTable" class="table text-center" cellspacing='0'>
                             <tr class="row">
                                 <td class="col">Название</td>
-                                <td class="col"><input name="categoryName" type="text"></td>
+                                <td class="col"><input name="categoryName" type="text" value="${categoryNameValue}">
+                                </td>
                             </tr>
                             <tr class="row">
                                 <td class="col">parentID</td>
-                                <td class="col"><input name="parentCategoryId" type="text"></td>
+                                <td class="col"><input name="parentCategoryId" type="text"
+                                                       value="${parentCategoryIdValue}"></td>
                             </tr>
                             <tr class="row">
                                 <td>
