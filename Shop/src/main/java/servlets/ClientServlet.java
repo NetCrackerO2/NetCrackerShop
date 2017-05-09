@@ -63,31 +63,24 @@ public class ClientServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
                 response.setHeader("Location", "/");
                 return;
-            }
-            else if (request.getParameter("exportClients") != null) {
-                ToXml.exportClients(clientBean.getAll(),request.getServletContext().getRealPath("/clients.xml"));
-            }
-            else if (request.getParameter("exportOrders") != null) {
-                ToXml.exportOrders(orderBean.getAll(),request.getServletContext().getRealPath("/orders.xml"));
-            }
-            else if (request.getParameter("importClients") != null) {
+            } else if (request.getParameter("exportClients") != null) {
+                ToXml.exportClients(clientBean.getAll(), request.getServletContext().getRealPath("/clients.xml"));
+            } else if (request.getParameter("exportOrders") != null) {
+                ToXml.exportOrders(orderBean.getAll(), request.getServletContext().getRealPath("/orders.xml"));
+            } else if (request.getParameter("importClients") != null) {
                 fromxml.importClients(request.getServletContext().getRealPath("/clients.xml"));
-            }
-            else if (request.getParameter("importOrders") != null) {
-                HashMap<Integer,Integer> mapping = new HashMap<>();
-                for(ClientEntity client:clientBean.getAll())
+            } else if (request.getParameter("importOrders") != null) {
+                HashMap<Integer, Integer> mapping = new HashMap<>();
+                for (ClientEntity client : clientBean.getAll())
                     mapping.put(client.getId(), client.getId());
-                fromxml.importOrders(request.getServletContext().getRealPath("/orders.xml"),mapping);
+                fromxml.importOrders(request.getServletContext().getRealPath("/orders.xml"), mapping);
             }
         } catch (NullPointerException e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Отсутствует необходимый параметр: " + e.getMessage());
+            clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
         } catch (ConverterException e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", "Некорректное значение параметра: " + e.getMessage());
+            clientInfo.setErrorMessage("Некорректное значение параметра: " + e.getMessage());
         } catch (Exception e) {
-            request.setAttribute("isError", true);
-            request.setAttribute("errorMessage", e.getMessage());
+            clientInfo.setErrorMessage(e.getMessage());
         }
 
         request.getRequestDispatcher("admin_clients.jsp").forward(request, response);

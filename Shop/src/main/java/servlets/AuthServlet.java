@@ -20,7 +20,8 @@ public class AuthServlet extends HttpServlet {
     @Inject
     ClientInfo clientInfo;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         if (request.getParameter("login") != null) {
             clientBean.login(request.getParameter("login"));
@@ -31,8 +32,9 @@ public class AuthServlet extends HttpServlet {
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        } else
+        } else {
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +42,8 @@ public class AuthServlet extends HttpServlet {
         if (clientInfo.isLoggedIn()) {
             response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
             response.setHeader("Location", "/");
-        } else
+        } else {
             request.getRequestDispatcher("auth_view.jsp").forward(request, response);
+        }
     }
 }

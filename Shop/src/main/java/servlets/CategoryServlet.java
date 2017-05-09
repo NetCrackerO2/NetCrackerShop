@@ -49,13 +49,12 @@ public class CategoryServlet extends HttpServlet {
                 categoryBean.remove(getConvertedParameter(request, "categoryId", Integer::valueOf));
             } else if (request.getParameter("editCategory") != null) {
                 categoryBean.editCategory(getConvertedParameter(request, "categoryId", Integer::valueOf),
-                        getStringParameter(request, "categoryName")
+                                          getStringParameter(request, "categoryName")
                 );
-            }
-            else if (request.getParameter("exportCategories") != null) {
-                ToXml.exportCategories(categoryBean.getAll(),request.getServletContext().getRealPath("/categories.xml"));
-            }
-            else if (request.getParameter("importCategories") != null) {
+            } else if (request.getParameter("exportCategories") != null) {
+                ToXml.exportCategories(categoryBean.getAll(),
+                                       request.getServletContext().getRealPath("/categories.xml"));
+            } else if (request.getParameter("importCategories") != null) {
                 fromxml.importCategories(request.getServletContext().getRealPath("/categories.xml"));
             }
         } catch (NullPointerException e) {

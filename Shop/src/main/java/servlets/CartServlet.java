@@ -5,7 +5,6 @@ import backup.ToXml;
 import beans.CartBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
-import models.ProductInOrder;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart.jsp"})
@@ -26,16 +24,19 @@ public class CartServlet extends HttpServlet {
     @Inject
     ClientInfo clientInfo;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
         try {
             if (request.getParameter("buy") != null) {
-                cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("count")));
+                cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")),
+                                          Integer.parseInt(request.getParameter("count")));
             }
             if (request.getParameter("createOrder") != null) {
                 cartBean.createOrder(request.getParameter("address"));
@@ -46,12 +47,12 @@ public class CartServlet extends HttpServlet {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
             }
             if (request.getParameter("orderInfoButton") != null) {
-                request.setAttribute("orderId",request.getParameter("orderId"));
+                request.setAttribute("orderId", request.getParameter("orderId"));
                 request.getRequestDispatcher("order.jsp").forward(request, response);
                 return;
             }
             if (request.getParameter("exportCarts") != null) {
-                ToXml.exportCarts(cartBean.getAll(),request.getServletContext().getRealPath("/carts.xml"));
+                ToXml.exportCarts(cartBean.getAll(), request.getServletContext().getRealPath("/carts.xml"));
                 request.getRequestDispatcher("admin_clients.jsp").forward(request, response);
                 return;
             }
