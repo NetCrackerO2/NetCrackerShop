@@ -53,7 +53,7 @@
                         <input type="submit" name="exportClients" class="exportButton btn btn-primary"
                                value="Экспорт клиентов"/>
                     </form>
-					<form action="clientsServlet.jsp">
+                    <form action="clientsServlet.jsp">
                         <input type="submit" name="importClients" class="exportButton btn btn-primary"
                                value="Импорт клиентов"/>
                     </form>
@@ -63,10 +63,10 @@
                         <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
                                value="Экспорт заказов"/>
                     </form>
-	                <form action="clientsServlet.jsp">
-	                    <input type="submit" name="importOrders" class="exportButton btn btn-primary"
-	                           value="Импорт заказов"/>
-	                </form>
+                    <form action="clientsServlet.jsp">
+                        <input type="submit" name="importOrders" class="exportButton btn btn-primary"
+                               value="Импорт заказов"/>
+                    </form>
                 </td>
                 <td>
                     <form action="cart.jsp">
@@ -79,6 +79,7 @@
                 <th>ID</th>
                 <th>Имя</th>
                 <th>Адрес</th>
+                <th>Админ</th>
                 <th colspan="2">Редактирование</th>
             </tr><!-- Table Header -->
             </thead>
@@ -88,6 +89,7 @@
                     <td class="id"><c:out value="${item.id}"/></td>
                     <td class="name editable"><c:out value="${item.name}"/></td>
                     <td class="defaultAddress editable"><c:out value="${item.defaultAddress}"/></td>
+                    <td class="isAdmin editable"><c:out value="${item.getAdmin()}"/></td>
                     <td>
                         <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
                     </td>
@@ -98,7 +100,7 @@
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="btn btn-primary">Удалить</a>
+                                <a class="btn btn-primary">Неудаляемо</a>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -149,6 +151,29 @@
                                 <td class="col">Адрес</td>
                                 <td class="col"><input name="clientDefaultAddress" type="text"
                                                        value="${clientDefaultAddressValue}"></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="col">Администратор</td>
+                                <td class="col">
+                                    <select name="clientIsAdmin">
+                                        <option name="false"
+                                                value="false"
+                                                <c:if test="${false == clientIsAdminValue}">
+                                                    selected
+                                                </c:if>
+                                        >
+                                            false
+                                        </option>
+                                        <option name="true"
+                                                value="true"
+                                                <c:if test="${true == clientIsAdminValue}">
+                                                    selected
+                                                </c:if>
+                                        >
+                                            true
+                                        </option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr class="row">
                                 <td>

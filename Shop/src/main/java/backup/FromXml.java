@@ -1,41 +1,27 @@
 package backup;
 
-import models.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import beans.CategoryBean;
 import beans.ClientBean;
 import beans.OrderBean;
 import beans.ProductBean;
+import models.OrderEntity;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.Order;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Named
@@ -124,8 +110,9 @@ public class FromXml {
                     int id = Integer.parseInt(client.getElementsByTagName("id").item(0).getTextContent());
                     String name = client.getElementsByTagName("name").item(0).getTextContent();
                     String address = client.getElementsByTagName("default_address").item(0).getTextContent();
-                    
-                    int newId = clientBean.addClient(name, address).getId();
+                    Boolean isAdmin = Boolean.valueOf(client.getElementsByTagName("isAdmin").item(0).getTextContent());
+
+                    int newId = clientBean.addClient(name, address, isAdmin).getId();
                     result.put(id, newId);
                 }
             }

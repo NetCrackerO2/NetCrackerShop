@@ -60,7 +60,12 @@
                     <td><input class="textfield" type="text" name="clientDefaultAddress"
                                value="${clientBean.getClientInfo().address}"/>
                     </td>
-
+                </tr>
+                <tr>
+                    <td><label>Администратор</label></td>
+                    <td><input class="textfield" type="text" name="clientIsAdmin"
+                               value="${clientBean.getClientInfo().getAdmin()}" readonly/>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>

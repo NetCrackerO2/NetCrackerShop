@@ -27,7 +27,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
     public ClientEntity getByLogin(String login) {
         try {
             return em.createQuery("SELECT e from ClientEntity e where e.name=:token", getEntityClass())
-                    .setParameter("token", login).getSingleResult();
+                     .setParameter("token", login).getSingleResult();
             // TODO: нормальная обработка исключения
         } catch (Exception e) {
             return null;
@@ -53,7 +53,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return clientInfo;
     }
 
-    public ClientEntity addClient(String name, String defaultAddress) {
+    public ClientEntity addClient(String name, String defaultAddress, Boolean isAdmin) {
         if (getByLogin(name) != null) {
             throw new EJBException("Клиент с таким именем уже существует.");
         }
@@ -68,6 +68,8 @@ public class ClientBean extends GenericBean<ClientEntity> {
             throw new EJBException("Недопустимый адрес.");
         }
         client.setDefaultAddress(defaultAddress);
+
+        client.setAdmin(isAdmin);
 
         return persist(client);
     }
@@ -84,8 +86,23 @@ public class ClientBean extends GenericBean<ClientEntity> {
     }
 
     @Override
+    public void remove(int id) {
+        ClientEntity client = get(id);
+
+        if (client == null || !canRemove(client)) {
+            throw new EJBException("Этот пользователь не может быть удалён.");
+        }
+
+        super.remove(id);
+    }
+
+    @Override
     public boolean canRemove(ClientEntity entity) {
-        // TODO Auto-generated method stub
-        return clientInfo.getId() != entity.getId();
+        boolean flag = true;
+
+        //flag = flag && (clientInfo.getId() != entity.getId());
+        flag = flag && (!entity.getAdmin());
+
+        return flag;
     }
 }

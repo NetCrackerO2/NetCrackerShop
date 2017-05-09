@@ -45,13 +45,16 @@ public class ClientServlet extends HttpServlet {
             if (request.getParameter("addClient") != null) {
                 request.setAttribute("clientNameValue", request.getParameter("clientName"));
                 request.setAttribute("clientDefaultAddressValue", request.getParameter("clientDefaultAddress"));
+                request.setAttribute("clientIsAdminValue", request.getParameter("clientIsAdmin"));
 
                 clientBean.addClient(getStringParameter(request, "clientName"),
-                                     getStringParameter(request, "clientDefaultAddress")
+                                     getStringParameter(request, "clientDefaultAddress"),
+                                     getConvertedParameter(request, "clientIsAdmin", Boolean::valueOf)
                 );
 
                 request.setAttribute("clientNameValue", "");
                 request.setAttribute("clientDefaultAddressValue", "");
+                request.setAttribute("clientIsAdminValue", "");
             } else if (request.getParameter("removeClient") != null) {
                 Integer clientId = getConvertedParameter(request, "clientId", Integer::valueOf);
                 clientBean.remove(clientId);
