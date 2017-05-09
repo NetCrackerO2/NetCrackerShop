@@ -99,7 +99,7 @@ public class ToXml {
         Element categories = doc.createElement("categories");
 
         for (CategoryEntity entity : categoryList) {
-            Element category = doc.createElement("client");
+            Element category = doc.createElement("category");
 
             Element id = doc.createElement("id");
             id.appendChild(doc.createTextNode(String.valueOf(entity.getId())));
