@@ -1,5 +1,6 @@
 package servlets;
 
+import backup.FromXml;
 import backup.ToXml;
 import beans.CategoryBean;
 import clientInfo.ClientInfo;
@@ -24,6 +25,8 @@ public class CategoryServlet extends HttpServlet {
     CategoryBean categoryBean;
     @Inject
     ClientInfo clientInfo;
+    @Inject
+    FromXml fromxml;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -51,6 +54,9 @@ public class CategoryServlet extends HttpServlet {
             }
             else if (request.getParameter("exportCategories") != null) {
                 ToXml.exportCategories(categoryBean.getAll(),request.getServletContext().getRealPath("/categories.xml"));
+            }
+            else if (request.getParameter("importCategories") != null) {
+                fromxml.importCategories(request.getServletContext().getRealPath("/categories.xml"));
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

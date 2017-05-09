@@ -1,9 +1,11 @@
 package servlets;
 
+import backup.FromXml;
 import backup.ToXml;
 import beans.ClientBean;
 import beans.OrderBean;
 import clientInfo.ClientInfo;
+import models.ClientEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
@@ -26,6 +29,8 @@ public class ClientServlet extends HttpServlet {
     OrderBean orderBean;
     @Inject
     ClientInfo clientInfo;
+    @Inject
+    FromXml fromxml;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -61,6 +66,15 @@ public class ClientServlet extends HttpServlet {
             }
             else if (request.getParameter("exportOrders") != null) {
                 ToXml.exportOrders(orderBean.getAll(),request.getServletContext().getRealPath("/orders.xml"));
+            }
+            else if (request.getParameter("importClients") != null) {
+                fromxml.importClients(request.getServletContext().getRealPath("/clients.xml"));
+            }
+            else if (request.getParameter("importOrders") != null) {
+                HashMap<Integer,Integer> mapping = new HashMap<>();
+                for(ClientEntity client:clientBean.getAll())
+                    mapping.put(client.getId(), client.getId());
+                fromxml.importOrders(request.getServletContext().getRealPath("/orders.xml"),mapping);
             }
         } catch (NullPointerException e) {
             request.setAttribute("isError", true);

@@ -52,6 +52,12 @@
                                value="Экспорт"/>
                     </form>
                 </td>
+                <td>
+                    <form action="categoriesServlet.jsp">
+                        <input type="submit" name="importCategories" class="exportButton btn btn-primary"
+                               value="Импорт"/>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <th>ID</th>

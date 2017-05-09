@@ -52,12 +52,20 @@
                         <input type="submit" name="exportClients" class="exportButton btn btn-primary"
                                value="Экспорт клиентов"/>
                     </form>
+					<form action="clientsServlet.jsp">
+                        <input type="submit" name="importClients" class="exportButton btn btn-primary"
+                               value="Импорт клиентов"/>
+                    </form>
                 </td>
                 <td>
                     <form action="clientsServlet.jsp">
                         <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
                                value="Экспорт заказов"/>
                     </form>
+	                <form action="clientsServlet.jsp">
+	                    <input type="submit" name="importOrders" class="exportButton btn btn-primary"
+	                           value="Импорт заказов"/>
+	                </form>
                 </td>
                 <td>
                     <form action="cart.jsp">
