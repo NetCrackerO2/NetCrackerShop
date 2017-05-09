@@ -2,6 +2,7 @@
 <%@include file="env.jsp" %>
 
 <%@include file="reqauth.jsp" %>
+<%@include file="reqadmin.jsp" %>
 
 <c:set var="title" value="Admin panel" scope="page"/>
 <c:set var="pathStack" value="${['Admin']}" scope="page"/>

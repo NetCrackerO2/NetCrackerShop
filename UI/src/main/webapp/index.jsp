@@ -26,7 +26,9 @@
         <li><a href="search.jsp">Поиск</a></li>
         <c:if test="${clientInfo.loggedIn}">
             <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            <li><a href="admin_view.jsp">Админка</a></li>
+            <c:if test="${clientInfo.getAdmin()}">
+                <li><a href="admin_view.jsp">Админка</a></li>
+            </c:if>
         </c:if>
     </ul>
 </div>

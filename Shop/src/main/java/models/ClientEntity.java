@@ -12,6 +12,7 @@ public class ClientEntity {
     private int id;
     private String name;
     private String defaultAddress;
+    private Boolean isAdmin;
     private List<OrderEntity> ordersById;
 
     @Id
@@ -47,6 +48,16 @@ public class ClientEntity {
 
     public void setDefaultAddress(String defaultAddress) {
         this.defaultAddress = defaultAddress;
+    }
+
+    @Basic
+    @Column(name = "is_admin")
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override
