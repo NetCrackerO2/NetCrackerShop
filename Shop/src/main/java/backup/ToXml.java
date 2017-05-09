@@ -4,7 +4,6 @@ import models.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javax.persistence.criteria.Order;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -86,6 +85,10 @@ public class ToXml {
             Element address = doc.createElement("default_address");
             address.appendChild(doc.createTextNode(String.valueOf(entity.getDefaultAddress())));
             client.appendChild(address);
+
+            Element isAdmin = doc.createElement("is_admin");
+            isAdmin.appendChild(doc.createTextNode(String.valueOf(entity.getAdmin())));
+            client.appendChild(isAdmin);
 
             clients.appendChild(client);
         }

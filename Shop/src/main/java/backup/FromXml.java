@@ -110,7 +110,7 @@ public class FromXml {
                     int id = Integer.parseInt(client.getElementsByTagName("id").item(0).getTextContent());
                     String name = client.getElementsByTagName("name").item(0).getTextContent();
                     String address = client.getElementsByTagName("default_address").item(0).getTextContent();
-                    Boolean isAdmin = Boolean.valueOf(client.getElementsByTagName("isAdmin").item(0).getTextContent());
+                    Boolean isAdmin = Boolean.valueOf(client.getElementsByTagName("is_admin").item(0).getTextContent());
 
                     int newId = clientBean.addClient(name, address, isAdmin).getId();
                     result.put(id, newId);
@@ -143,7 +143,6 @@ public class FromXml {
                     String status = order.getElementsByTagName("status").item(0).getTextContent();
                     
                     OrderEntity entity = new OrderEntity();
-                    entity.setId(id);
                     entity.setClientByClientId(clientBean.get(clientMapping.get(clientId)));
                     entity.setAddress(address);
                     entity.setDate(date);
