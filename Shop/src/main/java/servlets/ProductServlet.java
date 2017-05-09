@@ -1,11 +1,13 @@
 package servlets;
 
+import backup.FromXml;
 import backup.ToXml;
 import beans.CategoryBean;
 import beans.ClientBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
 import models.CategoryEntity;
+import models.ClientEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import static servlets.ParameterGetter.getConvertedParameter;
@@ -29,6 +32,8 @@ public class ProductServlet extends HttpServlet {
     CategoryBean categoryBean;
     @Inject
     ClientInfo clientInfo;
+    @Inject
+    FromXml fromxml;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -58,6 +63,12 @@ public class ProductServlet extends HttpServlet {
             }
             else if (request.getParameter("exportProducts") != null) {
                 ToXml.exportProducts(productBean.getAll(),request.getServletContext().getRealPath("/products.xml"));
+            }
+            else if (request.getParameter("importProducts") != null) {
+                HashMap<Integer,Integer> mapping = new HashMap<>();
+                for(CategoryEntity client:categoryBean.getAll())
+                    mapping.put(client.getId(), client.getId());
+                fromxml.importProducts(request.getServletContext().getRealPath("/products.xml"), mapping);
             }
         }
         catch (NullPointerException e) {
