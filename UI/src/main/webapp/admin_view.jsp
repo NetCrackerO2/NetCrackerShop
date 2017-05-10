@@ -49,14 +49,14 @@
                 </td>
                 <td>
                     <form action="productsServlet.jsp">
-                    <input type="submit" name="exportProducts" class="exportButton btn btn-primary"
-                           value="Экспорт"/>
+                        <input type="submit" name="exportProducts" class="exportButton btn btn-primary"
+                               value="Экспорт"/>
                     </form>
                 </td>
                 <td>
                     <form action="productsServlet.jsp">
-                    <input type="submit" name="importProducts" class="exportButton btn btn-primary"
-                           value="Импорт"/>
+                        <input type="submit" name="importProducts" class="exportButton btn btn-primary"
+                               value="Импорт"/>
                     </form>
                 </td>
             </tr>
@@ -92,14 +92,13 @@
                                 <a href="<c:url value="/productsServlet.jsp?removeProduct=&productId=${item.id}"/>"
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
-                            <c:otherwise>
-                                <a class="btn">Неудаляемо</a>
-                            </c:otherwise>
+                            <%--<c:otherwise>--%>
+                                <%--<a class="btn">Неудаляемо</a>--%>
+                            <%--</c:otherwise>--%>
                         </c:choose>
                     </td>
                 </tr>
             </c:forEach>
-
             </tbody>
         </table>
     </div>

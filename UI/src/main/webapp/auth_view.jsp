@@ -4,6 +4,7 @@
 <c:set var="title" value="Авторизация" scope="page"/>
 <html lang="ru">
 <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title><c:out value="${title}"/></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">

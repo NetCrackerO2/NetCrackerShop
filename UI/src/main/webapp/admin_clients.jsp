@@ -99,9 +99,9 @@
                                 <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
-                            <c:otherwise>
-                                <a class="btn">Неудаляемо</a>
-                            </c:otherwise>
+                            <%--<c:otherwise>--%>
+                                <%--<a class="btn">Неудаляемо</a>--%>
+                            <%--</c:otherwise>--%>
                         </c:choose>
                     </td>
                 </tr>
