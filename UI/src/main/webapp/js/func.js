@@ -105,13 +105,15 @@ $('.editProductButton').on('click', function () {
     var x = $(this).closest('tr');
     if (this.value == 'Изменить') {
         $(this).val("Сохранить");
-        x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
-
-
+        //x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
+        x.find('.editable').css({'background': 'wheat'});
+        x.find('.editable').attr('contenteditable','true');
     } else {
         if (this.value == 'Сохранить') {
             $(this).val("Изменить");
-            x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+           // x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+            x.find('.editable').css({'background': 'none'});
+            x.find('.editable').attr('contenteditable','false');
             try {
                 var id = x.find('.id').html().trim();
                 var name = x.find('.name').html().trim();
@@ -133,12 +135,15 @@ $('.editProductButton').on('click', function () {
         var x = $(this).closest('tr');
         if (this.value == 'Изменить') {
             $(this).val("Сохранить");
-            x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
-
+            //x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
+            x.find('.editable').css({'background': 'wheat'});
+            x.find('.editable').attr('contenteditable','true');
         } else {
             if (this.value == 'Сохранить') {
                 $(this).val("Изменить");
-                x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                x.find('.editable').css({'background': 'none'});
+                x.find('.editable').attr('contenteditable','false');
                 try {
                     var id = x.find('.id').html().trim();
                     var name = x.find('.name').html().trim();
@@ -159,11 +164,15 @@ $('.editProductButton').on('click', function () {
         var x = $(this).closest('tr');
         if (this.value == 'Изменить') {
             $(this).val("Сохранить");
-            x.find('.editable').css({'-webkit-user-modify': 'read-write','background': 'wheat'});
+            //x.find('.editable').css({'-webkit-user-modify': 'read-write','background': 'wheat'});
+            x.find('.editable').css({'background': 'wheat'});
+            x.find('.editable').attr('contenteditable','true');
         } else {
             if (this.value == 'Сохранить') {
                 $(this).val("Изменить");
-                x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                x.find('.editable').css({'background': 'none'});
+                x.find('.editable').attr('contenteditable','false');;
                 try {
                     var id = x.find('.id').html().trim();
                     var name = x.find('.name').html().trim();
