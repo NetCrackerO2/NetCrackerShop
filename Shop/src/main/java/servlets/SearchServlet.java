@@ -41,7 +41,9 @@ public class SearchServlet extends HttpServlet {
                 List<String[]> parameters = new ArrayList<>();
                 List<String[]> minMaxParameters = new ArrayList<>();
                 addItem(parameters, "name", request.getParameter("nameFilter"));
-                addItem(parameters, "category.name", request.getParameter("categorySelect"));
+                if (!Objects.equals(request.getParameter("categorySelect"), "<Все>")) {
+                    addItem(parameters, "category.name", request.getParameter("categorySelect"));
+                }
                 addMinMaxItem(minMaxParameters,
                               "price",
                               request.getParameter("minPriceFilter"),
@@ -71,6 +73,7 @@ public class SearchServlet extends HttpServlet {
         request.setAttribute("minPriceValue", request.getParameter("minPriceFilter"));
         request.setAttribute("maxPriceValue", request.getParameter("maxPriceFilter"));
         request.setAttribute("countValue", request.getParameter("countFilter"));
+        request.setAttribute("categorySelectValue", request.getParameter("categorySelect"));
         request.setAttribute("categories", categoryList);
         request.setAttribute("products", list);
         request.getRequestDispatcher("search.jsp").forward(request, response);

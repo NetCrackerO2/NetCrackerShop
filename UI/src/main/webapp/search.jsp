@@ -39,12 +39,26 @@
                     <td>
                         <div class="col">
                             <select name="categorySelect">
+                                <option name="<Все>" class="categoryId"
+                                        value="<Все>"
+                                        <c:if test="${item.name == categorySelectValue}">
+                                            selected
+                                        </c:if>
+                                >
+                                    <c:out value="<Все>"/>
+                                </option>
                                 <c:if test="${empty categories}">
                                     <c:set var="categories" value="${categoryBean.getAll()}"/>
                                 </c:if>
                                 <c:forEach items="${categories}" var="item">
                                     <option name="<c:out value="${item.name}"/>" class="categoryId"
-                                            value="<c:out value="${item.name}"/>"><c:out value="${item.name}"/></option>
+                                            value="<c:out value="${item.name}"/>"
+                                            <c:if test="${item.name == categorySelectValue}">
+                                                selected
+                                            </c:if>
+                                    >
+                                        <c:out value="${item.name}"/>
+                                    </option>
                                 </c:forEach>
                             </select>
                         </div>
