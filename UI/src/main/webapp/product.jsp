@@ -6,50 +6,23 @@
 
 <fmt:parseNumber var="productId" integerOnly="true" type="number" value="${param.id}"/>
 <c:set var="product" value="${productBean.get(productId)}"/>
-<%--<c:set var="pathStack" value="${['Categories', product.getCategory().getName(), product.getName()]}"--%>
-<%--scope="page"/>--%>
 <c:set var="title" value="${product.name}" scope="page"/>
-<%--<c:set var="objStack" value="${[title,'product.jsp',product.getCategoryByCategoryId().getName()]}" scope="page"/>--%>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
 <c:set var="detailsPrefix">/products.jsp?category=</c:set>
 
 <%@include file="template_start.jsp" %>
-<div class="container">
-    <div class="row">
-        <ul class="breadCrumbs list-inline">
-            <li><a href="index.jsp">Главная</a></li>
-            <span> > </span>
-            <li><a href="categories.jsp">Категории</a></li>
-            <span> > </span>
-            <li><a href=${detailsPrefix}${product.getCategory().getId()}>${product.getCategory().getName()}</a></li>
-            <span> > </span>
-            <li><a href="#">${product.getName()}</a></li>
-        </ul>
-        <div class="text-right">
-            <form method="POST" action="/searchServlet.jsp" class="search">
-                <table>
-                    <tr>
-                        <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
-                        <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <ul class="list-inline navigate">
-        <li><a href="categories.jsp">Категории</a></li>
-        <li><a href="search.jsp">Поиск</a></li>
-        <c:if test="${clientInfo.loggedIn}">
-            <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            <li><a href="admin_view.jsp">Админка</a></li>
-        </c:if>
-    </ul>
-</div>
+<c:set var="crumbs">
+    <a href="index.jsp">Главная</a>,
+    <a href="categories.jsp">Категории</a>,
+    <a href=${detailsPrefix}${product.getCategory().getId()}>${product.getCategory().getName()}</a>,
+    <a href="#">${product.getName()}</a>
+</c:set>
+<jsp:include page="menu.jsp">
+    <jsp:param name="crumbs" value="${crumbs}"/>
+</jsp:include>
 </nav>
-<!-- Главный Экран- -->
 
+<!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>

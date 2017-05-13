@@ -1,8 +1,3 @@
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-
 <footer class="navbar-fixed-bottom">
     <div class="container">
         <div class="row">

@@ -4,41 +4,20 @@
 <%@include file="reqauth.jsp" %>
 <%@include file="reqadmin.jsp" %>
 
-<c:set var="title" value="Admin panel" scope="page"/>
+<c:set var="title" value="Админ-панель" scope="page"/>
 <c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
-<!-- Главный Экран- -->
-<div class="container">
-    <div class="row">
-        <ul class="breadCrumbs list-inline">
-            <li><a href="index.jsp">Главная</a></li>
-            <span> > </span>
-            <li><a href="admin_category.jsp">Админка-категории</a></li>
-        </ul>
-        <div class="text-right">
-            <form method="POST" action="/searchServlet.jsp" class="search">
-                <table>
-                    <tr>
-                        <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
-                        <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <ul class="list-inline navigate">
-        <li><a href="categories.jsp">Категории</a></li>
-        <li><a href="search.jsp">Поиск</a></li>
-        <c:if test="${clientInfo.loggedIn}">
-            <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            <li><a href="admin_view.jsp">Админка</a></li>
-        </c:if>
-    </ul>
-</div>
+<c:set var="crumbs">
+    <a href="index.jsp">Главная</a>,
+    <a href="admin_category.jsp">Админ-панель: Категории</a>
+</c:set>
+<jsp:include page="menu.jsp">
+    <jsp:param name="crumbs" value="${crumbs}"/>
+</jsp:include>
 </nav>
+
+<!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-2">
         <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
@@ -80,9 +59,6 @@
                                 <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
                                    class="btn btn-primary">Удалить</a>
                             </c:when>
-                            <%--<c:otherwise>--%>
-                                <%--<a class="btn">Неудаляемо</a>--%>
-                            <%--</c:otherwise>--%>
                         </c:choose>
                     </td>
                 </tr>

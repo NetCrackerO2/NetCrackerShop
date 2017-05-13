@@ -1,4 +1,3 @@
-<%@ page import="beans.ProductBean" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
@@ -10,38 +9,16 @@
 <c:set var="orders" value="${orderBean.getByClientId(clientBean.getClientInfo().id)}"/>
 
 <%@include file="template_start.jsp" %>
-<div class="container">
-    <div class="row">
-        <ul class="breadCrumbs list-inline">
-            <li><a href="index.jsp">Главная</a></li>
-            <span> > </span>
-            <li><a href="user_profile.jsp">Профиль</a></li>
-            <span> > </span>
-            <li><a href="orders.jsp">Заказы</a></li>
-        </ul>
-        <div class="text-right">
-            <form method="POST" action="/searchServlet.jsp" class="search">
-                <table>
-                    <tr>
-                        <td><input type="search" name="nameFilter" placeholder="поиск" class="input"/></td>
-                        <td><input name="findProductWide" value="" type="submit" class="findButton"/></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <ul class="list-inline navigate">
-        <li><a href="categories.jsp">Категории</a></li>
-        <li><a href="search.jsp">Поиск</a></li>
-        <c:if test="${clientInfo.loggedIn}">
-            <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            <li><a href="admin_view.jsp">Админка</a></li>
-        </c:if>
-    </ul>
-</div>
+<c:set var="crumbs">
+    <a href="index.jsp">Главная</a>,
+    <a href="user_profile.jsp">Личный кабинет</a>,
+    <a href="orders.jsp">Заказы</a>
+</c:set>
+<jsp:include page="menu.jsp">
+    <jsp:param name="crumbs" value="${crumbs}"/>
+</jsp:include>
 </nav>
+
 <!-- Главный Экран- -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
