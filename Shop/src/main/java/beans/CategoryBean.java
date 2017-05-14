@@ -1,5 +1,9 @@
 package beans;
 
+
+import clientInfo.AdminInterceptor;
+import clientInfo.AuthorizationInterceptor;
+import clientInfo.NeedAdmin;
 import models.CategoryEntity;
 import models.ProductEntity;
 
@@ -8,16 +12,19 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
 
 @Named
 @Stateless
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class CategoryBean extends GenericBean<CategoryEntity> {
     @Override
     protected Class<CategoryEntity> getEntityClass() {
         return CategoryEntity.class;
     }
 
+    @NeedAdmin
     public CategoryEntity addCategory(String name,
                                       Integer parentCategoryId) throws EJBException {
         CategoryEntity category = new CategoryEntity();
@@ -34,6 +41,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         return persist(category);
     }
 
+    @NeedAdmin
     public void editCategory(int id, String name) {
         CategoryEntity categoryEntity = get(id);
 
@@ -45,6 +53,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
     }
 
     @Override
+    @NeedAdmin
     public boolean canRemove(CategoryEntity entity) {
         boolean flag = true;
 

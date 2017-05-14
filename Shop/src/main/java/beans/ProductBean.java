@@ -1,19 +1,24 @@
 package beans;
 
 
+import clientInfo.AdminInterceptor;
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAdmin;
 import models.*;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @Stateless
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ProductBean extends GenericBean<ProductEntity> {
     @Inject
     CategoryBean categoryBean;
@@ -74,6 +79,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return productsInOrder;
     }
 
+    @NeedAdmin
     public ProductEntity addProduct(String name,
                                     String description,
                                     int count,
@@ -108,10 +114,11 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return persist(product);
     }
 
-    public void editProduct(int id,String name,int count,float price){
-        ProductEntity productEntity=get(id);
+    @NeedAdmin
+    public void editProduct(int id, String name, int count, float price) {
+        ProductEntity productEntity = get(id);
 
-        if (productEntity==null){
+        if (productEntity == null) {
             return;
         }
 
@@ -119,7 +126,9 @@ public class ProductBean extends GenericBean<ProductEntity> {
         productEntity.setCount(count);
         productEntity.setPrice(price);
     }
+
     @Override
+    @NeedAdmin
     public boolean canRemove(ProductEntity entity) {
         boolean flag = true;
 

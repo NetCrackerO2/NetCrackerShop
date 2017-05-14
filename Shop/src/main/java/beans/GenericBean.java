@@ -16,6 +16,7 @@ public abstract class GenericBean<T> {
 
     public abstract boolean canRemove(T entity);
 
+
     public T persist(T entity) {
         em.persist(entity);
         em.flush();
@@ -39,7 +40,6 @@ public abstract class GenericBean<T> {
             return null;
         }
     }
-
 
     public void remove(int id) {
         T entity = get(id);

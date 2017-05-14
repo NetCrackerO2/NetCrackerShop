@@ -1,6 +1,7 @@
 package beans;
 
 
+import clientInfo.AdminInterceptor;
 import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
 import clientInfo.NeedAuthorization;
@@ -23,7 +24,7 @@ import java.util.Objects;
 
 @Named
 @Stateless
-@Interceptors(AuthorizationInterceptor.class)
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 @NeedAuthorization
 public class CartBean extends GenericBean<CartEntity> {
     @Inject
@@ -148,7 +149,6 @@ public class CartBean extends GenericBean<CartEntity> {
             removeProductFromCart(entity.getProductId());
         }
     }
-
 
     @Override
     public boolean canRemove(CartEntity entity) {

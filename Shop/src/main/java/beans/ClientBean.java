@@ -1,8 +1,6 @@
 package beans;
 
-import clientInfo.AuthorizationInterceptor;
-import clientInfo.ClientInfo;
-import clientInfo.NeedAuthorization;
+import clientInfo.*;
 import models.ClientEntity;
 
 import javax.ejb.EJBException;
@@ -13,7 +11,7 @@ import javax.interceptor.Interceptors;
 
 @Named
 @Stateless
-@Interceptors(AuthorizationInterceptor.class)
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ClientBean extends GenericBean<ClientEntity> {
 
     @Inject
@@ -48,12 +46,11 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return true;
     }
 
-    @NeedAuthorization
     public ClientInfo getClientInfo() {
         return clientInfo;
     }
 
-    public ClientEntity addClient(String name, String defaultAddress, Boolean isAdmin) {
+    private ClientEntity add(String name, String defaultAddress, Boolean isAdmin) {
         if (getByLogin(name) != null) {
             throw new EJBException("Клиент с таким именем уже существует.");
         }
@@ -74,7 +71,16 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return persist(client);
     }
 
-    public void editClient(int id, String name, String defaultAddress) {
+    @NeedAdmin
+    public ClientEntity addClient(String name, String defaultAddress, Boolean isAdmin) {
+        return add(name, defaultAddress, isAdmin);
+    }
+
+    public ClientEntity registerClient(String name, String defaultAddress) {
+        return add(name, defaultAddress, false);
+    }
+
+    private void edit(int id, String name, String defaultAddress) {
         ClientEntity entity = get(id);
 
         if (entity == null) {
@@ -85,7 +91,18 @@ public class ClientBean extends GenericBean<ClientEntity> {
         entity.setDefaultAddress(defaultAddress);
     }
 
+    @NeedAdmin
+    public void editClient(int id, String name, String defaultAddress) {
+        edit(id, name, defaultAddress);
+    }
+
+    @NeedAuthorization
+    public void editClientInfo(String name, String defaultAddress) {
+        edit(clientInfo.getId(), name, defaultAddress);
+    }
+
     @Override
+    @NeedAdmin
     public void remove(int id) {
         ClientEntity client = get(id);
 
@@ -97,6 +114,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
     }
 
     @Override
+    @NeedAdmin
     public boolean canRemove(ClientEntity entity) {
         boolean flag = true;
 
