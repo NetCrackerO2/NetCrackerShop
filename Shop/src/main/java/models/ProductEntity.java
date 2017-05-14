@@ -125,4 +125,8 @@ public class ProductEntity {
     public void setCategory(CategoryEntity categoryByCategoryId) {
         this.category = categoryByCategoryId;
     }
+
+    public int categoryId() {
+        return getCategory().getId();
+    }
 }
