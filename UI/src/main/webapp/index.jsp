@@ -15,3 +15,4 @@
     <div class="container">
     </div>
 </section>
+<%@include file="template_end.jsp" %>

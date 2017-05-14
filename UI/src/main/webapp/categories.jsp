@@ -18,26 +18,28 @@
 </nav>
 
 <!-- Главный Экран- -->
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>Наименование</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${categories}" var="item">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <table class="table table-striped table-bordered">
+                <thead>
                 <tr>
-                    <td>
-                        <a href="<c:url value="${detailsPrefix}${item.id}"/>">
-                            <c:out value="${item.name}"/>
-                        </a>
-                    </td>
+                    <th>Наименование</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <c:forEach items="${categories}" var="item">
+                    <tr>
+                        <td>
+                            <a href="<c:url value="${detailsPrefix}${item.id}"/>">
+                                <c:out value="${item.name}"/>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </div>

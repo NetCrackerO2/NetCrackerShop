@@ -17,113 +17,116 @@
 </nav>
 
 <!-- Главный Экран- -->
-<div class="row">
-    <div class="col-md-8  col-md-offset-2">
-        <section id="searchBox">
-            <hr>
-            <h3>Расширенный поиск товаров</h3>
-            <form method="POST" action="/searchServlet.jsp" class="findForm">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Категория</th>
-                        <th>Цена</th>
-                        <th>Количество</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <td>
-                        <div class="col"><input name="nameFilter" type="text" value="${nameValue}"></div>
-                    </td>
-                    <td>
-                        <div class="col">
-                            <select name="categorySelect">
-                                <option name="<Все>" class="categoryId"
-                                        value="<Все>"
-                                        <c:if test="${item.name == categorySelectValue}">
-                                            selected
-                                        </c:if>
-                                >
-                                    <c:out value="<Все>"/>
-                                </option>
-                                <c:if test="${empty categories}">
-                                    <c:set var="categories" value="${categoryBean.getAll()}"/>
-                                </c:if>
-                                <c:forEach items="${categories}" var="item">
-                                    <option name="<c:out value="${item.name}"/>" class="categoryId"
-                                            value="<c:out value="${item.name}"/>"
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <section id="searchBox">
+                <hr>
+                <h3>Расширенный поиск товаров</h3>
+                <form method="POST" action="/searchServlet.jsp" class="findForm">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Категория</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <td>
+                            <div class="col"><input name="nameFilter" type="text" value="${nameValue}"></div>
+                        </td>
+                        <td>
+                            <div class="col">
+                                <select name="categorySelect">
+                                    <option name="<Все>" class="categoryId"
+                                            value="<Все>"
                                             <c:if test="${item.name == categorySelectValue}">
                                                 selected
                                             </c:if>
                                     >
-                                        <c:out value="${item.name}"/>
+                                        <c:out value="<Все>"/>
                                     </option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <input name="minPriceFilter" type="text" class="minPrice" value="${minPriceValue}">
-                        <span>-</span>
-                        <input name="maxPriceFilter" type="text" class="maxPrice" value="${maxPriceValue}">
-                    </td>
-                    <td>
-                        <input name="countFilter" type="text" class="countMin" value="${countValue}">
-                    </tbody>
-                </table>
-                <div class="row" align="right">
-                    <input name="findProductWide" value="Поиск" type="submit" class="btn btn-primary findButton">
-                </div>
-            </form>
-            <hr>
-            <c:if test='${products.isEmpty()==false}'>
-            <h3>Результат поиска</h3>
-            <div class="row">
-                <div class="col-md-8">
-                    <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
-                        <thead>
-                        <tr>
-                            <th>Наименование</th>
-                            <th>Описание</th>
-                            <th>Цена</th>
-                            <th>Количество</th>
-                        </tr><!-- Table Header -->
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${products}" var="item">
-                            <tr>
-                                <td>
-                                    <c:out value="${item.name}"/>
-                                </td>
-                                <td>
-                                    <desc><c:out value="${item.description}"/></desc>
-                                </td>
-                                <td>
-                                    <price>$<c:out value="${item.price}"/></price>
-                                </td>
-                                <td>
-                                    <count><c:out value="${item.count}"/> шт.</count>
-                                </td>
-                                <td>
-                                    <form method="POST" action="/cart.jsp">
-                                        <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                                        <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
-                                               value="1"/>
-                                        <button type=submit name=buy class="btn btn-primary"><img class="icon"
-                                                                                                  src="../image/cart.png">
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                                    <c:if test="${empty categories}">
+                                        <c:set var="categories" value="${categoryBean.getAll()}"/>
+                                    </c:if>
+                                    <c:forEach items="${categories}" var="item">
+                                        <option name="<c:out value="${item.name}"/>" class="categoryId"
+                                                value="<c:out value="${item.name}"/>"
+                                                <c:if test="${item.name == categorySelectValue}">
+                                                    selected
+                                                </c:if>
+                                        >
+                                            <c:out value="${item.name}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <input name="minPriceFilter" type="text" class="minPrice" value="${minPriceValue}">
+                            <span>-</span>
+                            <input name="maxPriceFilter" type="text" class="maxPrice" value="${maxPriceValue}">
+                        </td>
+                        <td>
+                            <input name="countFilter" type="text" class="countMin" value="${countValue}">
                         </tbody>
                     </table>
+                    <div class="row" align="right">
+                        <input name="findProductWide" value="Поиск" type="submit" class="btn btn-primary findButton">
+                    </div>
+                </form>
+                <hr>
+                <c:if test='${products.isEmpty()==false}'>
+                <h3>Результат поиска</h3>
+                <div class="row">
+                    <div class="col-md-10">
+                        <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
+                            <thead>
+                            <tr>
+                                <th>Наименование</th>
+                                <th>Описание</th>
+                                <th>Цена</th>
+                                <th>Количество</th>
+                            </tr><!-- Table Header -->
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${products}" var="item">
+                                <tr>
+                                    <td>
+                                        <c:out value="${item.name}"/>
+                                    </td>
+                                    <td>
+                                        <desc><c:out value="${item.description}"/></desc>
+                                    </td>
+                                    <td>
+                                        <price>$<c:out value="${item.price}"/></price>
+                                    </td>
+                                    <td>
+                                        <count><c:out value="${item.count}"/> шт.</count>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/cart.jsp">
+                                            <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
+                                            <input type="number" name="count" min="1"
+                                                   max="<c:out value='${item.count}'/>"
+                                                   value="1"/>
+                                            <button type=submit name=buy class="btn btn-primary"><img class="icon"
+                                                                                                      src="../image/cart.png">
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            </c:if>
+                </c:if>
+        </div>
+        </section>
     </div>
-    </section>
 </div>
 </div>
 </section>

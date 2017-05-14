@@ -18,78 +18,80 @@
 </nav>
 
 <!-- Главный Экран- -->
-<div class="row">
-    <div class="col-md-6 col-md-offset-2">
-        <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
-            <thead>
-            <tr>
-                <td>
-                    <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                </td>
-                <td>
-                    <form action="clientsServlet.jsp">
-                        <input type="submit" name="exportClients" class="exportButton btn btn-primary"
-                               value="Экспорт клиентов"/>
-                    </form>
-                    <form action="clientsServlet.jsp">
-                        <input type="submit" name="importClients" class="exportButton btn btn-primary"
-                               value="Импорт клиентов"/>
-                    </form>
-                </td>
-                <td>
-                    <form action="clientsServlet.jsp">
-                        <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
-                               value="Экспорт заказов"/>
-                    </form>
-                    <form action="clientsServlet.jsp">
-                        <input type="submit" name="importOrders" class="exportButton btn btn-primary"
-                               value="Импорт заказов"/>
-                    </form>
-                </td>
-                <td>
-                    <form action="cart.jsp">
-                        <input type="submit" name="exportCarts" class="exportButton btn btn-primary"
-                               value="Экспорт корзин"/>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>Имя</th>
-                <th>Адрес</th>
-                <th>Админ</th>
-                <th colspan="2">Редактирование</th>
-            </tr><!-- Table Header -->
-            </thead>
-            <tbody>
-            <c:forEach items="${clientBean.getAll()}" var="item">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
+                <thead>
                 <tr>
-                    <td class="id"><c:out value="${item.id}"/></td>
-                    <td class="name editable"><c:out value="${item.name}"/></td>
-                    <td class="defaultAddress editable"><c:out value="${item.defaultAddress}"/></td>
-                    <td class="isAdmin editable"><c:out value="${item.getAdmin()}"/></td>
                     <td>
-                        <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
+                        <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
                     </td>
                     <td>
-                        <c:choose>
-                            <c:when test="${clientBean.canRemove(item)}">
-                                <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
-                                   class="btn btn-primary">Удалить</a>
-                            </c:when>
-                        </c:choose>
+                        <form action="clientsServlet.jsp">
+                            <input type="submit" name="exportClients" class="exportButton btn btn-primary"
+                                   value="Экспорт клиентов"/>
+                        </form>
+                        <form action="clientsServlet.jsp">
+                            <input type="submit" name="importClients" class="exportButton btn btn-primary"
+                                   value="Импорт клиентов"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="clientsServlet.jsp">
+                            <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
+                                   value="Экспорт заказов"/>
+                        </form>
+                        <form action="clientsServlet.jsp">
+                            <input type="submit" name="importOrders" class="exportButton btn btn-primary"
+                                   value="Импорт заказов"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="cart.jsp">
+                            <input type="submit" name="exportCarts" class="exportButton btn btn-primary"
+                                   value="Экспорт корзин"/>
+                        </form>
                     </td>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-2 col-md-offset-1">
-        <ul class="list-group submenu">
-            <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
-            <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
-            <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
-        </ul>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Адрес</th>
+                    <th>Админ</th>
+                    <th colspan="2">Редактирование</th>
+                </tr><!-- Table Header -->
+                </thead>
+                <tbody>
+                <c:forEach items="${clientBean.getAll()}" var="item">
+                    <tr>
+                        <td class="id"><c:out value="${item.id}"/></td>
+                        <td class="name editable"><c:out value="${item.name}"/></td>
+                        <td class="defaultAddress editable"><c:out value="${item.defaultAddress}"/></td>
+                        <td class="isAdmin editable"><c:out value="${item.getAdmin()}"/></td>
+                        <td>
+                            <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${clientBean.canRemove(item)}">
+                                    <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
+                                       class="btn btn-primary">Удалить</a>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2 col-md-offset-2">
+            <ul class="list-group submenu">
+                <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
+                <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
+                <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 </div>

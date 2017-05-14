@@ -21,18 +21,18 @@
             </form>
         </div>
     </div>
-</div>
+    <div class="row">
+        <ul class="list-inline navigate">
+            <li><a href="categories.jsp">Категории</a></li>
+            <li><a href="search.jsp">Поиск</a></li>
 
-<div class="row">
-    <ul class="list-inline navigate">
-        <li><a href="categories.jsp">Категории</a></li>
-        <li><a href="search.jsp">Поиск</a></li>
-
-        <c:if test="${clientInfo.loggedIn}">
-            <li><a href="user_profile.jsp">Личный кабинет</a></li>
-            <c:if test="${clientInfo.getAdmin()}">
-                <li><a href="admin_view.jsp">Админ-панель</a></li>
+            <c:if test="${clientInfo.loggedIn}">
+                <li><a href="user_profile.jsp">Личный кабинет</a></li>
+                <c:if test="${clientInfo.getAdmin()}">
+                    <li><a href="admin_view.jsp">Админ-панель</a></li>
+                </c:if>
             </c:if>
-        </c:if>
-    </ul>
+        </ul>
+    </div>
 </div>
+
