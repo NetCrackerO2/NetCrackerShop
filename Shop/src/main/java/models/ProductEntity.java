@@ -132,13 +132,4 @@ public class ProductEntity {
     public void setCategory(CategoryEntity categoryByCategoryId) {
         this.category = categoryByCategoryId;
     }
-
-    @Transient
-    public int getCategoryId() {
-        return getCategory().getId();
-    }
-
-    public void setCategoryId(int categoryId) {
-        setCategory(categoryBean.get(categoryId));
-    }
 }

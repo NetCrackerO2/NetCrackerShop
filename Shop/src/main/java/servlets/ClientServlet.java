@@ -72,13 +72,6 @@ public class ClientServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
                 response.setHeader("Location", "/");
                 return;
-            } else if (request.getParameter("importClients") != null) {
-                fromxml.importClients(request.getServletContext().getRealPath("/clients.xml"));
-            } else if (request.getParameter("importOrders") != null) {
-                HashMap<Integer, Integer> mapping = new HashMap<>();
-                for (ClientEntity client : clientBean.getAll())
-                    mapping.put(client.getId(), client.getId());
-                fromxml.importOrders(request.getServletContext().getRealPath("/orders.xml"), mapping);
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

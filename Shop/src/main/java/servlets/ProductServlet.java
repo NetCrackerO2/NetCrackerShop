@@ -21,8 +21,7 @@ import java.util.List;
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
 
-
-@WebServlet(name = "ProductServlet", urlPatterns = {"/productsServlet.jsp"})
+@WebServlet(name = "ProductServlet", urlPatterns = { "/productsServlet.jsp" })
 public class ProductServlet extends HttpServlet {
     @Inject
     ProductBean productBean;
@@ -35,13 +34,13 @@ public class ProductServlet extends HttpServlet {
     @Inject
     ToXml toXml;
 
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
         try {
@@ -53,11 +52,10 @@ public class ProductServlet extends HttpServlet {
                 request.setAttribute("categorySelectValue", request.getParameter("categorySelect"));
 
                 productBean.addProduct(getStringParameter(request, "productName"),
-                                       getStringParameter(request, "productDescription"),
-                                       getConvertedParameter(request, "productCount", Integer::valueOf),
-                                       getConvertedParameter(request, "productPrice", Float::valueOf),
-                                       getCategoryIdByName(request.getParameter("categorySelect"))
-                );
+                        getStringParameter(request, "productDescription"),
+                        getConvertedParameter(request, "productCount", Integer::valueOf),
+                        getConvertedParameter(request, "productPrice", Float::valueOf),
+                        getCategoryIdByName(request.getParameter("categorySelect")));
 
                 request.setAttribute("productNameValue", "");
                 request.setAttribute("productDescriptionValue", "");
@@ -68,17 +66,13 @@ public class ProductServlet extends HttpServlet {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
-                                        getStringParameter(request, "productName"),
-                                        getConvertedParameter(request, "productCount", Integer::valueOf),
-                                        getConvertedParameter(request, "productPrice", Float::valueOf)
-                );
+                        getStringParameter(request, "productName"),
+                        getConvertedParameter(request, "productCount", Integer::valueOf),
+                        getConvertedParameter(request, "productPrice", Float::valueOf));
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
-            } else if (request.getParameter("importProducts") != null) {
-                HashMap<Integer, Integer> mapping = new HashMap<>();
-                for (CategoryEntity client : categoryBean.getAll())
-                    mapping.put(client.getId(), client.getId());
-                fromXml.importProducts(request.getServletContext().getRealPath("/products.xml"), mapping);
+            } else if (request.getParameter("import") != null) {
+                fromXml.importBackup(request.getServletContext().getRealPath("/exported.xml"));
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
