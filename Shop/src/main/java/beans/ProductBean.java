@@ -134,12 +134,22 @@ public class ProductBean extends GenericBean<ProductEntity> {
 
         try {
             flag = flag && em.createQuery("select e from OrderProductEntity e where e.productByProductId.id=:token",
-                                          OrderProductEntity.class)
-                             .setParameter("token", entity.getId())
-                             .getResultList().size() == 0;
+                    OrderProductEntity.class).setParameter("token", entity.getId()).getResultList().size() == 0;
         } catch (EntityNotFoundException ignore) {
         }
 
         return flag;
+    }
+
+    public List<ProductEntity> getByName(String name) {
+        try {
+            List<ProductEntity> list = em
+                    .createQuery("SELECT e from ProductEntity e where e.name=:token", ProductEntity.class)
+                    .setParameter("token", name).getResultList();
+            list.size();
+            return list;
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 }
