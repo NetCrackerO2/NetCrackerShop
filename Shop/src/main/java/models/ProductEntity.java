@@ -133,11 +133,12 @@ public class ProductEntity {
         this.category = categoryByCategoryId;
     }
 
-    public int crutchGetCategoryId() {
+    @Transient
+    public int getCategoryId() {
         return getCategory().getId();
     }
 
-    public void crutchSetCategoryId(int categoryId) {
+    public void setCategoryId(int categoryId) {
         setCategory(categoryBean.get(categoryId));
     }
 }
