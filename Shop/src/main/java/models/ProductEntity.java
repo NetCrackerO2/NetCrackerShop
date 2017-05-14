@@ -1,7 +1,10 @@
 package models;
 
 
+import beans.CategoryBean;
+
 import javax.ejb.EJBException;
+import javax.inject.Inject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
@@ -10,12 +13,16 @@ import java.util.Collection;
 @Entity
 @Table(name = "products", schema = "public", catalog = "shopDB")
 public class ProductEntity {
+    @Inject
+    CategoryBean categoryBean;
+
     private int id;
     private String name;
     private Float price;
     private Integer count;
     private String description;
     private Collection<OrderProductEntity> orderProductsById;
+    //private int categoryId;
     private CategoryEntity category;
 
     @Id
@@ -126,7 +133,11 @@ public class ProductEntity {
         this.category = categoryByCategoryId;
     }
 
-    public int categoryId() {
+    public int crutchGetCategoryId() {
         return getCategory().getId();
+    }
+
+    public void crutchSetCategoryId(int categoryId) {
+        setCategory(categoryBean.get(categoryId));
     }
 }
