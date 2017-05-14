@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input class="btn btn-primary" type="submit" name="editClient" value="Сохранить"/>
+                    <td><input class="btn btn-primary" type="submit" name="editClientInfo" value="Сохранить"/>
                     </td>
                 </tr>
             </table>

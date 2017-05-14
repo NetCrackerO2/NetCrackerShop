@@ -1,11 +1,9 @@
 package servlets;
 
 import backup.FromXml;
-import backup.ToXml;
 import beans.ClientBean;
 import beans.OrderBean;
 import clientInfo.ClientInfo;
-import models.ClientEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
@@ -67,6 +64,13 @@ public class ClientServlet extends HttpServlet {
                                       getStringParameter(request, "clientDefaultAddress")
                 );
                 clientInfo.init(clientBean.get(clientInfo.getId()));
+            } else if (request.getParameter("editClientInfo") != null) {
+                clientBean.editClientInfo(getStringParameter(request, "clientName"),
+                                          getStringParameter(request, "clientDefaultAddress")
+                );
+                clientInfo.init(clientBean.get(clientInfo.getId()));
+                request.getRequestDispatcher("user_profile.jsp").forward(request, response);
+                return;
             } else if (request.getParameter("logout") != null) {
                 clientInfo.logout();
                 response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
