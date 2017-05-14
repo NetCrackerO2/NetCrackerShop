@@ -88,19 +88,19 @@ public class ProductBean extends GenericBean<ProductEntity> {
         ProductEntity product = new ProductEntity();
 
         if (name.equals("")) {
-            throw new EJBException("Недопустимое название товара.");
+            throw new EJBException("Недопустимое пустое название товара.");
         }
         product.setName(name);
 
         product.setDescription(description);
 
         if (count < 0) {
-            throw new EJBException("Недопустимое количество товара.");
+            throw new EJBException("Недопустимое количество товара: " + count);
         }
         product.setCount(count);
 
         if (price < 0) {
-            throw new EJBException("Недопустимая стоимость товара.");
+            throw new EJBException("Недопустимая стоимость товара: " + price);
         }
         product.setPrice(price);
 
@@ -134,7 +134,9 @@ public class ProductBean extends GenericBean<ProductEntity> {
 
         try {
             flag = flag && em.createQuery("select e from OrderProductEntity e where e.productByProductId.id=:token",
-                    OrderProductEntity.class).setParameter("token", entity.getId()).getResultList().size() == 0;
+                                          OrderProductEntity.class)
+                             .setParameter("token", entity.getId())
+                             .getResultList().size() == 0;
         } catch (EntityNotFoundException ignore) {
         }
 

@@ -7,13 +7,12 @@ import clientInfo.NeedAdmin;
 import models.CategoryEntity;
 import models.ProductEntity;
 
-import java.util.List;
-
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Named
 @Stateless
@@ -30,7 +29,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         CategoryEntity category = new CategoryEntity();
 
         if (name.equals("")) {
-            throw new EJBException("Недопустимое название категории.");
+            throw new EJBException("Недопустимое пустое название категории.");
         }
         category.setName(name);
 

@@ -30,18 +30,22 @@ public class FromXml {
     CategoryBean categoryBean;
 
     private Map<Integer, Integer> importProducts(List<UnregistredProductEntity> products,
-            Map<Integer, Integer> categoryMapping) {
+                                                 Map<Integer, Integer> categoryMapping) {
         Map<Integer, Integer> result = new HashMap<>();
         try {
             for (UnregistredProductEntity product : products) {
                 int category = -1;
-                if (categoryMapping.containsKey(product.getCategoryId()))
+                if (categoryMapping.containsKey(product.getCategoryId())) {
                     category = categoryMapping.get(product.getCategoryId());
-                while (!productBean.getByName(product.getName()).isEmpty())
-                    product.setName(product.getName() + " (импортировано)");
-                ProductEntity pe = productBean.addProduct(product.getName(), product.getDescription(),
-                        product.getCount(), product.getPrice(), category);
-                result.put(product.getId(), pe.getId());
+                }
+
+                if (productBean.getByName(product.getName()).size() > 0) {
+                    // журнал
+                } else {
+                    ProductEntity pe = productBean.addProduct(product.getName(), product.getDescription(),
+                                                              product.getCount(), product.getPrice(), category);
+                    result.put(product.getId(), pe.getId());
+                }
             }
         } catch (RuntimeException e) {
             ctx.setRollbackOnly();
@@ -56,10 +60,11 @@ public class FromXml {
             for (CategoryEntity category : categories) {
                 int newId = -1;
                 List<CategoryEntity> local = categoryBean.getByName(category.getName());
-                if (local.size() > 0)
+                if (local.size() > 0) {
                     newId = local.get(0).getId();
-                else
+                } else {
                     newId = categoryBean.addCategory(category.getName(), -1).getId();
+                }
                 result.put(category.getId(), newId);
             }
         } catch (RuntimeException e) {

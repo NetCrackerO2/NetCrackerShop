@@ -52,17 +52,17 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
     private ClientEntity add(String name, String defaultAddress, Boolean isAdmin) {
         if (getByLogin(name) != null) {
-            throw new EJBException("Клиент с таким именем уже существует.");
+            throw new EJBException("Клиент с таким именем уже существует: " + name);
         }
         ClientEntity client = new ClientEntity();
 
         if (name.equals("")) {
-            throw new EJBException("Недопустимое имя клиента.");
+            throw new EJBException("Недопустимое пустое имя клиента.");
         }
         client.setName(name);
 
         if (defaultAddress.equals("")) {
-            throw new EJBException("Недопустимый адрес.");
+            throw new EJBException("Недопустимый пустой адрес.");
         }
         client.setDefaultAddress(defaultAddress);
 
