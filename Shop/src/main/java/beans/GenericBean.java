@@ -13,6 +13,7 @@ public abstract class GenericBean<T> {
     protected EntityManager em;
 
     protected abstract Class<T> getEntityClass();
+
     public abstract boolean canRemove(T entity);
 
     public T persist(T entity) {
@@ -83,6 +84,7 @@ public abstract class GenericBean<T> {
         //TODO: Это дохрена небезопасно, но кого это волнует?
         for (int i = 0; i < parametersCount; i++) {
             String[] parameter = parameters.get(i);
+            parameter[1] = parameter[1].replace("\'", "");
 
             query.append(" lower(e.");
             query.append(parameter[0]);
@@ -97,6 +99,8 @@ public abstract class GenericBean<T> {
 
         for (int i = 0; i < minMaxParametersCount; i++) {
             String[] minMaxParameter = minMaxParameters.get(i);
+            minMaxParameter[1] = minMaxParameter[1].replace("\'", "");
+            minMaxParameter[2] = minMaxParameter[2].replace("\'", "");
 
             if (parametersCount != 0 || i != 0) {
                 query.append(" and");
