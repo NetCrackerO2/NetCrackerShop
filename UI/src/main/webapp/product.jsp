@@ -37,7 +37,8 @@
             <tbody>
             <tr>
                 <td>
-                    <c:out value="${product.name}"/></td>
+                    <c:out value="${product.name}"/>
+                </td>
                 <td>
                     <desc><c:out value="${product.description}"/></desc>
                 </td>
@@ -45,11 +46,16 @@
                     <price>$<c:out value="${product.price}"/></price>
                 </td>
                 <td>
+                    <count><c:out value="${product.count}"/> шт.</count>
+                </td>
+                <td>
                     <form method="POST" action="/cart.jsp">
                         <input type="hidden" name="id" value="<c:out value='${product.id}'/>"/>
                         <input type="number" name="count" min="1" max="<c:out value='${product.count}'/>"
                                value="1"/>
-                        <button type=submit name=buy>&#x1F6D2;</button>
+                        <button type=submit name=buy class="btn btn-primary"><img class="icon"
+                                                                                  src="../image/cart.png">
+                        </button>
                     </form>
                 </td>
             </tr>

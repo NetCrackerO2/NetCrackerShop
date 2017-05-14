@@ -110,7 +110,9 @@
                                         <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
                                         <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
                                                value="1"/>
-                                        <button type=submit name=buy>&#x1F6D2;</button>
+                                        <button type=submit name=buy class="btn btn-primary"><img class="icon"
+                                                                                                  src="../image/cart.png">
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
