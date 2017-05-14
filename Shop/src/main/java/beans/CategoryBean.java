@@ -1,8 +1,9 @@
 package beans;
 
-
 import models.CategoryEntity;
 import models.ProductEntity;
+
+import java.util.List;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -27,35 +28,45 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         category.setName(name);
 
         if (parentCategoryId != null) {
-            category.setCategoryByParentId(
-                    get(parentCategoryId)
-            );
+            category.setCategoryByParentId(get(parentCategoryId));
         }
 
         return persist(category);
     }
 
-    public void editCategory(int id,String name){
-        CategoryEntity categoryEntity=get(id);
+    public void editCategory(int id, String name) {
+        CategoryEntity categoryEntity = get(id);
 
-        if (categoryEntity==null){
+        if (categoryEntity == null) {
             return;
         }
 
         categoryEntity.setName(name);
     }
+
     @Override
     public boolean canRemove(CategoryEntity entity) {
         boolean flag = true;
 
         try {
-            flag = flag && em.createQuery("select e from ProductEntity e where e.category.id=:token",
-                                          ProductEntity.class)
-                             .setParameter("token", entity.getId())
-                             .getResultList().size() == 0;
+            flag = flag
+                    && em.createQuery("select e from ProductEntity e where e.category.id=:token", ProductEntity.class)
+                            .setParameter("token", entity.getId()).getResultList().size() == 0;
         } catch (EntityNotFoundException ignore) {
         }
 
         return flag;
+    }
+
+    public List<CategoryEntity> getByName(String name) {
+        try {
+            List<CategoryEntity> list = em
+                    .createQuery("SELECT e from CategoryEntity e where e.name=:token", CategoryEntity.class)
+                    .setParameter("token", name).getResultList();
+            list.size();
+            return list;
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 }

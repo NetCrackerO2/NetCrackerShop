@@ -52,7 +52,12 @@ public class FromXml {
         Map<Integer, Integer> result = new HashMap<>();
         try {
             for (CategoryEntity category : categories) {
-                int newId = categoryBean.addCategory(category.getName(), -1).getId();
+                int newId = -1;
+                List<CategoryEntity> local = categoryBean.getByName(category.getName());
+                if (local.size() > 0) {
+                    newId = local.get(0).getId();
+                } else
+                    newId = categoryBean.addCategory(category.getName(), -1).getId();
                 result.put(category.getId(), newId);
             }
         } catch (RuntimeException e) {
