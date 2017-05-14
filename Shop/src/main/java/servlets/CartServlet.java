@@ -51,11 +51,6 @@ public class CartServlet extends HttpServlet {
                 request.getRequestDispatcher("order.jsp").forward(request, response);
                 return;
             }
-            if (request.getParameter("exportCarts") != null) {
-                ToXml.exportCarts(cartBean.getAll(), request.getServletContext().getRealPath("/carts.xml"));
-                request.getRequestDispatcher("admin_clients.jsp").forward(request, response);
-                return;
-            }
 
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());

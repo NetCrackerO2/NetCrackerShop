@@ -2,10 +2,13 @@ package models;
 
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 
+@XmlRootElement(name = "category")
 @Entity
 @Table(name = "categories", schema = "public", catalog = "shopDB")
 public class CategoryEntity {
@@ -25,7 +28,8 @@ public class CategoryEntity {
     public int getId() {
         return id;
     }
-
+    
+    @XmlElement
     public void setId(int id) {
         this.id = id;
     }
@@ -36,6 +40,7 @@ public class CategoryEntity {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
