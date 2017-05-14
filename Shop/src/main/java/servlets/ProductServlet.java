@@ -31,7 +31,9 @@ public class ProductServlet extends HttpServlet {
     @Inject
     ClientInfo clientInfo;
     @Inject
-    FromXml fromxml;
+    FromXml fromXml;
+    @Inject
+    ToXml toXml;
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -70,13 +72,13 @@ public class ProductServlet extends HttpServlet {
                                         getConvertedParameter(request, "productCount", Integer::valueOf),
                                         getConvertedParameter(request, "productPrice", Float::valueOf)
                 );
-            } else if (request.getParameter("exportProducts") != null) {
-                ToXml.exportProducts(productBean.getAll(), request.getServletContext().getRealPath("/products.xml"));
+            } else if (request.getParameter("export") != null) {
+                toXml.export(request.getServletContext().getRealPath("/exported.xml"));
             } else if (request.getParameter("importProducts") != null) {
                 HashMap<Integer, Integer> mapping = new HashMap<>();
                 for (CategoryEntity client : categoryBean.getAll())
                     mapping.put(client.getId(), client.getId());
-                fromxml.importProducts(request.getServletContext().getRealPath("/products.xml"), mapping);
+                fromXml.importProducts(request.getServletContext().getRealPath("/products.xml"), mapping);
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

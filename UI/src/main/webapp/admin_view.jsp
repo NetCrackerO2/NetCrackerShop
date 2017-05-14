@@ -28,13 +28,13 @@
                 </td>
                 <td>
                     <form action="productsServlet.jsp">
-                        <input type="submit" name="exportProducts" class="exportButton btn btn-primary"
+                        <input type="submit" name="export" class="exportButton btn btn-primary"
                                value="Экспорт"/>
                     </form>
                 </td>
                 <td>
                     <form action="productsServlet.jsp">
-                        <input type="submit" name="importProducts" class="exportButton btn btn-primary"
+                        <input type="submit" name="import" class="exportButton btn btn-primary"
                                value="Импорт"/>
                     </form>
                 </td>

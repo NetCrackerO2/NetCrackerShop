@@ -72,10 +72,6 @@ public class ClientServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
                 response.setHeader("Location", "/");
                 return;
-            } else if (request.getParameter("exportClients") != null) {
-                ToXml.exportClients(clientBean.getAll(), request.getServletContext().getRealPath("/clients.xml"));
-            } else if (request.getParameter("exportOrders") != null) {
-                ToXml.exportOrders(orderBean.getAll(), request.getServletContext().getRealPath("/orders.xml"));
             } else if (request.getParameter("importClients") != null) {
                 fromxml.importClients(request.getServletContext().getRealPath("/clients.xml"));
             } else if (request.getParameter("importOrders") != null) {
