@@ -32,6 +32,7 @@
                         <th>ID</th>
                         <th>Наименование</th>
                         <th>Описание</th>
+                        <th>Категория</th>
                         <th>Количество</th>
                         <th>Цена</th>
                         <th>Стоимость</th>
@@ -47,6 +48,7 @@
                             <td><a href="<c:url value='${detailsPrefix}${item.id}'/>"><c:out
                                     value="${item.name}"/></a></td>
                             <td><c:out value="${item.description}"/></td>
+                            <td><c:out value="${item.getCategory().getName()}"/></td>
                             <td>
                                 <c:out value="${cartItem.count}"/>
                                 <c:if test="${cartItem.count > item.count}">
