@@ -27,18 +27,6 @@
                     <td>
                         <a href="#add_product_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
                     </td>
-                    <td>
-                        <form action="productsServlet.jsp">
-                            <input type="submit" name="export" class="exportButton btn btn-primary"
-                                   value="Экспорт"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="productsServlet.jsp">
-                            <input type="submit" name="import" class="exportButton btn btn-primary"
-                                   value="Импорт"/>
-                        </form>
-                    </td>
                 </tr>
                 <tr>
                     <th>ID</th>
@@ -85,6 +73,7 @@
                 <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
                 <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
                 <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
+                <li class="list-group-item"><a href="admin_exp_imp.jsp">Экспорт/Импорт</a></li>
             </ul>
         </div>
     </div>

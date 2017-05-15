@@ -20,38 +20,12 @@
 <!-- Главный Экран- -->
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-1">
             <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
                 <thead>
                 <tr>
                     <td>
                         <a href="#add_user_Modal" class="btn btn-primary" data-toggle="modal">Добавить</a>
-                    </td>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <input type="submit" name="exportClients" class="exportButton btn btn-primary"
-                                   value="Экспорт клиентов"/>
-                        </form>
-                        <form action="clientsServlet.jsp">
-                            <input type="submit" name="importClients" class="exportButton btn btn-primary"
-                                   value="Импорт клиентов"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <input type="submit" name="exportOrders" class="exportButton btn btn-primary"
-                                   value="Экспорт заказов"/>
-                        </form>
-                        <form action="clientsServlet.jsp">
-                            <input type="submit" name="importOrders" class="exportButton btn btn-primary"
-                                   value="Импорт заказов"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="cart.jsp">
-                            <input type="submit" name="exportCarts" class="exportButton btn btn-primary"
-                                   value="Экспорт корзин"/>
-                        </form>
                     </td>
                 </tr>
                 <tr>
@@ -85,11 +59,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 col-md-offset-2">
+        <div class="col-md-2 col-md-offset-1">
             <ul class="list-group submenu">
                 <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
                 <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
                 <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
+                <li class="list-group-item"><a href="admin_exp_imp.jsp">Экспорт/Импорт</a></li>
             </ul>
         </div>
     </div>
