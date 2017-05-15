@@ -1,7 +1,6 @@
 package servlets;
 
 import backup.FromXml;
-import backup.ToXml;
 import beans.CategoryBean;
 import clientInfo.ClientInfo;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
@@ -40,17 +38,13 @@ public class CategoryServlet extends HttpServlet {
         try {
             if (request.getParameter("addCategory") != null) {
                 request.setAttribute("categoryNameValue", request.getParameter("categoryName"));
-                request.setAttribute("parentCategoryIdValue", request.getParameter("parentCategoryId"));
 
                 categoryBean.addCategory(
                         getStringParameter(request, "categoryName"),
-                        Objects.equals(getStringParameter(request, "parentCategoryId"), "") ?
-                                null :
-                                getConvertedParameter(request, "parentCategoryId", Integer::valueOf)
+                        null
                 );
 
                 request.setAttribute("categoryNameValue", "");
-                request.setAttribute("parentCategoryIdValue", "");
             } else if (request.getParameter("removeCategory") != null) {
                 categoryBean.remove(getConvertedParameter(request, "categoryId", Integer::valueOf));
             } else if (request.getParameter("editCategory") != null) {

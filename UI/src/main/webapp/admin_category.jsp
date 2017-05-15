@@ -92,11 +92,6 @@
                                 </td>
                             </tr>
                             <tr class="row">
-                                <td class="col">parentID</td>
-                                <td class="col"><input name="parentCategoryId" type="text"
-                                                       value="${parentCategoryIdValue}"></td>
-                            </tr>
-                            <tr class="row">
                                 <td>
                                     <input type="submit" name="addCategory" class="saveAdd btn btn-primary"
                                            value="Добавить"/>
