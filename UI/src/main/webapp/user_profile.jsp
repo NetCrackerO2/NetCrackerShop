@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<c:set var="title" value="Профиль" scope="page"/>
+<c:set var="title" value="Личный кабинет" scope="page"/>
 <c:set var="objStack" value="${[title,'user_profile.jsp']}" scope="page"/>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
 
@@ -14,6 +14,7 @@
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>
 </nav>
 
@@ -22,7 +23,6 @@
     <div class="row">
         <hr>
         <div class="col-md-7 col-md-offset-3">
-            <h2 class="text3">Личные данные</h2>
             <form action="clientsServlet.jsp" class="saveUserInfoForm">
                 <table class="lk table">
                     <tr>

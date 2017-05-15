@@ -26,7 +26,7 @@ public class AuthServlet extends HttpServlet {
         if (request.getParameter("login") != null) {
             clientBean.login(request.getParameter("login"));
             if (!clientInfo.isLoggedIn()) {
-                clientInfo.setErrorMessage("Неверный логин");
+                clientInfo.setErrorMessage("Неверный логин: " + request.getParameter("login"));
             }
         }
         if (clientInfo.isLoggedIn()) {

@@ -13,6 +13,7 @@
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>
 </nav>
 
@@ -22,7 +23,6 @@
         <hr>
         <div class="col-md-12">
             <section id="searchBox">
-                <h3>Расширенный поиск товаров</h3>
                 <form method="POST" action="/searchServlet.jsp" class="findForm">
                     <table class="table">
                         <thead>

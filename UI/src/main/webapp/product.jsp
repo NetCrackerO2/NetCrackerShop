@@ -19,6 +19,7 @@
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>
 </nav>
 

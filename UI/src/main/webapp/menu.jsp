@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row">
         <c:forEach var="crumb" items="${param.crumbs}">
-            <c:set var="test" value="${crumb}"/>
             <ul class="breadCrumbs list-inline">
-                <li> > ${test}</li>
+                <li> > ${crumb}</li>
             </ul>
         </c:forEach>
 
@@ -35,4 +34,4 @@
         </ul>
     </div>
 </div>
-
+<h2 class="text3"><c:out value="${param.title}"/></h2>

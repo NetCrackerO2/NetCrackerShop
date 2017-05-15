@@ -4,7 +4,7 @@
 <%@include file="reqauth.jsp" %>
 <%@include file="reqadmin.jsp" %>
 
-<c:set var="title" value="Админ-панель" scope="page"/>
+<c:set var="title" value="Админ-панель: Экспорт/Импорт" scope="page"/>
 <c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
@@ -14,6 +14,7 @@
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>
 </nav>
 
