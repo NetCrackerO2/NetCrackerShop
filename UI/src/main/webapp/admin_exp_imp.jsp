@@ -24,14 +24,12 @@
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th></th>
                     <th>Экспорт</th>
                     <th>Импорт</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <th>Товары</th>
                     <td>
                         <form action="productsServlet.jsp">
                             <button type="submit" name="export" class="exportButton btn btn-primary"
@@ -43,74 +41,6 @@
                     <td>
                         <form action="productsServlet.jsp">
                             <button type="submit" name="import" class="importButton btn btn-primary">
-                                <img class="icon" src="../image/import.png">
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Категории</th>
-                    <td>
-                        <form action="categoriesServlet.jsp">
-                            <button type="submit" name="exportCategories" class="exportButton btn btn-primary">
-                                <img class="icon" src="../image/export.png">
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="categoriesServlet.jsp">
-                            <button type="submit" name="importCategories" class="importButton btn btn-primary">
-                                <img class="icon" src="../image/import.png">
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Клиенты</th>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <button type="submit" name="exportClients" class="exportButton btn btn-primary">
-                                <img class="icon" src="../image/export.png">
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <button type="submit" name="importClients" class="importButton btn btn-primary">
-                                <img class="icon" src="../image/import.png">
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Заказы</th>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <button type="submit" name="exportOrders" class="exportButton btn btn-primary">
-                                <img class="icon" src="../image/export.png">
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="clientsServlet.jsp">
-                            <button type="submit" name="importOrders" class="importButton btn btn-primary">
-                            <img class="icon" src="../image/import.png">
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Корзины</th>
-                    <td>
-                        <form action="cart.jsp">
-                            <button type="submit" name="exportCarts" class="exportButton btn btn-primary">
-                            <img class="icon" src="../image/export.png">
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="cart.jsp">
-                            <button type="submit" name="importCarts" class="importButton btn btn-primary">
                                 <img class="icon" src="../image/import.png">
                             </button>
                         </form>

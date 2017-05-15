@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import static servlets.ParameterGetter.getConvertedParameter;
@@ -71,8 +70,12 @@ public class ProductServlet extends HttpServlet {
                         getConvertedParameter(request, "productPrice", Float::valueOf));
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
+                request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
+                return;
             } else if (request.getParameter("import") != null) {
                 fromXml.importBackup(request.getServletContext().getRealPath("/exported.xml"));
+                request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
+                return;
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());
