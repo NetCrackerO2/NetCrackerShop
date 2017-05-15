@@ -20,6 +20,7 @@
 <!-- Главный Экран- -->
 <div class="container">
     <div class="row">
+        <hr>
         <div class="col-md-8 col-md-offset-1">
             <table id="categoryTable" class="table table-striped table-bordered" cellspacing='0'>
                 <thead>

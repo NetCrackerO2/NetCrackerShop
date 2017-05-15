@@ -51,6 +51,7 @@
 <section id="content">
     <div class="container">
         <div class="row">
+            <hr>
             <div class="col-md-6 col-md-offset-3">
                     <form name="login-form" class="login-form" method="POST" action="/register.jsp">
                         <div class="headerLogin">

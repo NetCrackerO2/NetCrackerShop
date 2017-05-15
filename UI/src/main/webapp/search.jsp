@@ -19,9 +19,9 @@
 <!-- Главный Экран- -->
 <div class="container">
     <div class="row">
+        <hr>
         <div class="col-md-12">
             <section id="searchBox">
-                <hr>
                 <h3>Расширенный поиск товаров</h3>
                 <form method="POST" action="/searchServlet.jsp" class="findForm">
                     <table class="table">

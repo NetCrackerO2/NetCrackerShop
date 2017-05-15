@@ -20,6 +20,7 @@
 <!-- Главный Экран- -->
 <div class="container">
     <div class="row">
+        <hr>
         <div class="col-md-7 col-md-offset-3">
             <h2 class="text3">Личные данные</h2>
             <form action="clientsServlet.jsp" class="saveUserInfoForm">

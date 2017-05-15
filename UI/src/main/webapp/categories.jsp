@@ -20,6 +20,7 @@
 <!-- Главный Экран- -->
 <div class="container">
     <div class="row">
+        <hr>
         <div class="col-md-4 col-md-offset-4">
             <table class="table table-striped table-bordered">
                 <thead>

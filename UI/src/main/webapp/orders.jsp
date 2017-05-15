@@ -21,6 +21,7 @@
 
 <!-- Главный Экран- -->
 <div class="row">
+    <hr>
     <div class="col-md-6 col-md-offset-3">
         <table class="table table-striped table-bordered" cellspacing='0'>
             <thead>
