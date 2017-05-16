@@ -106,7 +106,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
     @NeedAuthorization
     public void editClientInfo(String name, String defaultAddress) {
-        edit(clientInfo.getId(), name, defaultAddress, false);
+        edit(clientInfo.getId(), name, defaultAddress, clientInfo.getAdmin());
     }
 
     @Override
