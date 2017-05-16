@@ -22,9 +22,10 @@
 <div class="container">
     <div class="row">
         <hr>
-        <div class="col-md-7 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3">
             <form action="clientInfo.jsp" class="saveUserInfoForm">
                 <table class="lk table">
+                    <tbody>
                     <tr>
                         <td><label>Имя</label></td>
                         <td><input class="textfield" type="text" name="clientName"
@@ -36,15 +37,15 @@
                                    value="${clientBean.getClientInfo().address}"/>
                         </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td><input class="btn btn-primary" type="submit" name="editClientInfo" value="Сохранить"/>
-                        </td>
-                    </tr>
+                    </tbody>
                 </table>
+                <div class="row text-center">
+                    <input class="btn btn-primary" type="submit" name="editClientInfo"
+                           value="Сохранить"/>
+                </div>
             </form>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-md-offset-1">
             <ul class="list-group submenu">
                 <li class="list-group-item"><a href="orders.jsp">История заказов</a></li>
             </ul>

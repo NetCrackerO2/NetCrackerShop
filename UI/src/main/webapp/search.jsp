@@ -73,7 +73,7 @@
                             <input name="countFilter" type="text" class="countMin" value="${countValue}">
                         </tbody>
                     </table>
-                    <div class="row" align="right">
+                    <div class="row text-center">
                         <input name="findProductWide" value="Поиск" type="submit" class="btn btn-primary findButton">
                     </div>
                 </form>

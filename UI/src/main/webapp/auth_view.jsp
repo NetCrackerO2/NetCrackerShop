@@ -19,7 +19,8 @@
                         <div class="contentLogin">
                             <input name="clientName" type="text" class="input username" placeholder="Имя"/>
                         </div>
-                        <div class="footerLogin">
+
+                        <div class="footerAuth footerLogin">
                             <input type="submit" name="login" value="ВОЙТИ" class="btn-primary button"/>
                         </div>
                         <c:if test="${isError==true}">

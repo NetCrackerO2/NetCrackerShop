@@ -18,9 +18,11 @@
                     </div>
                     <div class="contentLogin">
                         <input name="clientName" type="text" class="input username" placeholder="Имя"/>
+                    </div>
+                    <div class="contentLogin">
                         <input name="clientDefaultAddress" type="text" class="input username" placeholder="Адрес"/>
                     </div>
-                    <div class="footerLogin">
+                    <div class="footerAuth footerRegister">
                         <input type="submit" name="register" value="РЕГИСТРАЦИЯ" class="btn-primary button"/>
                     </div>
                     <c:if test="${isError==true}">

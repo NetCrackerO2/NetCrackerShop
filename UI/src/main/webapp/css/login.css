@@ -59,20 +59,24 @@
 }
 
 /* Second input field */
-.login-form .contentLogin .password, .login-form .content .pass-icon {
+.login-form .contentLogin .contentAddress, .login-form .content .pass-icon {
 	margin-top: 25px;
 }
 
 
 
-.login-form .footerLogin {
-	padding: 25px 95px 40px 20px;
+.login-form .footerAuth {
 	overflow: auto;
-
-
 	box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
 	-moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
 	-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+
+}
+.login-form .footerLogin {
+    padding: 25px 95px 40px 20px;
+}
+.login-form .footerRegister {
+    padding: 25px 65px 40px 20px;
 }
 
 /* Login button */
