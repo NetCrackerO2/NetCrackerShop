@@ -25,7 +25,7 @@
     <div class="row">
         <hr>
         <div class="col-md-6 col-md-offset-3">
-            <form id="cartForm" name="orderButton" action="" method="post">
+            <form id="cartForm" name="orderButton" action="cart.jsp" method="post">
                 <table class="table" cellspacing='0'>
                     <thead>
                     <tr>
