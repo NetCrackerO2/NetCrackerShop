@@ -31,19 +31,20 @@
 </nav>
 
 <!-- Главный Экран- -->
-<div class="row">
-    <hr>
-    <div class="col-md-8 col-md-offset-2">
-        <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
-            <thead>
-            <tr>
-                <th>Наименование</th>
-                <th>Описание</th>
-                <th>Цена</th>
-                <th>Количество</th>
-            </tr><!-- Table Header -->
-            </thead>
-            <tbody>
+<div class="container">
+    <div class="row">
+        <hr>
+        <div class="col-md-8 col-md-offset-2">
+            <table id="productsTable" class="table table-striped table-bordered" cellspacing='0'>
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                </tr><!-- Table Header -->
+                </thead>
+                <tbody>
                 <c:forEach items="${products}" var="item">
                     <tr>
                         <td>
@@ -61,7 +62,7 @@
                         <td>
                             <form method="POST" action="/cart.jsp">
                                 <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                                <input type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
+                                <input class="cntProduct" type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
                                        value="1"/>
                                 <button type=submit name=buy class="btn btn-primary"><img class="icon"
                                                                                           src="../image/cart.png">
@@ -70,12 +71,9 @@
                         </td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-</div>
-</section>
-
 <%@include file="template_end.jsp" %>
