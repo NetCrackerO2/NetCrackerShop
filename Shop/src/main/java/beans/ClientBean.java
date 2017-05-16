@@ -90,6 +90,9 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if ((duplicate = getByLogin(name)) != null && duplicate.getId() != id) {
             throw new EJBException("Клиент с таким именем уже существует: " + name);
         }
+        if (entity.getAdmin() && !isAdmin) {
+            throw new EJBException("Понижение прав администратора невозможно.");
+        }
 
         entity.setName(name);
         entity.setDefaultAddress(defaultAddress);
