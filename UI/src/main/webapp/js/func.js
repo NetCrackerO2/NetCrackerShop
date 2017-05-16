@@ -196,8 +196,9 @@ $('.editProductButton').on('click', function () {
 
         } else {
             if (this.value == 'Сохранить') {
+                var btn = $(this);
                 var onFinish = function() {
-                    $(this).val("Изменить");
+                    btn.val("Изменить");
                     //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
                     x.find('.editable').css({'background': 'none'});
                     x.find('.contenteditable').attr('contenteditable','false');;
