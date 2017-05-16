@@ -100,6 +100,27 @@
 //         });
 //     }
 // ]);
+
+function onResponse(xhr, onFinish) {
+    if (xhr.readyState != 4) return;
+    var container = document.getElementsByClassName('error')[0];
+    var el = document.getElementById('error_msg');
+    while (el.firstChild) {
+        el.removeChild(el.firstChild);
+    }
+    container.style.display="none";
+    if (xhr.status != 200) {
+        el.appendChild(document.createTextNode(xhr.status + ': ' + xhr.statusText));
+        container.style.display="block";
+    } else {
+        el.appendChild(document.createTextNode(xhr.responseText));
+        if(xhr.responseText.length>0)
+            container.style.display="block";
+        else
+            onFinish();
+    }
+};
+
 //Изменение товара
 $('.editProductButton').on('click', function () {
     var x = $(this).closest('tr');
@@ -163,7 +184,6 @@ $('.editProductButton').on('click', function () {
             }
         }
     })
-
 //Изменение клиента
     $('.editClientButton').on('click', function () {
         var x = $(this).closest('tr');
@@ -176,11 +196,13 @@ $('.editProductButton').on('click', function () {
 
         } else {
             if (this.value == 'Сохранить') {
-                $(this).val("Изменить");
-                //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
-                x.find('.editable').css({'background': 'none'});
-                x.find('.contenteditable').attr('contenteditable','false');;
-                x.find('select.isAdmin').prop("disabled", true);
+                var onFinish = function() {
+                    $(this).val("Изменить");
+                    //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                    x.find('.editable').css({'background': 'none'});
+                    x.find('.contenteditable').attr('contenteditable','false');;
+                    x.find('select.isAdmin').prop("disabled", true);
+                };
                 try {
                     var id = x.find('.id').html().trim();
                     var name = x.find('.name').html().trim();
@@ -188,6 +210,9 @@ $('.editProductButton').on('click', function () {
                     var select = x.find('select.isAdmin');
                     var isAdmin=select[0].options[select[0].selectedIndex].value;
                     request = new XMLHttpRequest();
+                    request.onreadystatechange = function(){
+                        onResponse(request, onFinish);
+                    };
                     var param = "&clientId=" + id + "&clientName=" + name + "&clientDefaultAddress=" + defaultAddress
                         +"&isAdmin="+isAdmin;
                     request.open('GET', '/clientsServlet.jsp?editClient=ok' + param, true);

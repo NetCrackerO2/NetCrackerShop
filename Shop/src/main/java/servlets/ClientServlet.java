@@ -79,6 +79,14 @@ public class ClientServlet extends HttpServlet {
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
         }
+        if (request.getParameter("editClient") != null) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            if(clientInfo.getErrorMessage()!=null)
+                response.getWriter().print(clientInfo.getErrorMessage());
+            clientInfo.setErrorMessage("");
+            return;
+        }
 
         request.getRequestDispatcher("admin_clients.jsp").forward(request, response);
     }
