@@ -26,7 +26,7 @@
             <table class="categoryFont table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Наименование</th>
+                    <th>Название</th>
                 </tr>
                 </thead>
                 <tbody>

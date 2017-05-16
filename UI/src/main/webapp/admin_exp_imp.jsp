@@ -50,12 +50,12 @@
                             <br>
                             <label>
                                 <input type="radio" name=mergePolicyRadio value="1" checked/>
-                                Игнорировать существующие
+                                Игнорировать конфликтующие товары
                             </label>
                             <br>
                             <label>
                                 <input type="radio" name=mergePolicyRadio value="2"/>
-                                Переименовывать существующие
+                                Переименовывать конфликтующие товары
                             </label>
                         </form>
                     </td>

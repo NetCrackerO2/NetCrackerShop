@@ -29,7 +29,6 @@
                 <table class="table" cellspacing='0'>
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Наименование</th>
                         <th>Описание</th>
                         <th>Категория</th>
@@ -44,7 +43,6 @@
                         <c:set var="item" value="${productBean.get(cartItem.productId)}"/>
                         <c:set var="sum" value="${sum + item.price * cartItem.count}"/>
                         <tr>
-                            <td><c:out value="${item.id}"/></td>
                             <td><a href="<c:url value='${detailsPrefix}${item.id}'/>"><c:out
                                     value="${item.name}"/></a></td>
                             <td><c:out value="${item.description}"/></td>

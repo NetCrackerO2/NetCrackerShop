@@ -31,6 +31,7 @@ public class OrderBean extends GenericBean<OrderEntity> {
     public List<OrderEntity> getByClientId(int clientId) {
         try {
             List<OrderEntity> list = em.find(ClientEntity.class, clientId).getOrdersById();
+            list.sort((o1, o2) -> o1.getId() > o2.getId() ? -1 : 1);
             list.size();
             return list;
         } catch (EntityNotFoundException e) {
