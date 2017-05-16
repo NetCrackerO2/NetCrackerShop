@@ -61,17 +61,17 @@
                         <td>
                             <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
                         </td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${clientBean.canRemove(item)}">
-                                    <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
-                                       class="btn btn-primary">Удалить</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <span class="reserve">Администратора нельзя удалить</span>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
+                            <%--<td>
+                                <c:choose>
+                                    <c:when test="${clientBean.canRemove(item)}">
+                                        <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
+                                           class="btn btn-primary">Удалить</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="reserve">Администратора нельзя удалить</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>--%>
                     </tr>
                 </c:forEach>
                 </tbody>
