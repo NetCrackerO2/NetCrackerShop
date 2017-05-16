@@ -3,8 +3,8 @@
 
 <%@include file="reqauth.jsp" %>
 
-<c:set var="title" value="Заказ №${orderId}" scope="page"/>
-<c:set var="order" value="${productBean.getInOrder(Integer.parseInt(orderId))}"/>
+<c:set var="title" value="Заказ №${param.orderId}" scope="page"/>
+<c:set var="order" value="${productBean.getInOrder(Integer.parseInt(param.orderId))}"/>
 
 
 <%@include file="template_start.jsp" %>
@@ -12,7 +12,7 @@
     <a href="index.jsp">Главная</a>,
     <a href="user_profile.jsp">Личный кабинет</a>,
     <a href="orders.jsp">Заказы</a>,
-    <a href="orders.jsp">Заказ №${orderId}</a>
+    <a href="orders.jsp">Заказ №${param.orderId}</a>
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>

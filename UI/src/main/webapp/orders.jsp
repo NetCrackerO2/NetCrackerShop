@@ -36,7 +36,7 @@
             <tbody>
 
             <c:forEach var="order" items="${orderBean.getByClientId(clientBean.getClientInfo().id)}">
-                <form method="get" action="/cart.jsp">
+                <form method="get" action="/order.jsp">
                     <input name="orderId" value="${order.id}" type="hidden">
                     <tr>
                         <td><c:out value="${order.id}"/></td>

@@ -51,11 +51,6 @@ public class CartServlet extends HttpServlet {
             if (request.getParameter("remove") != null) {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
             }
-            if (request.getParameter("orderInfoButton") != null) {
-                request.setAttribute("orderId", request.getParameter("orderId"));
-                request.getRequestDispatcher("order.jsp").forward(request, response);
-                return;
-            }
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
         }
