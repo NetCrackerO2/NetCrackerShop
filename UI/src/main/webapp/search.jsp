@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <section id="searchBox">
                 <form method="POST" action="/searchServlet.jsp" class="findForm">
-                    <table class="table">
+                    <table class="searchTable table">
                         <thead>
                         <tr>
                             <th>Название</th>
@@ -82,7 +82,7 @@
                 <h3>Результат поиска</h3>
                 <div class="row">
                     <div class="col-md-10">
-                        <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
+                        <table id="productsTable" class="table table-striped table-bordered" cellspacing='0'>
                             <thead>
                             <tr>
                                 <th>Наименование</th>
@@ -109,7 +109,7 @@
                                     <td>
                                         <form method="POST" action="/cart.jsp">
                                             <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                                            <input type="number" name="count" min="1"
+                                            <input class="cntProduct" type="number" name="count" min="1"
                                                    max="<c:out value='${item.count}'/>"
                                                    value="1"/>
                                             <button type=submit name=buy class="btn btn-primary"><img class="icon"
