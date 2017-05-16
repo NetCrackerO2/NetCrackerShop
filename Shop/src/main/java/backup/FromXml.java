@@ -30,7 +30,8 @@ public class FromXml {
     CategoryBean categoryBean;
 
     private Map<Integer, Integer> importProducts(List<UnregistredProductEntity> products,
-                                                 Map<Integer, Integer> categoryMapping) {
+                                                 Map<Integer, Integer> categoryMapping,
+                                                 MergePolicy policy) {
         Map<Integer, Integer> result = new HashMap<>();
         try {
             for (UnregistredProductEntity product : products) {
@@ -39,13 +40,22 @@ public class FromXml {
                     category = categoryMapping.get(product.getCategoryId());
                 }
 
-                if (productBean.getByName(product.getName()).size() > 0) {
-                    // журнал
-                } else {
-                    ProductEntity pe = productBean.addProduct(product.getName(), product.getDescription(),
-                                                              product.getCount(), product.getPrice(), category);
-                    result.put(product.getId(), pe.getId());
+                if (policy == MergePolicy.IGNORE_COPIES) {
+                    if (productBean.getByName(product.getName()).size() > 0) {
+                        continue;
+                    }
+                } else if (policy == MergePolicy.RENAME_COPIES) {
+                    while (!productBean.getByName(product.getName()).isEmpty()) {
+                        product.setName(product.getName() + " (импортировано)");
+                    }
                 }
+
+                ProductEntity pe = productBean.addProduct(product.getName(),
+                                                          product.getDescription(),
+                                                          product.getCount(),
+                                                          product.getPrice(),
+                                                          category);
+                result.put(product.getId(), pe.getId());
             }
         } catch (RuntimeException e) {
             ctx.setRollbackOnly();
@@ -74,11 +84,12 @@ public class FromXml {
         return result;
     }
 
-    public Map<Integer, Integer> importBackup(String path) throws JAXBException {
+    public Map<Integer, Integer> importBackup(String path, MergePolicy policy) throws JAXBException {
         File file = new File(path);
         JAXBContext jaxbContext = JAXBContext.newInstance(BackupUnit.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         BackupUnit content = (BackupUnit) jaxbUnmarshaller.unmarshal(file);
-        return importProducts(content.getProducts(), importCategories(content.getCategories()));
+        return importProducts(content.getProducts(), importCategories(content.getCategories()), policy);
     }
 }
+

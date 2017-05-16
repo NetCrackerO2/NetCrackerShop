@@ -45,6 +45,18 @@
                             <button type="submit" name="import" class="importButton btn btn-primary">
                                 <img class="icon" src="../image/import.png">
                             </button>
+                            <br>
+                            Политика разрешения конфликтов:
+                            <br>
+                            <label>
+                                <input type="radio" name=mergePolicyRadio value="1" checked/>
+                                Игнорировать существующие
+                            </label>
+                            <br>
+                            <label>
+                                <input type="radio" name=mergePolicyRadio value="2"/>
+                                Переименовывать существующие
+                            </label>
                         </form>
                     </td>
                 </tr>
