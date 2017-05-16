@@ -22,8 +22,8 @@
 <div class="container">
     <div class="row">
         <hr>
-        <div class="col-md-4 col-md-offset-4">
-            <table class="table table-striped table-bordered">
+        <div class="col-md-8 col-md-offset-2">
+            <table class="categoryFont table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>Наименование</th>
