@@ -35,18 +35,19 @@ public class ClientInfoServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        if (request.getParameter("logout") != null) {
-            clientInfo.logout();
-        } else if (request.getParameter("editClientInfo") != null) {
-            clientBean.editClientInfo(getStringParameter(request, "clientName"),
-                                      getStringParameter(request, "clientDefaultAddress")
-            );
-            clientInfo.init(clientBean.get(clientInfo.getId()));
-            request.getRequestDispatcher("user_profile.jsp").forward(request, response);
-            return;
+        try {
+            if (request.getParameter("logout") != null) {
+                clientInfo.logout();
+            } else if (request.getParameter("editClientInfo") != null) {
+                clientBean.editClientInfo(getStringParameter(request, "clientName"),
+                                          getStringParameter(request, "clientDefaultAddress")
+                );
+                clientInfo.init(clientBean.get(clientInfo.getId()));
+            }
+        } catch (Exception e) {
+            clientInfo.setErrorMessage(e.getMessage());
         }
 
-        response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-        response.setHeader("Location", "/");
+        request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 }

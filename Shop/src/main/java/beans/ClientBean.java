@@ -86,6 +86,9 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if (entity == null) {
             return;
         }
+        if (getByLogin(name) != null) {
+            throw new EJBException("Клиент с таким именем уже существует: " + name);
+        }
 
         entity.setName(name);
         entity.setDefaultAddress(defaultAddress);
