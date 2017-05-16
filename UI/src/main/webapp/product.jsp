@@ -31,7 +31,7 @@
             <table id="clientsTable" class="table table-striped table-bordered" cellspacing='0'>
                 <thead>
                 <tr>
-                    <th>Наименование</th>
+                    <th>Название</th>
                     <th>Описание</th>
                     <th>Цена</th>
                     <th>Количество</th>

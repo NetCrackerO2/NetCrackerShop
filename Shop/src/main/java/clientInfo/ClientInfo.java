@@ -17,15 +17,6 @@ public class ClientInfo implements Serializable {
     private Integer id;
 
     @XmlElement
-    private String name;
-
-    @XmlElement
-    private String address;
-
-    @XmlElement
-    private Boolean isAdmin;
-
-    @XmlElement
     private String errorMessage = "";
 
 
@@ -39,10 +30,7 @@ public class ClientInfo implements Serializable {
             return this;
         }
 
-        setId(client.getId());
-        setName(client.getName());
-        setAddress(client.getDefaultAddress());
-        setAdmin(client.getAdmin());
+        id = client.getId();
 
         return this;
     }
@@ -53,42 +41,11 @@ public class ClientInfo implements Serializable {
     }
 
     public void logout() {
-        setId(null);
-        setName(null);
-        setAddress(null);
-        setAdmin(null);
+        id = null;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
     }
 
     public String getErrorMessage() {

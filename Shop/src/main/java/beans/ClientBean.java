@@ -46,6 +46,12 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return true;
     }
 
+    public void updateClientInfo() {
+        if (clientInfo.isLoggedIn()) {
+            clientInfo.init(get(clientInfo.getId()));
+        }
+    }
+
     public ClientInfo getClientInfo() {
         return clientInfo;
     }
@@ -106,7 +112,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
 
     @NeedAuthorization
     public void editClientInfo(String name, String defaultAddress) {
-        edit(clientInfo.getId(), name, defaultAddress, clientInfo.getAdmin());
+        edit(clientInfo.getId(), name, defaultAddress, get(clientInfo.getId()).getAdmin());
     }
 
     @Override

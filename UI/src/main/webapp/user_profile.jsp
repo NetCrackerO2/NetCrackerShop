@@ -29,12 +29,12 @@
                     <tr>
                         <td><label>Имя</label></td>
                         <td><input class="textfield" type="text" name="clientName"
-                                   value="${clientBean.getClientInfo().name}"></td>
+                                   value="${clientBean.get(clientInfo.id).name}"></td>
                     </tr>
                     <tr>
                         <td><label>Адрес</label></td>
                         <td><input class="textfield" type="text" name="clientDefaultAddress"
-                                   value="${clientBean.getClientInfo().address}"/>
+                                   value="${clientBean.get(clientInfo.id).defaultAddress}"/>
                         </td>
                     </tr>
                     </tbody>

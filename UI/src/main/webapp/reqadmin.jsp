@@ -1,4 +1,4 @@
-<c:if test="${not clientInfo.getAdmin()}">
+<c:if test="${not clientBean.get(clientInfo.id).getAdmin()}">
     <%
         response.sendRedirect("/");
     %>

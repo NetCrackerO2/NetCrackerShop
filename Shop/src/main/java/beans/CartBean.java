@@ -101,7 +101,7 @@ public class CartBean extends GenericBean<CartEntity> {
         }
 
         if (address == null || Objects.equals(address, "")) {
-            address = clientInfo.getAddress();
+            address = clientBean.get(clientInfo.getId()).getDefaultAddress();
         }
 
         java.util.Date currentDate = new java.util.Date();

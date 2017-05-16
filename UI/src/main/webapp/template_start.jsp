@@ -39,7 +39,8 @@
             <div class="col-md-3 col-md-offset-9  ">
                 <ul class="user list-inline">
                     <c:if test="${clientInfo.loggedIn}">
-                        <li>Здравствуйте, <a href="user_profile.jsp"><c:out value="${clientInfo.name}"/></a></li>
+                        <li>Здравствуйте, <a href="user_profile.jsp"><c:out
+                                value="${clientBean.get(clientInfo.id).name}"/></a></li>
                         <li><a href="cart_view.jsp"><img class="icon" src="../image/cart.png"></a></li>
                     </c:if>
                 </ul>

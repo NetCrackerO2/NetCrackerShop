@@ -6,7 +6,7 @@
 <c:set var="title" value="Заказы" scope="page"/>
 <c:set var="objStack" value="${[title,'orders.jsp']}" scope="page"/>
 <c:set var="pathStack" value="${[objStack]}" scope="page"/>
-<c:set var="orders" value="${orderBean.getByClientId(clientBean.getClientInfo().id)}"/>
+<c:set var="orders" value="${orderBean.getByClientId(clientInfo.id)}"/>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
@@ -35,7 +35,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="order" items="${orderBean.getByClientId(clientBean.getClientInfo().id)}">
+            <c:forEach var="order" items="${orderBean.getByClientId(clientInfo.id)}">
                 <form method="get" action="/order.jsp">
                     <input name="orderId" value="${order.id}" type="hidden">
                     <tr>
