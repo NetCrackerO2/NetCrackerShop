@@ -41,11 +41,11 @@ public class FromXml {
                 }
 
                 if (policy == MergePolicy.IGNORE_COPIES) {
-                    if (productBean.getByName(product.getName()).size() > 0) {
+                    if (productBean.getByName(product.getName()) != null) {
                         continue;
                     }
                 } else if (policy == MergePolicy.RENAME_COPIES) {
-                    while (!productBean.getByName(product.getName()).isEmpty()) {
+                    while (productBean.getByName(product.getName()) != null) {
                         product.setName(product.getName() + " (импортировано)");
                     }
                 }
