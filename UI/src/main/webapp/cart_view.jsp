@@ -29,9 +29,9 @@
                 <table class="table" cellspacing='0'>
                     <thead>
                     <tr>
-                        <th>Наименование</th>
-                        <th>Описание</th>
                         <th>Категория</th>
+                        <!--<th>Описание</th>-->
+                        <th>Название</th>
                         <th>Количество</th>
                         <th>Цена</th>
                         <th>Стоимость</th>
@@ -43,10 +43,10 @@
                         <c:set var="item" value="${productBean.get(cartItem.productId)}"/>
                         <c:set var="sum" value="${sum + item.price * cartItem.count}"/>
                         <tr>
+                            <td><c:out value="${item.getCategory().getName()}"/></td>
                             <td><a href="<c:url value='${detailsPrefix}${item.id}'/>"><c:out
                                     value="${item.name}"/></a></td>
-                            <td><c:out value="${item.description}"/></td>
-                            <td><c:out value="${item.getCategory().getName()}"/></td>
+                                <%--<td><c:out value="${item.description}"/></td>--%>
                             <td>
                                 <c:out value="${cartItem.count}"/>
                                 <c:if test="${cartItem.count > item.count}">
@@ -66,7 +66,7 @@
                     </c:forEach>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <!--<td></td>-->
                         <td></td>
                         <td></td>
                         <td>Итого:</td>

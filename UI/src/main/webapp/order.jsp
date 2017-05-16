@@ -5,6 +5,7 @@
 
 <c:set var="title" value="Заказ №${param.orderId}" scope="page"/>
 <c:set var="order" value="${productBean.getInOrder(Integer.parseInt(param.orderId))}"/>
+<c:set var="result" value="0" scope="page"/>
 
 
 <%@include file="template_start.jsp" %>
@@ -29,7 +30,8 @@
             <tr>
                 <th>Товар</th>
                 <th>Количество</th>
-                <th>Стоимость</th>
+                <th>Цена</th>
+                <th>Сумма</th>
             </tr>
             </thead>
             <tbody>
@@ -38,8 +40,17 @@
                     <td><c:out value="${productInOrder.name}"/></td>
                     <td><c:out value="${productInOrder.shoppingCount}"/></td>
                     <td><c:out value="${productInOrder.shoppingPrice}"/></td>
+                    <td><c:out value="${productInOrder.shoppingCount * productInOrder.shoppingPrice}"/></td>
+                    <c:set var="result"
+                           value="${result + (productInOrder.shoppingCount * productInOrder.shoppingPrice)}"/>
                 </tr>
             </c:forEach>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Итого:</td>
+                <td><c:out value="${result}"/></td>
+            </tr>
             </tbody>
         </table>
     </div>

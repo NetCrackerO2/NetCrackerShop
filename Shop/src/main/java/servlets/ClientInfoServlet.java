@@ -38,16 +38,17 @@ public class ClientInfoServlet extends HttpServlet {
         try {
             if (request.getParameter("logout") != null) {
                 clientInfo.logout();
+                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+                response.setHeader("Location", "/");
             } else if (request.getParameter("editClientInfo") != null) {
                 clientBean.editClientInfo(getStringParameter(request, "clientName"),
                                           getStringParameter(request, "clientDefaultAddress")
                 );
                 clientInfo.init(clientBean.get(clientInfo.getId()));
+                request.getRequestDispatcher("user_profile.jsp").forward(request, response);
             }
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
         }
-
-        request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 }

@@ -52,7 +52,7 @@
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="reserve">Содержит заказанный товар</span>
+                                    <span class="reserve">Содержит товары</span>
                                 </c:otherwise>
                             </c:choose>
                         </td>
