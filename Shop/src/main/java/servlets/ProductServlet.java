@@ -1,6 +1,7 @@
 package servlets;
 
 import backup.FromXml;
+import backup.MergePolicy;
 import backup.ToXml;
 import beans.CategoryBean;
 import beans.ProductBean;
@@ -20,11 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
 
-@WebServlet(name = "ProductServlet", urlPatterns = { "/productsServlet.jsp" })
+@WebServlet(name = "ProductServlet", urlPatterns = {"/productsServlet.jsp"})
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 @NeedAdmin
 public class ProductServlet extends HttpServlet {
@@ -57,10 +59,10 @@ public class ProductServlet extends HttpServlet {
                 request.setAttribute("categorySelectValue", request.getParameter("categorySelect"));
 
                 productBean.addProduct(getStringParameter(request, "productName"),
-                        getStringParameter(request, "productDescription"),
-                        getConvertedParameter(request, "productCount", Integer::valueOf),
-                        getConvertedParameter(request, "productPrice", Float::valueOf),
-                        getCategoryIdByName(request.getParameter("categorySelect")));
+                                       getStringParameter(request, "productDescription"),
+                                       getConvertedParameter(request, "productCount", Integer::valueOf),
+                                       getConvertedParameter(request, "productPrice", Float::valueOf),
+                                       getCategoryIdByName(request.getParameter("categorySelect")));
 
                 request.setAttribute("productNameValue", "");
                 request.setAttribute("productDescriptionValue", "");
@@ -71,16 +73,19 @@ public class ProductServlet extends HttpServlet {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
-                        getStringParameter(request, "productName"),
-                        getConvertedParameter(request, "productCount", Integer::valueOf),
-                        getConvertedParameter(request, "productPrice", Float::valueOf),
-                        getCategoryIdByName(getStringParameter(request, "productCategory")));
+                                        getStringParameter(request, "productName"),
+                                        getConvertedParameter(request, "productCount", Integer::valueOf),
+                                        getConvertedParameter(request, "productPrice", Float::valueOf),
+                                        getCategoryIdByName(getStringParameter(request, "productCategory")));
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
                 request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
                 return;
             } else if (request.getParameter("import") != null) {
-                fromXml.importBackup(request.getServletContext().getRealPath("/exported.xml"));
+                String value = request.getParameter("mergePolicyRadio");
+                MergePolicy policy = Objects.equals(value, "1") ? MergePolicy.IGNORE_COPIES :
+                        (Objects.equals(value, "2") ? MergePolicy.RENAME_COPIES : null);
+                fromXml.importBackup(request.getServletContext().getRealPath("/exported.xml"), policy);
                 request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
                 return;
             }

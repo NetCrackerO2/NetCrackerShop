@@ -26,7 +26,8 @@ public abstract class GenericBean<T> {
 
     public List<T> getAll() {
         try {
-            return em.createQuery("SELECT e from " + getEntityClass().getSimpleName() + " e", getEntityClass())
+            return em.createQuery("SELECT e from " + getEntityClass().getSimpleName() + " e order by e.id desc",
+                                  getEntityClass())
                      .getResultList();
         } catch (EntityNotFoundException e) {
             return null;

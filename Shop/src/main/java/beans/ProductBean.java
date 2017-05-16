@@ -165,4 +165,18 @@ public class ProductBean extends GenericBean<ProductEntity> {
             return null;
         }
     }
+
+    public Integer getMaxCount() {
+        List<ProductEntity> list;
+        try {
+            list = em.createQuery("SELECT e from ProductEntity e order by e.count desc",
+                                  ProductEntity.class)
+                     .setMaxResults(1)
+                     .getResultList();
+            list.size();
+            return list.get(0).getCount();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
