@@ -42,9 +42,22 @@
                 <c:forEach items="${clientBean.getAll()}" var="item">
                     <tr>
                         <td class="id"><c:out value="${item.id}"/></td>
-                        <td class="name editable"><c:out value="${item.name}"/></td>
-                        <td class="defaultAddress editable"><c:out value="${item.defaultAddress}"/></td>
-                        <td class="isAdmin editable"><c:out value="${item.getAdmin()}"/></td>
+                        <td class="name contenteditable editable"><c:out value="${item.name}"/></td>
+                        <td class="defaultAddress contenteditable editable"><c:out value="${item.defaultAddress}"/></td>
+                        <td class="isAdmin editable">
+                            <select class="isAdmin" name="isAdmin" disabled="true">
+                                <c:forEach items="true,false" var="selAdmin">
+                                    <option name="<c:out value="${selAdmin}"/>"
+                                            value="<c:out value="${selAdmin}"/>"
+                                            <c:if test="${selAdmin == item.getAdmin() }">
+                                                selected
+                                            </c:if>
+                                    >
+                                        <c:out value="${selAdmin}"/>
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </td>
                         <td>
                             <input type="submit" name="edit" class="btn btn-primary editClientButton" value="Изменить"/>
                         </td>
@@ -54,6 +67,9 @@
                                     <a href="<c:url value="/clientsServlet.jsp?removeClient=&clientId=${item.id}"/>"
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
+                                <c:otherwise>
+                                    <span class="reserve">Нельзя удалить</span>
+                                </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>

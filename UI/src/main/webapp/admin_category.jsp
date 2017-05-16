@@ -40,7 +40,7 @@
                 <c:forEach items="${categoryBean.getAll()}" var="item">
                     <tr>
                         <td class="id"><c:out value="${item.id}"/></td>
-                        <td class="name editable"><c:out value="${item.name}"/></td>
+                        <td class="name contenteditable editable"><c:out value="${item.name}"/></td>
                         <td>
                             <input type="submit" name="edit" class="btn btn-primary editCategoryButton"
                                    value="Изменить"/>
@@ -51,6 +51,9 @@
                                     <a href="<c:url value="/categoriesServlet.jsp?removeCategory=&categoryId=${item.id}"/>"
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
+                                <c:otherwise>
+                                    <span class="reserve">Содержит заказанный товар</span>
+                                </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>

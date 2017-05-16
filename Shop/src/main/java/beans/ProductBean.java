@@ -115,7 +115,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
 
     @NeedAdmin
-    public void editProduct(int id, String name, int count, float price) {
+    public void editProduct(int id, String name, int count, float price,int categoryId) {
         ProductEntity productEntity = get(id);
 
         if (productEntity == null) {
@@ -125,6 +125,11 @@ public class ProductBean extends GenericBean<ProductEntity> {
         productEntity.setName(name);
         productEntity.setCount(count);
         productEntity.setPrice(price);
+        CategoryEntity category = categoryBean.get(categoryId);
+        if (category == null) {
+            throw new EJBException("Такой категории не существует! Id = " + categoryId);
+        }
+        productEntity.setCategory(category);
     }
 
     @Override

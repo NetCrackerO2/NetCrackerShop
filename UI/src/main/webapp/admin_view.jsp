@@ -33,6 +33,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Наименование</th>
+                    <th>Категория</th>
                     <th>Количество</th>
                     <th>Цена</th>
                     <th colspan="2">Редактирование</th>
@@ -44,13 +45,28 @@
                         <td class="id" name="idProduct">
                             <c:out value="${item.id}"/>
                         </td>
-                        <td name="nameProduct" class="name editable">
+                        <td name="nameProduct" class="name contenteditable editable">
                             <c:out value="${item.name}"/>
                         </td>
-                        <td name="countProduct" class="count editable">
+                        <td class="editable">
+                            <select class="category" name="categorySelect" disabled="true">
+                                <c:set var="categories" value="${categoryBean.getAll()}"/>
+                                <c:forEach items="${categories}" var="cat">
+                                    <option name="<c:out value="${cat.name}"/>"
+                                            value="<c:out value="${cat.name}"/>"
+                                            <c:if test="${cat.name == item.getCategory().getName() }">
+                                                selected
+                                            </c:if>
+                                    >
+                                        <c:out value="${cat.name}"/>
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                        <td name="countProduct" class="count contenteditable editable">
                             <c:out value="${item.count}"/>
                         </td>
-                        <td name="priceProduct" class="price editable">
+                        <td name="priceProduct" class="price contenteditable editable">
                             <c:out value="${item.price}"/>
                         </td>
                         <td>
@@ -63,6 +79,9 @@
                                     <a href="<c:url value="/productsServlet.jsp?removeProduct=&productId=${item.id}"/>"
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
+                                <c:otherwise>
+                                    <span class="reserve">Товар заказан</span>
+                                </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>

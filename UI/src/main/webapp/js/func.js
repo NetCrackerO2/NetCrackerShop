@@ -107,20 +107,25 @@ $('.editProductButton').on('click', function () {
         $(this).val("Сохранить");
         //x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
         x.find('.editable').css({'background': 'wheat'});
-        x.find('.editable').attr('contenteditable','true');
+        x.find('.contenteditable').attr('contenteditable','true');
+        x.find('select.category').prop("disabled", false);
     } else {
         if (this.value == 'Сохранить') {
             $(this).val("Изменить");
            // x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
             x.find('.editable').css({'background': 'none'});
-            x.find('.editable').attr('contenteditable','false');
+            x.find('.contenteditable').attr('contenteditable','false');
+            x.find('select.category').prop("disabled", true);
             try {
                 var id = x.find('.id').html().trim();
                 var name = x.find('.name').html().trim();
                 var count = x.find('.count').html().trim();
                 var price = x.find('.price').html().trim();
+                var select = x.find('select.category');
+                var category=select[0].options[select[0].selectedIndex].value;
                 request = new XMLHttpRequest();
-                var param = "&productId=" + id + "&productName=" + name + "&productCount=" + count + "&productPrice=" + price;
+                var param = "&productId=" + id + "&productName=" + name + "&productCount=" + count + "&productPrice="
+                    + price+"&productCategory="+category;
                 request.open('GET', '/productsServlet.jsp?editProduct=ok' + param, true);
                 request.send(null);
             }
@@ -137,7 +142,7 @@ $('.editProductButton').on('click', function () {
             $(this).val("Сохранить");
             //x.find('.editable').css({'-webkit-user-modify': 'read-write', 'background': 'wheat'});
             x.find('.editable').css({'background': 'wheat'});
-            x.find('.editable').attr('contenteditable','true');
+            x.find('.contenteditable').attr('contenteditable','true');
         } else {
             if (this.value == 'Сохранить') {
                 $(this).val("Изменить");
@@ -166,19 +171,25 @@ $('.editProductButton').on('click', function () {
             $(this).val("Сохранить");
             //x.find('.editable').css({'-webkit-user-modify': 'read-write','background': 'wheat'});
             x.find('.editable').css({'background': 'wheat'});
-            x.find('.editable').attr('contenteditable','true');
+            x.find('.contenteditable').attr('contenteditable','true');
+            x.find('select.isAdmin').prop("disabled", false);
+
         } else {
             if (this.value == 'Сохранить') {
                 $(this).val("Изменить");
                 //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
                 x.find('.editable').css({'background': 'none'});
-                x.find('.editable').attr('contenteditable','false');;
+                x.find('.contenteditable').attr('contenteditable','false');;
+                x.find('select.isAdmin').prop("disabled", true);
                 try {
                     var id = x.find('.id').html().trim();
                     var name = x.find('.name').html().trim();
                     var defaultAddress = x.find('.defaultAddress').html().trim();
+                    var select = x.find('select.isAdmin');
+                    var isAdmin=select[0].options[select[0].selectedIndex].value;
                     request = new XMLHttpRequest();
-                    var param = "&clientId=" + id + "&clientName=" + name + "&clientDefaultAddress=" + defaultAddress;
+                    var param = "&clientId=" + id + "&clientName=" + name + "&clientDefaultAddress=" + defaultAddress
+                        +"&isAdmin="+isAdmin;
                     request.open('GET', '/clientsServlet.jsp?editClient=ok' + param, true);
                     request.send(null);
                 }

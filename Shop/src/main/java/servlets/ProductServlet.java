@@ -67,7 +67,8 @@ public class ProductServlet extends HttpServlet {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
                         getStringParameter(request, "productName"),
                         getConvertedParameter(request, "productCount", Integer::valueOf),
-                        getConvertedParameter(request, "productPrice", Float::valueOf));
+                        getConvertedParameter(request, "productPrice", Float::valueOf),
+                        getCategoryIdByName(getStringParameter(request, "productCategory")));
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
                 request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);

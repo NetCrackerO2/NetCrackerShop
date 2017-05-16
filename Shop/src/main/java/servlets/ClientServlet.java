@@ -45,8 +45,8 @@ public class ClientServlet extends HttpServlet {
                 request.setAttribute("clientIsAdminValue", request.getParameter("clientIsAdmin"));
 
                 clientBean.addClient(getStringParameter(request, "clientName"),
-                                     getStringParameter(request, "clientDefaultAddress"),
-                                     getConvertedParameter(request, "clientIsAdmin", Boolean::valueOf)
+                        getStringParameter(request, "clientDefaultAddress"),
+                        getConvertedParameter(request, "clientIsAdmin", Boolean::valueOf)
                 );
 
                 request.setAttribute("clientNameValue", "");
@@ -60,13 +60,15 @@ public class ClientServlet extends HttpServlet {
                 }
             } else if (request.getParameter("editClient") != null) {
                 clientBean.editClient(getConvertedParameter(request, "clientId", Integer::valueOf),
-                                      getStringParameter(request, "clientName"),
-                                      getStringParameter(request, "clientDefaultAddress")
+                        getStringParameter(request, "clientName"),
+                        getStringParameter(request, "clientDefaultAddress"),
+                        Boolean.valueOf(getStringParameter(request, "isAdmin"))
                 );
                 clientInfo.init(clientBean.get(clientInfo.getId()));
             } else if (request.getParameter("editClientInfo") != null) {
                 clientBean.editClientInfo(getStringParameter(request, "clientName"),
-                                          getStringParameter(request, "clientDefaultAddress")
+                        getStringParameter(request, "clientDefaultAddress"),
+                        Boolean.valueOf(getStringParameter(request, "isAdmin"))
                 );
                 clientInfo.init(clientBean.get(clientInfo.getId()));
                 request.getRequestDispatcher("user_profile.jsp").forward(request, response);

@@ -79,18 +79,15 @@ nav {
 nav {
   ul.breadCrumbs {
     float: left;
-      a {
-        padding: 5px;
-        text-transform: uppercase;
-        background-color: #2F717F;
-        color: #fff;
-      }
+    a {
+      padding: 5px;
+      text-transform: uppercase;
+      background-color: #2F717F;
+      color: #fff;
+    }
   }
 }
-body {
-  background: #f9f9f9;
 
-}
 section#content {
   a {
     padding: 5px;
@@ -104,12 +101,14 @@ section#content {
   margin-top: 15px;
 }
 
-.table {
-  text-align: center;
-  th {
+body {
+  background: #f9f9f9;
+  table {
     text-align: center;
+    th {
+      text-align: center;
+    }
   }
-
 }
 
 /*============   Базовые настройки    ===========*/
@@ -118,6 +117,10 @@ a:focus,
 a:visited,
 a:active {
   text-decoration: none;
+}
+
+td span {
+  color:red;
 }
 
 /*============    Подвал    ===========*/
