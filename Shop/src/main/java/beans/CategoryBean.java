@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import javax.persistence.NoResultException;
 
 @Named
 @Stateless
@@ -47,6 +47,10 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         if (categoryEntity == null) {
             return;
         }
+        CategoryEntity duplicate;
+        if ((duplicate = getByName(name)) != null && duplicate.getId() != id) {
+            throw new EJBException("Категория с таким названием уже существует: " + name);
+        }
 
         categoryEntity.setName(name);
     }
@@ -65,21 +69,18 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         try {
             flag = flag
                     && em.createQuery("select e from ProductEntity e where e.category.id=:token", ProductEntity.class)
-                            .setParameter("token", entity.getId()).getResultList().size() == 0;
+                         .setParameter("token", entity.getId()).getResultList().size() == 0;
         } catch (EntityNotFoundException ignore) {
         }
 
         return flag;
     }
 
-    public List<CategoryEntity> getByName(String name) {
+    public CategoryEntity getByName(String name) {
         try {
-            List<CategoryEntity> list = em
-                    .createQuery("SELECT e from CategoryEntity e where e.name=:token", CategoryEntity.class)
-                    .setParameter("token", name).getResultList();
-            list.size();
-            return list;
-        } catch (EntityNotFoundException e) {
+            return em.createQuery("SELECT e from CategoryEntity e where e.name=:token", CategoryEntity.class)
+                     .setParameter("token", name).getSingleResult();
+        } catch (NoResultException e) {
             return null;
         }
     }

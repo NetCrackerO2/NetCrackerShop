@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +122,10 @@ public class ProductBean extends GenericBean<ProductEntity> {
         if (productEntity == null) {
             return;
         }
+        ProductEntity duplicate;
+        if ((duplicate = getByName(name)) != null && duplicate.getId() != id) {
+            throw new EJBException("Продукт с таким названием уже существует: " + name);
+        }
 
         productEntity.setName(name);
         productEntity.setCount(count);
@@ -154,14 +159,12 @@ public class ProductBean extends GenericBean<ProductEntity> {
         return flag;
     }
 
-    public List<ProductEntity> getByName(String name) {
+    public ProductEntity getByName(String name) {
         try {
-            List<ProductEntity> list = em
-                    .createQuery("SELECT e from ProductEntity e where e.name=:token", ProductEntity.class)
-                    .setParameter("token", name).getResultList();
-            list.size();
-            return list;
-        } catch (EntityNotFoundException e) {
+            return em.createQuery("SELECT e from ProductEntity e where e.name=:token", ProductEntity.class)
+                     .setParameter("token", name)
+                     .getSingleResult();
+        } catch (NoResultException e) {
             return null;
         }
     }
@@ -169,8 +172,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
     public Integer getMaxCount() {
         List<ProductEntity> list;
         try {
-            list = em.createQuery("SELECT e from ProductEntity e order by e.count desc",
-                                  ProductEntity.class)
+            list = em.createQuery("SELECT e from ProductEntity e order by e.count desc", ProductEntity.class)
                      .setMaxResults(1)
                      .getResultList();
             list.size();

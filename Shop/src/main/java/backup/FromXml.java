@@ -41,11 +41,11 @@ public class FromXml {
                 }
 
                 if (policy == MergePolicy.IGNORE_COPIES) {
-                    if (productBean.getByName(product.getName()).size() > 0) {
+                    if (productBean.getByName(product.getName()) != null) {
                         continue;
                     }
                 } else if (policy == MergePolicy.RENAME_COPIES) {
-                    while (!productBean.getByName(product.getName()).isEmpty()) {
+                    while (productBean.getByName(product.getName()) != null) {
                         product.setName(product.getName() + " (импортировано)");
                     }
                 }
@@ -69,9 +69,9 @@ public class FromXml {
         try {
             for (CategoryEntity category : categories) {
                 int newId = -1;
-                List<CategoryEntity> local = categoryBean.getByName(category.getName());
-                if (local.size() > 0) {
-                    newId = local.get(0).getId();
+                CategoryEntity local = categoryBean.getByName(category.getName());
+                if (local != null) {
+                    newId = local.getId();
                 } else {
                     newId = categoryBean.addCategory(category.getName(), -1).getId();
                 }
