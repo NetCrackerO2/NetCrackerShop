@@ -20,6 +20,7 @@ public class AuthorizationInterceptor {
 
     private boolean needAuthorization(InvocationContext context) {
         return context.getTarget().getClass().isAnnotationPresent(NeedAuthorization.class)
+                || context.getTarget().getClass().getSuperclass().isAnnotationPresent(NeedAuthorization.class)
                 || context.getMethod().isAnnotationPresent(NeedAuthorization.class);
     }
 }

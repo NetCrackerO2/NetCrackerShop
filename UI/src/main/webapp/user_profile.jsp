@@ -23,14 +23,8 @@
     <div class="row">
         <hr>
         <div class="col-md-7 col-md-offset-3">
-            <form action="clientsServlet.jsp" class="saveUserInfoForm">
+            <form action="clientInfo.jsp" class="saveUserInfoForm">
                 <table class="lk table">
-                    <tr>
-                        <td><label>ID</label></td>
-                        <td><input type="text" class="textfield" name="clientId"
-                                   value="${clientBean.getClientInfo().id}" readonly>
-                        </td>
-                    </tr>
                     <tr>
                         <td><label>Имя</label></td>
                         <td><input class="textfield" type="text" name="clientName"
@@ -40,12 +34,6 @@
                         <td><label>Адрес</label></td>
                         <td><input class="textfield" type="text" name="clientDefaultAddress"
                                    value="${clientBean.getClientInfo().address}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Администратор</label></td>
-                        <td><input class="textfield" type="text" name="clientIsAdmin"
-                                   value="${clientBean.getClientInfo().getAdmin()}" readonly/>
                         </td>
                     </tr>
                     <tr>

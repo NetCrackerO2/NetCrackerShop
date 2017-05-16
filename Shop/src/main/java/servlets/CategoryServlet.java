@@ -2,10 +2,14 @@ package servlets;
 
 import backup.FromXml;
 import beans.CategoryBean;
+import clientInfo.AdminInterceptor;
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAdmin;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +22,8 @@ import static servlets.ParameterGetter.getStringParameter;
 
 
 @WebServlet(name = "CategoryServlet", urlPatterns = {"/categoriesServlet.jsp"})
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
+@NeedAdmin
 public class CategoryServlet extends HttpServlet {
     @Inject
     CategoryBean categoryBean;

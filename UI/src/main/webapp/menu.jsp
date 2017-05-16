@@ -33,5 +33,5 @@
             </c:if>
         </ul>
     </div>
-    <h3 class="text3"><c:out value="${param.title}"/></h3>
+    <h3><c:out value="${param.title}"/></h3>
 </div>

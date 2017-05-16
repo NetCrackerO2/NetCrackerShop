@@ -3,10 +3,14 @@ package servlets;
 import backup.FromXml;
 import beans.ClientBean;
 import beans.OrderBean;
+import clientInfo.AdminInterceptor;
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAuthorization;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +23,8 @@ import static servlets.ParameterGetter.getStringParameter;
 
 
 @WebServlet(name = "ClientServlet", urlPatterns = {"/clientsServlet.jsp"})
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
+@NeedAuthorization
 public class ClientServlet extends HttpServlet {
     @Inject
     ClientBean clientBean;
@@ -34,10 +40,10 @@ public class ClientServlet extends HttpServlet {
         doGet(request, response);
     }
 
+
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
         try {
             if (request.getParameter("addClient") != null) {
                 request.setAttribute("clientNameValue", request.getParameter("clientName"));
@@ -45,8 +51,8 @@ public class ClientServlet extends HttpServlet {
                 request.setAttribute("clientIsAdminValue", request.getParameter("clientIsAdmin"));
 
                 clientBean.addClient(getStringParameter(request, "clientName"),
-                        getStringParameter(request, "clientDefaultAddress"),
-                        getConvertedParameter(request, "clientIsAdmin", Boolean::valueOf)
+                                     getStringParameter(request, "clientDefaultAddress"),
+                                     getConvertedParameter(request, "clientIsAdmin", Boolean::valueOf)
                 );
 
                 request.setAttribute("clientNameValue", "");
@@ -60,24 +66,11 @@ public class ClientServlet extends HttpServlet {
                 }
             } else if (request.getParameter("editClient") != null) {
                 clientBean.editClient(getConvertedParameter(request, "clientId", Integer::valueOf),
-                        getStringParameter(request, "clientName"),
-                        getStringParameter(request, "clientDefaultAddress"),
-                        Boolean.valueOf(getStringParameter(request, "isAdmin"))
+                                      getStringParameter(request, "clientName"),
+                                      getStringParameter(request, "clientDefaultAddress"),
+                                      Boolean.valueOf(getStringParameter(request, "isAdmin"))
                 );
                 clientInfo.init(clientBean.get(clientInfo.getId()));
-            } else if (request.getParameter("editClientInfo") != null) {
-                clientBean.editClientInfo(getStringParameter(request, "clientName"),
-                        getStringParameter(request, "clientDefaultAddress"),
-                        Boolean.valueOf(getStringParameter(request, "isAdmin"))
-                );
-                clientInfo.init(clientBean.get(clientInfo.getId()));
-                request.getRequestDispatcher("user_profile.jsp").forward(request, response);
-                return;
-            } else if (request.getParameter("logout") != null) {
-                clientInfo.logout();
-                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-                response.setHeader("Location", "/");
-                return;
             }
         } catch (NullPointerException e) {
             clientInfo.setErrorMessage("Отсутствует необходимый параметр: " + e.getMessage());

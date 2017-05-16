@@ -53,6 +53,12 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
 
     @Override
     @NeedAdmin
+    public void remove(int id) {
+        super.remove(id);
+    }
+
+    @Override
+    @NeedAdmin
     public boolean canRemove(CategoryEntity entity) {
         boolean flag = true;
 

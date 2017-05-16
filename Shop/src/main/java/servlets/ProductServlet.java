@@ -4,11 +4,15 @@ import backup.FromXml;
 import backup.ToXml;
 import beans.CategoryBean;
 import beans.ProductBean;
+import clientInfo.AdminInterceptor;
+import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
+import clientInfo.NeedAdmin;
 import models.CategoryEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +25,8 @@ import static servlets.ParameterGetter.getConvertedParameter;
 import static servlets.ParameterGetter.getStringParameter;
 
 @WebServlet(name = "ProductServlet", urlPatterns = { "/productsServlet.jsp" })
+@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
+@NeedAdmin
 public class ProductServlet extends HttpServlet {
     @Inject
     ProductBean productBean;

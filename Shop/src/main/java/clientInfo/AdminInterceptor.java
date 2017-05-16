@@ -19,6 +19,7 @@ public class AdminInterceptor {
 
     private boolean needAdmin(InvocationContext context) {
         return context.getTarget().getClass().isAnnotationPresent(NeedAdmin.class)
+                || context.getTarget().getClass().getSuperclass().isAnnotationPresent(NeedAdmin.class)
                 || context.getMethod().isAnnotationPresent(NeedAdmin.class);
     }
 }

@@ -80,7 +80,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         return add(name, defaultAddress, false);
     }
 
-    private void edit(int id, String name, String defaultAddress,Boolean isAdmin) {
+    private void edit(int id, String name, String defaultAddress, Boolean isAdmin) {
         ClientEntity entity = get(id);
 
         if (entity == null) {
@@ -93,13 +93,13 @@ public class ClientBean extends GenericBean<ClientEntity> {
     }
 
     @NeedAdmin
-    public void editClient(int id, String name, String defaultAddress,boolean isAdmin) {
-        edit(id, name, defaultAddress,isAdmin);
+    public void editClient(int id, String name, String defaultAddress, boolean isAdmin) {
+        edit(id, name, defaultAddress, isAdmin);
     }
 
     @NeedAuthorization
-    public void editClientInfo(String name, String defaultAddress,boolean isAdmin) {
-        edit(clientInfo.getId(), name, defaultAddress,isAdmin);
+    public void editClientInfo(String name, String defaultAddress) {
+        edit(clientInfo.getId(), name, defaultAddress, false);
     }
 
     @Override

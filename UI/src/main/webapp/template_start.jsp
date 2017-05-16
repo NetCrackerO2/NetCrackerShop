@@ -17,7 +17,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-
 </head>
 <body>
 <header>
@@ -29,7 +28,7 @@
                     <li><a href="register.jsp">Регистрация</a></li>
                 </c:if>
                 <c:if test="${clientInfo.loggedIn}">
-                    <li><a href="clientsServlet.jsp?logout=">Выйти</a></li>
+                    <li><a href="clientInfo.jsp?logout=">Выйти</a></li>
                 </c:if>
             </ul>
         </div>
