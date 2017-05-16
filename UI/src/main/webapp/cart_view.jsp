@@ -12,7 +12,7 @@
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
     <a href="index.jsp">Главная</a>,
-    <a href="cart_view.jsp">Корзина</a>
+    <a href="cart.jsp">Корзина</a>
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
@@ -25,7 +25,7 @@
     <div class="row">
         <hr>
         <div class="col-md-6 col-md-offset-3">
-            <form id="cartForm" name="orderButton" action="" method="post">
+            <form id="cartForm" name="orderButton" action="cart.jsp" method="post">
                 <table class="table" cellspacing='0'>
                     <thead>
                     <tr>

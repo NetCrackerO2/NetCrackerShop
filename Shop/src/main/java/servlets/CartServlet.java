@@ -33,7 +33,8 @@ public class CartServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         if (!clientInfo.isLoggedIn()) {
-            request.getRequestDispatcher("auth_view.jsp").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+            response.setHeader("Location", "/auth_view.jsp");
             return;
         }
 
@@ -41,13 +42,13 @@ public class CartServlet extends HttpServlet {
             if (request.getParameter("buy") != null) {
                 cartBean.addProductInCart(Integer.parseInt(request.getParameter("id")),
                                           Integer.parseInt(request.getParameter("count")));
-            }
-            if (request.getParameter("createOrder") != null) {
+            } else if (request.getParameter("createOrder") != null) {
                 cartBean.createOrder(request.getParameter("address"));
-                request.getRequestDispatcher("orders.jsp").forward(request, response);
+
+                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+                response.setHeader("Location", "/orders.jsp");
                 return;
-            }
-            if (request.getParameter("remove") != null) {
+            } else if (request.getParameter("remove") != null) {
                 cartBean.removeProductFromCart(Integer.parseInt(request.getParameter("id")));
             }
         } catch (Exception e) {
