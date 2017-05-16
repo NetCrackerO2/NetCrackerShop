@@ -50,8 +50,8 @@ public class SearchServlet extends HttpServlet {
                               request.getParameter("maxPriceFilter"));
                 addMinMaxItem(minMaxParameters,
                               "count",
-                              "0",
-                              request.getParameter("countFilter"));
+                              request.getParameter("countFilter"),
+                              productBean.getMaxCount().toString());
 
                 list = productBean.filterBy(parameters, minMaxParameters);
             } catch (IllegalArgumentException | EJBException e) {
