@@ -3,13 +3,9 @@ package servlets;
 
 import beans.CartBean;
 import beans.ProductBean;
-import clientInfo.AdminInterceptor;
-import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
-import clientInfo.NeedAuthorization;
 
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +15,6 @@ import java.io.IOException;
 
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart.jsp"})
-@Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
-@NeedAuthorization
 public class CartServlet extends HttpServlet {
     @Inject
     CartBean cartBean;
@@ -37,6 +31,11 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
+        if (!clientInfo.isLoggedIn()) {
+            request.getRequestDispatcher("auth_view.jsp").forward(request, response);
+            return;
+        }
 
         try {
             if (request.getParameter("buy") != null) {
