@@ -86,7 +86,8 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if (entity == null) {
             return;
         }
-        if (getByLogin(name) != null) {
+        ClientEntity duplicate;
+        if ((duplicate = getByLogin(name)) != null && duplicate.getId() != id) {
             throw new EJBException("Клиент с таким именем уже существует: " + name);
         }
 

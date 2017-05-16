@@ -80,7 +80,7 @@
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="reserve">Товар заказан</span>
+                                    <span class="reserve">Товар содержится в заказах</span>
                                 </c:otherwise>
                             </c:choose>
                         </td>

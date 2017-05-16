@@ -68,7 +68,7 @@
                                        class="btn btn-primary">Удалить</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="reserve">Нельзя удалить</span>
+                                    <span class="reserve">Администратора нельзя удалить</span>
                                 </c:otherwise>
                             </c:choose>
                         </td>
