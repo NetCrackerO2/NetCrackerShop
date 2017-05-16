@@ -132,11 +132,14 @@ $('.editProductButton').on('click', function () {
         x.find('select.category').prop("disabled", false);
     } else {
         if (this.value == 'Сохранить') {
-            $(this).val("Изменить");
-           // x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
-            x.find('.editable').css({'background': 'none'});
-            x.find('.contenteditable').attr('contenteditable','false');
-            x.find('select.category').prop("disabled", true);
+            var btn = $(this);
+            var onFinish = function() {
+                btn.val("Изменить");
+               // x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                x.find('.editable').css({'background': 'none'});
+                x.find('.contenteditable').attr('contenteditable','false');
+                x.find('select.category').prop("disabled", true);
+            }
             try {
                 var id = x.find('.id').html().trim();
                 var name = x.find('.name').html().trim();
@@ -145,6 +148,9 @@ $('.editProductButton').on('click', function () {
                 var select = x.find('select.category');
                 var category=select[0].options[select[0].selectedIndex].value;
                 request = new XMLHttpRequest();
+                request.onreadystatechange = function(){
+                    onResponse(request, onFinish);
+                };
                 var param = "&productId=" + id + "&productName=" + name + "&productCount=" + count + "&productPrice="
                     + price+"&productCategory="+category;
                 request.open('GET', '/productsServlet.jsp?editProduct=ok' + param, true);
@@ -166,14 +172,20 @@ $('.editProductButton').on('click', function () {
             x.find('.contenteditable').attr('contenteditable','true');
         } else {
             if (this.value == 'Сохранить') {
-                $(this).val("Изменить");
-                //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
-                x.find('.editable').css({'background': 'none'});
-                x.find('.editable').attr('contenteditable','false');
+                var btn = $(this);
+                var onFinish = function() {
+                    btn.val("Изменить");
+                    //x.find('.editable').css({'-webkit-user-modify': 'read-only','background': 'none'});
+                    x.find('.editable').css({'background': 'none'});
+                    x.find('.editable').attr('contenteditable','false');
+                }
                 try {
                     var id = x.find('.id').html().trim();
                     var name = x.find('.name').html().trim();
                     request = new XMLHttpRequest();
+                    request.onreadystatechange = function(){
+                        onResponse(request, onFinish);
+                    };
                     var param = "&categoryId=" + id + "&categoryName=" + name;
                     request.open('GET', '/categoriesServlet.jsp?editCategory=ok' + param, true);
                     request.send(null);

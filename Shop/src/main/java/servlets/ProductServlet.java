@@ -96,6 +96,14 @@ public class ProductServlet extends HttpServlet {
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
         }
+        if (request.getParameter("editProduct") != null) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            if(clientInfo.getErrorMessage()!=null)
+                response.getWriter().print(clientInfo.getErrorMessage());
+            clientInfo.setErrorMessage("");
+            return;
+        }
         request.getRequestDispatcher("admin_view.jsp").forward(request, response);
     }
 
