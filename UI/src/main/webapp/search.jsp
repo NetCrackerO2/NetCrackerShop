@@ -85,6 +85,7 @@
                         <table id="productsTable" class="table table-striped table-bordered" cellspacing='0'>
                             <thead>
                             <tr>
+                                <th>Категория</th>
                                 <th>Наименование</th>
                                 <th>Описание</th>
                                 <th>Цена</th>
@@ -94,6 +95,9 @@
                             <tbody>
                             <c:forEach items="${products}" var="item">
                                 <tr>
+                                    <td>
+                                        <c:out value="${item.category.name}"/>
+                                    </td>
                                     <td>
                                         <c:out value="${item.name}"/>
                                     </td>
