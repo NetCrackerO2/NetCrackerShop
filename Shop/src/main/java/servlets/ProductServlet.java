@@ -104,7 +104,7 @@ public class ProductServlet extends HttpServlet {
             clientInfo.setErrorMessage("");
             return;
         }
-        request.getRequestDispatcher("admin_view.jsp").forward(request, response);
+        request.getRequestDispatcher("admin_products.jsp").forward(request, response);
     }
 
     private int getCategoryIdByName(String name) {

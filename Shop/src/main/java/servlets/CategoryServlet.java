@@ -75,6 +75,6 @@ public class CategoryServlet extends HttpServlet {
             return;
         }
 
-        request.getRequestDispatcher("admin_category.jsp").forward(request, response);
+        request.getRequestDispatcher("admin_categories.jsp").forward(request, response);
     }
 }

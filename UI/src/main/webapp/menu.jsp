@@ -28,7 +28,7 @@
                 <li><a href="user_profile.jsp">Личный кабинет</a></li>
                 <li><a href="cart.jsp">Корзина</a></li>
                 <c:if test="${clientBean.get(clientInfo.id).getAdmin()}">
-                    <li><a href="admin_view.jsp">Админ-панель</a></li>
+                    <li><a href="productsServlet.jsp">Админ-панель</a></li>
                 </c:if>
             </c:if>
         </ul>

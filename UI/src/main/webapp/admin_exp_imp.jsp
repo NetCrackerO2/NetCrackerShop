@@ -10,7 +10,7 @@
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
     <a href="index.jsp">Главная</a>,
-    <a href="admin_clients.jsp">Админ-панель: Экспорт/Импорт</a>
+    <a href="admin_exp_imp.jsp">Админ-панель: Экспорт/Импорт</a>
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>
@@ -65,9 +65,9 @@
         </div>
         <div class="col-md-2 col-md-offset-1">
             <ul class="list-group submenu">
-                <li class="list-group-item"><a href="admin_view.jsp">Работа с товаром</a></li>
-                <li class="list-group-item"><a href="admin_category.jsp">Работа с категориями</a></li>
-                <li class="list-group-item"><a href="admin_clients.jsp">Работа с клиентами</a></li>
+                <li class="list-group-item"><a href="productsServlet.jsp">Работа с товаром</a></li>
+                <li class="list-group-item"><a href="categoriesServlet.jsp">Работа с категориями</a></li>
+                <li class="list-group-item"><a href="clientsServlet.jsp">Работа с клиентами</a></li>
                 <li class="list-group-item"><a href="admin_exp_imp.jsp">Экспорт/Импорт</a></li>
             </ul>
         </div>
