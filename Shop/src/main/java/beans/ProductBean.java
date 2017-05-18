@@ -116,7 +116,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
 
     @NeedAdmin
-    public void editProduct(int id, String name, int count, float price, int categoryId) {
+    public void editProduct(int id, String name, String description, int count, float price, int categoryId) {
         ProductEntity productEntity = get(id);
 
         if (productEntity == null) {
@@ -128,6 +128,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
 
         productEntity.setName(name);
+        productEntity.setDescription(description);
         productEntity.setCount(count);
         productEntity.setPrice(price);
         CategoryEntity category = categoryBean.get(categoryId);

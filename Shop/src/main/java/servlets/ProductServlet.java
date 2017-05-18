@@ -74,6 +74,7 @@ public class ProductServlet extends HttpServlet {
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
                                         getStringParameter(request, "productName"),
+                                        getStringParameter(request, "productDescription"),
                                         getConvertedParameter(request, "productCount", Integer::valueOf),
                                         getConvertedParameter(request, "productPrice", Float::valueOf),
                                         getCategoryIdByName(getStringParameter(request, "productCategory")));

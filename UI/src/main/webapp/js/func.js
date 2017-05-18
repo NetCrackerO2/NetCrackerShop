@@ -143,6 +143,7 @@ $('.editProductButton').on('click', function () {
             try {
                 var id = x.find('.id').html().trim();
                 var name = x.find('.name').html().trim();
+                var description = x.find('.description').html().trim();
                 var count = x.find('.count').html().trim();
                 var price = x.find('.price').html().trim();
                 var select = x.find('select.category');
@@ -151,7 +152,7 @@ $('.editProductButton').on('click', function () {
                 request.onreadystatechange = function(){
                     onResponse(request, onFinish);
                 };
-                var param = "&productId=" + id + "&productName=" + name + "&productCount=" + count + "&productPrice="
+                var param = "&productId=" + id + "&productName=" + name + "&productDescription=" + description + "&productCount=" + count + "&productPrice="
                     + price+"&productCategory="+category;
                 request.open('GET', '/productsServlet.jsp?editProduct=ok' + param, true);
                 request.send(null);

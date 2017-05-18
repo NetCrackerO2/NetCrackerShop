@@ -34,6 +34,7 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Категория</th>
+                    <th>Описание</th>
                     <th>Количество</th>
                     <th>Цена</th>
                     <th colspan="2">Редактирование</th>
@@ -62,6 +63,9 @@
                                     </option>
                                 </c:forEach>
                             </select>
+                        </td>
+                        <td name="descriptionProduct" class="description contenteditable editable">
+                            <c:out value="${item.description}"/>
                         </td>
                         <td name="countProduct" class="count contenteditable editable">
                             <c:out value="${item.count}"/>
