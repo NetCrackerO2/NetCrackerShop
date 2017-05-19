@@ -23,7 +23,7 @@
     <div class="row">
         <hr>
         <div class="col-md-8 col-md-offset-2">
-            <table class="categoryFont table table-striped table-bordered">
+            <table id="categories" class="categoryFont table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>Название</th>

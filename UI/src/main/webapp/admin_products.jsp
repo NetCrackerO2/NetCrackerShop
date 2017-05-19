@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <hr>
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-8">
             <table id="productTable" class="table table-striped table-bordered" cellspacing='0'>
                 <thead>
                 <tr>
@@ -93,7 +93,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-2 col-md-offset-2">
             <ul class="list-group submenu">
                 <li class="list-group-item"><a href="productsServlet.jsp">Работа с товаром</a></li>
                 <li class="list-group-item"><a href="categoriesServlet.jsp">Работа с категориями</a></li>

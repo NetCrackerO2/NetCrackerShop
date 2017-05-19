@@ -96,20 +96,25 @@ section#content {
     color: #fff;
   }
 }
-.categoryFont{
-font-size: 18px;
+
+.categoryFont {
+  font-size: 18px;
 }
+
 #clientsTable {
   margin-top: 15px;
 }
+
 #productsTable .cntProduct {
   width: 100px;
 }
+
 .searchTable input,
 .searchTable select {
   width: 150px;
   height: 27px;
 }
+
 body {
   background: #f9f9f9;
   table {
@@ -120,8 +125,6 @@ body {
   }
 }
 
-
-
 /*============   Базовые настройки    ===========*/
 a:hover,
 a:focus,
@@ -131,7 +134,29 @@ a:active {
 }
 
 td span {
-  color:red;
+  color: red;
+}
+
+#clientsTable,
+#productTable,
+#categoryTable,
+#productsTable{
+  td {
+    max-width: 130px;
+  }
+}
+#categories{
+  td{
+    max-width: 200px;
+  }
+}
+
+td {
+  word-wrap: break-word;
+}
+
+td select {
+  width: 100px;
 }
 
 /*============    Подвал    ===========*/
