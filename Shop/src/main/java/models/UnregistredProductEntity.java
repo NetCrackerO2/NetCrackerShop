@@ -5,6 +5,8 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.CDI;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import beans.CategoryBean;
@@ -16,6 +18,7 @@ public class UnregistredProductEntity {
     private Float price;
     private Integer count;
     private String description;
+    private Boolean disabled;
     private int categoryId;
 
     public UnregistredProductEntity() {
@@ -28,6 +31,7 @@ public class UnregistredProductEntity {
         count = original.getCount();
         description = original.getDescription();
         categoryId = original.getCategory() == null ? -1 : original.getCategory().getId();
+        disabled = original.getDisabled();
     }
 
     public int getId() {
@@ -80,6 +84,14 @@ public class UnregistredProductEntity {
     public void setCategoryId(int id) {
         this.categoryId = id;
     }
+    
+    public Boolean getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
+    }
 
     public ProductEntity toRegistred() {
         ProductEntity result = new ProductEntity();
@@ -88,6 +100,7 @@ public class UnregistredProductEntity {
         result.setPrice(getPrice());
         result.setCount(getCount());
         result.setDescription(getDescription());
+        result.setDisabled(getDisabled());
         if (getCategoryId() == -1)
             result.setCategory(null);
         else {

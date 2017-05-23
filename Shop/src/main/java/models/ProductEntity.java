@@ -21,6 +21,7 @@ public class ProductEntity {
     private Float price;
     private Integer count;
     private String description;
+    private Boolean disabled;
     private Collection<OrderProductEntity> orderProductsById;
     //private int categoryId;
     private CategoryEntity category;
@@ -81,6 +82,16 @@ public class ProductEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    @Basic
+    @Column(name = "disabled")
+    public Boolean getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
     }
 
     @Override

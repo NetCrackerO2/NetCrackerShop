@@ -130,6 +130,8 @@ public class CartBean extends GenericBean<CartEntity> {
             } else {
                 product.setCount(product.getCount() - count);
             }
+            if (product.getDisabled())
+                throw new EJBException("Товар снят с продажи: " + product.getName());
 
 
             OrderProductEntity association = new OrderProductEntity();

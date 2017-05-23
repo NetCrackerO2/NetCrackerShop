@@ -77,8 +77,16 @@
                                    value="Изменить"/>
                         </td>
 						<td>
-							<a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
-							   class="btn btn-primary">Отключить</a>
+							<c:choose>
+                                <c:when test="${item.disabled}">
+									<a href="<c:url value="/productsServlet.jsp?enableProduct=&productId=${item.id}"/>"
+									   class="btn btn-primary">Включить</a>
+                                </c:when>
+                                <c:otherwise>
+									<a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
+									   class="btn btn-primary">Отключить</a>
+                                </c:otherwise>
+                            </c:choose>
 						</td>
                         <td>
                             <c:choose>

@@ -71,6 +71,10 @@ public class ProductServlet extends HttpServlet {
                 request.setAttribute("categorySelectValue", "");
             } else if (request.getParameter("removeProduct") != null) {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
+            } else if (request.getParameter("disableProduct") != null) {
+                productBean.get(Integer.parseInt(request.getParameter("productId"))).setDisabled(true);
+            } else if (request.getParameter("enableProduct") != null) {
+                productBean.get(Integer.parseInt(request.getParameter("productId"))).setDisabled(false);
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
                                         getStringParameter(request, "productName"),
