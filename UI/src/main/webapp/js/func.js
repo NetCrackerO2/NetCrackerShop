@@ -142,10 +142,10 @@ $('.editProductButton').on('click', function () {
             }
             try {
                 var id = x.find('.id').html().trim();
-                var name = x.find('.name').html().trim();
-                var description = x.find('.description').html().trim();
-                var count = x.find('.count').html().trim();
-                var price = x.find('.price').html().trim();
+                var name = x.find('.name').html().replace(/<br>/g,'').trim();
+                var description = x.find('.description').html().replace(/<br>/g,'').trim();
+                var count = x.find('.count').html().replace(/<br>/g,'').trim();
+                var price = x.find('.price').html().replace(/<br>/g,'').trim();
                 var select = x.find('select.category');
                 var category=select[0].options[select[0].selectedIndex].value;
                 request = new XMLHttpRequest();
@@ -182,7 +182,7 @@ $('.editProductButton').on('click', function () {
                 }
                 try {
                     var id = x.find('.id').html().trim();
-                    var name = x.find('.name').html().trim();
+                    var name = x.find('.name').html().replace(/<br>/g,'').trim();
                     request = new XMLHttpRequest();
                     request.onreadystatechange = function(){
                         onResponse(request, onFinish);
@@ -219,8 +219,8 @@ $('.editProductButton').on('click', function () {
                 };
                 try {
                     var id = x.find('.id').html().trim();
-                    var name = x.find('.name').html().trim();
-                    var defaultAddress = x.find('.defaultAddress').html().trim();
+                    var name = x.find('.name').html().replace(/<br>/g,'').trim();
+                    var defaultAddress = x.find('.defaultAddress').html().replace(/<br>/g,'').trim();
                     var select = x.find('select.isAdmin');
                     var isAdmin=select[0].options[select[0].selectedIndex].value;
                     request = new XMLHttpRequest();
