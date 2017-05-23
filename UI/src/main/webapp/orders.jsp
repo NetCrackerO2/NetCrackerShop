@@ -26,8 +26,8 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Адрес</th>
                 <th>Дата</th>
+                <th>Адрес</th>
                 <th></th>
             </tr>
             </thead>
@@ -38,8 +38,8 @@
                     <input name="orderId" value="${order.id}" type="hidden">
                     <tr>
                         <td><c:out value="${order.id}"/></td>
-                        <td><c:out value="${order.address}"/></td>
                         <td><c:out value="${order.date}"/></td>
+                        <td><c:out value="${order.address}"/></td>
                         <td>
                             <input id="orderButton" value="Подробнее" name="orderInfoButton" type="submit"
                                    class="btn btn-primary">
