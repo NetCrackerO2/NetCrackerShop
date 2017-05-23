@@ -1,11 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<c:set var="title" value="Личный кабинет" scope="page"/>
-<c:set var="objStack" value="${[title,'user_profile.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
-
 <%@include file="reqauth.jsp" %>
+
+<c:set var="title" value="Личный кабинет" scope="page"/>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">

@@ -5,7 +5,6 @@
 <%@include file="reqadmin.jsp" %>
 
 <c:set var="title" value="Админ-панель: Товары" scope="page"/>
-<c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
@@ -36,13 +35,13 @@
                     <th>Категория</th>
                     <th>Описание</th>
                     <th>Количество</th>
-                    <th>Цена</th>
-                    <th colspan="2">Редактирование</th>
+                    <th>Цена (в $)</th>
+                    <th colspan="3">Редактирование</th>
                 </tr><!-- Table Header -->
                 </thead>
                 <tbody>
                 <c:forEach items="${productBean.getAll()}" var="item">
-                    <tr>
+                    <tr <c:out value="${item.disabled?'class=disabled':''}"/>>
                         <td class="id" name="idProduct">
                             <c:out value="${item.id}"/>
                         </td>
@@ -76,6 +75,18 @@
                         <td>
                             <input type="submit" name="edit" class="btn btn-primary editProductButton"
                                    value="Изменить"/>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${item.disabled}">
+                                    <a href="<c:url value="/productsServlet.jsp?enableProduct=&productId=${item.id}"/>"
+                                       class="btn btn-primary">Включить</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
+                                       class="btn btn-primary">Отключить</a>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
                             <c:choose>

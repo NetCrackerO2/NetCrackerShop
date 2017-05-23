@@ -21,6 +21,8 @@ import java.util.List;
 @Stateless
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ProductBean extends GenericBean<ProductEntity> {
+    private static final int MAX_PRICE = 9999999;
+
     @Inject
     CategoryBean categoryBean;
     @Inject
@@ -44,7 +46,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
                                          .getProductsById();
             list.size();
             return list;
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException | NoResultException e) {
             return null;
         }
     }
@@ -100,9 +102,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
         product.setCount(count);
 
-        if (price < 0) {
-            throw new EJBException("Недопустимая стоимость товара: " + price);
-        }
+        roundAndCheckPrice(price);
         product.setPrice(price);
 
         CategoryEntity category = categoryBean.get(categoryId);
@@ -116,7 +116,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
 
     @NeedAdmin
-    public void editProduct(int id, String name, String description, int count, float price, int categoryId) {
+    public void editProduct(int id, String name, String description, int count, float price, int categoryId, boolean disabled) {
         ProductEntity productEntity = get(id);
 
         if (productEntity == null) {
@@ -127,6 +127,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
             throw new EJBException("Продукт с таким названием уже существует: " + name);
         }
 
+        roundAndCheckPrice(price);
+
         productEntity.setName(name);
         productEntity.setDescription(description);
         productEntity.setCount(count);
@@ -136,6 +138,17 @@ public class ProductBean extends GenericBean<ProductEntity> {
             throw new EJBException("Такой категории не существует! Id = " + categoryId);
         }
         productEntity.setCategory(category);
+        productEntity.setDisabled(disabled);
+    }
+
+    private void roundAndCheckPrice(float price) {
+        price = (float) (Math.round(price * 100.0) / 100.0);
+        if (Float.isNaN(price)
+                || Float.isInfinite(price)
+                || price <= 0
+                || price > MAX_PRICE) {
+            throw new EJBException("Недопустимая стоимость товара: " + price);
+        }
     }
 
     @Override
@@ -180,6 +193,19 @@ public class ProductBean extends GenericBean<ProductEntity> {
             return list.get(0).getCount();
         } catch (Exception e) {
             return 0;
+        }
+    }
+
+    public Float getMaxPrice() {
+        List<ProductEntity> list;
+        try {
+            list = em.createQuery("SELECT e from ProductEntity e order by e.price desc", ProductEntity.class)
+                     .setMaxResults(1)
+                     .getResultList();
+            list.size();
+            return list.get(0).getPrice();
+        } catch (Exception e) {
+            return 0f;
         }
     }
 }

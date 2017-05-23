@@ -3,7 +3,6 @@ package servlets;
 import beans.CategoryBean;
 import beans.ProductBean;
 import clientInfo.ClientInfo;
-import models.CategoryEntity;
 import models.ProductEntity;
 
 import javax.ejb.EJBException;
@@ -34,7 +33,6 @@ public class SearchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         List<ProductEntity> list = null;
-        List<CategoryEntity> categoryList = categoryBean.getAll();
 
         if (request.getParameter("findProductWide") != null) {
             try {
@@ -44,10 +42,10 @@ public class SearchServlet extends HttpServlet {
                 if (!Objects.equals(request.getParameter("categorySelect"), "<Все>")) {
                     addItem(parameters, "category.name", request.getParameter("categorySelect"));
                 }
-                addMinMaxItem(minMaxParameters,
-                              "price",
-                              request.getParameter("minPriceFilter"),
-                              request.getParameter("maxPriceFilter"));
+                addMinMaxPrice(minMaxParameters,
+                               "price",
+                               request.getParameter("minPriceFilter"),
+                               request.getParameter("maxPriceFilter"));
                 addMinMaxItem(minMaxParameters,
                               "count",
                               request.getParameter("countFilter"),
@@ -60,21 +58,12 @@ public class SearchServlet extends HttpServlet {
                 clientInfo.setErrorMessage(e.getMessage());
             }
         }
-        CategoryEntity tmp = null;
-        for (int i = 0; i < categoryList.size(); i++) {
-            if (categoryList.get(i).getName().equals(request.getParameter("categorySelect"))) {
-                tmp = categoryList.get(0);
-                categoryList.set(0, categoryList.get(i));
-                categoryList.set(i, tmp);
-            }
 
-        }
         request.setAttribute("nameValue", request.getParameter("nameFilter"));
         request.setAttribute("minPriceValue", request.getParameter("minPriceFilter"));
         request.setAttribute("maxPriceValue", request.getParameter("maxPriceFilter"));
         request.setAttribute("countValue", request.getParameter("countFilter"));
         request.setAttribute("categorySelectValue", request.getParameter("categorySelect"));
-        request.setAttribute("categories", categoryList);
         request.setAttribute("products", list);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
@@ -98,15 +87,38 @@ public class SearchServlet extends HttpServlet {
                                String parameterName,
                                String parameterMinValue,
                                String parameterMaxValue) {
-        if (parameterName == null
-                || parameterMinValue == null
-                || parameterMaxValue == null
-                || Objects.equals(parameterName, "")
-                || Objects.equals(parameterMinValue, "")
-                || Objects.equals(parameterMaxValue, "")) {
+        if (isEmpty(parameterName)
+                || isEmpty(parameterMinValue)
+                || isEmpty(parameterMaxValue)) {
             return;
         }
 
         minMaxParameters.add(new String[] {parameterName, parameterMinValue, parameterMaxValue});
+    }
+
+    private void addMinMaxPrice(List<String[]> minMaxParameters,
+                                String parameterName,
+                                String parameterMinValue,
+                                String parameterMaxValue) {
+        if (isEmpty(parameterName)
+                || (isEmpty(parameterMinValue) && isEmpty(parameterMaxValue))) {
+            return;
+        }
+
+        if (isEmpty(parameterMinValue)) {
+            parameterMinValue = "0";
+        }
+        if (isEmpty(parameterMaxValue)) {
+            parameterMaxValue = productBean.getMaxPrice().toString();
+        }
+
+        addMinMaxItem(minMaxParameters,
+                      parameterName,
+                      parameterMinValue,
+                      parameterMaxValue);
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.equals("");
     }
 }

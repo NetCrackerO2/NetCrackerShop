@@ -2,9 +2,6 @@
 <%@include file="env.jsp" %>
 
 <c:set var="title" value="Поиск" scope="page"/>
-<c:set var="objStack" value="${[title,'search.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
-<c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
@@ -48,9 +45,7 @@
                                     >
                                         <c:out value="<Все>"/>
                                     </option>
-                                    <c:if test="${empty categories}">
-                                        <c:set var="categories" value="${categoryBean.getAll()}"/>
-                                    </c:if>
+                                    <c:set var="categories" value="${categoryBean.getAll()}"/>
                                     <c:forEach items="${categories}" var="item">
                                         <option name="<c:out value="${item.name}"/>" class="categoryId"
                                                 value="<c:out value="${item.name}"/>"
@@ -65,12 +60,15 @@
                             </div>
                         </td>
                         <td>
-                            <input name="minPriceFilter" type="text" class="minPrice" value="${minPriceValue}">
+                            <input name="minPriceFilter" type="text" class="minPrice" placeholder="Мин. цена"
+                                   value="${minPriceValue}">
                             <span>-</span>
-                            <input name="maxPriceFilter" type="text" class="maxPrice" value="${maxPriceValue}">
+                            <input name="maxPriceFilter" type="text" class="maxPrice" placeholder="Макс. цена"
+                                   value="${maxPriceValue}">
                         </td>
                         <td>
-                            <input name="countFilter" type="text" class="countMin" value="${countValue}">
+                            <input name="countFilter" type="text" class="countMin" placeholder="Макс. количество"
+                                   value="${countValue}">
                         </tbody>
                     </table>
                     <div class="row text-center">
@@ -94,6 +92,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${products}" var="item">
+                                <c:if test="${item.disabled}">
                                 <tr>
                                     <td>
                                         <c:out value="${item.category.name}"/>
@@ -122,6 +121,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                                </c:if>
                             </c:forEach>
                             </tbody>
                         </table>

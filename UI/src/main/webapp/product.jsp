@@ -1,14 +1,14 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="env.jsp" %>
 
-<fmt:parseNumber var="categoryId" integerOnly="true" type="number" value="${param.category}"/>
 <%@include file="reqauth.jsp" %>
 
+<c:set var="title" value="${product.name}" scope="page"/>
+<c:set var="detailsPrefix">/products.jsp?category=</c:set>
+<fmt:parseNumber var="categoryId" integerOnly="true" type="number" value="${param.category}"/>
 <fmt:parseNumber var="productId" integerOnly="true" type="number" value="${param.id}"/>
 <c:set var="product" value="${productBean.get(productId)}"/>
-<c:set var="title" value="${product.name}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
-<c:set var="detailsPrefix">/products.jsp?category=</c:set>
+
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">

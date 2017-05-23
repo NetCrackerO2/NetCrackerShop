@@ -39,8 +39,8 @@
                 <tr>
                     <td><c:out value="${productInOrder.name}"/></td>
                     <td><c:out value="${productInOrder.shoppingCount}"/></td>
-                    <td><c:out value="${productInOrder.shoppingPrice}"/></td>
-                    <td><c:out value="${productInOrder.shoppingCount * productInOrder.shoppingPrice}"/></td>
+                    <td>$<c:out value="${productInOrder.shoppingPrice}"/></td>
+                    <td>$<c:out value="${productInOrder.shoppingCount * productInOrder.shoppingPrice}"/></td>
                     <c:set var="result"
                            value="${result + (productInOrder.shoppingCount * productInOrder.shoppingPrice)}"/>
                 </tr>
@@ -49,7 +49,7 @@
                 <td></td>
                 <td></td>
                 <td>Итого:</td>
-                <td><c:out value="${result}"/></td>
+                <td>$<c:out value="${result}"/></td>
             </tr>
             </tbody>
         </table>
