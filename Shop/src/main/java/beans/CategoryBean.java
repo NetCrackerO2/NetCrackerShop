@@ -18,6 +18,8 @@ import javax.persistence.NoResultException;
 @Stateless
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class CategoryBean extends GenericBean<CategoryEntity> {
+    private static final int NAME_MAX_LENGTH = 16;
+
     @Override
     protected Class<CategoryEntity> getEntityClass() {
         return CategoryEntity.class;
@@ -31,6 +33,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         if (name.equals("")) {
             throw new EJBException("Недопустимое пустое название категории.");
         }
+        checkName(name);
         category.setName(name);
 
         if (parentCategoryId != null) {
@@ -51,6 +54,7 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
         if ((duplicate = getByName(name)) != null && duplicate.getId() != id) {
             throw new EJBException("Категория с таким названием уже существует: " + name);
         }
+        checkName(name);
 
         categoryEntity.setName(name);
     }
@@ -82,6 +86,12 @@ public class CategoryBean extends GenericBean<CategoryEntity> {
                      .setParameter("token", name).getSingleResult();
         } catch (NoResultException e) {
             return null;
+        }
+    }
+
+    private void checkName(String name) {
+        if (name.length() > NAME_MAX_LENGTH) {
+            throw new EJBException("Название должно быть не длиннее 16 символов.");
         }
     }
 }
