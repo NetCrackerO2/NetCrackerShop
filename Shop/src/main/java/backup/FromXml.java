@@ -54,7 +54,8 @@ public class FromXml {
                                                           product.getDescription(),
                                                           product.getCount(),
                                                           product.getPrice(),
-                                                          category);
+                                                          category,
+                                                          product.getDisabled());
                 result.put(product.getId(), pe.getId());
             }
         } catch (RuntimeException e) {

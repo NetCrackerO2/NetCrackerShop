@@ -22,7 +22,7 @@ import java.util.List;
 @Stateless
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ProductBean extends GenericBean<ProductEntity> {
-    private static final int MAX_PRICE = 9999999;
+    private static final int MAX_PRICE = 999999999;
 
     @Inject
     CategoryBean categoryBean;
@@ -88,7 +88,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
                                     String description,
                                     int count,
                                     BigDecimal price,
-                                    int categoryId) throws EJBException {
+                                    int categoryId,
+                                    boolean disabled) throws EJBException {
         ProductEntity product = new ProductEntity();
 
         if (name.equals("")) {
@@ -103,7 +104,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
         product.setCount(count);
 
-        roundAndCheckPrice(price);
+        checkPrice(price);
         product.setPrice(price);
 
         CategoryEntity category = categoryBean.get(categoryId);
@@ -112,6 +113,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
         product.setCategory(category);
         category.getProductsById().add(product);
+
+        product.setDisabled(disabled);
 
         return persist(product);
     }
@@ -134,7 +137,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
             throw new EJBException("Продукт с таким названием уже существует: " + name);
         }
 
-        roundAndCheckPrice(price);
+        checkPrice(price);
 
         productEntity.setName(name);
         productEntity.setDescription(description);
@@ -148,7 +151,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         productEntity.setDisabled(disabled);
     }
 
-    private void roundAndCheckPrice(BigDecimal price) {
+    private void checkPrice(BigDecimal price) {
         if (price.doubleValue() <= 0
                 || price.doubleValue() > MAX_PRICE) {
             throw new EJBException("Недопустимая стоимость товара: " + price);

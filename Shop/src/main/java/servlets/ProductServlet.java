@@ -64,7 +64,8 @@ public class ProductServlet extends HttpServlet {
                                        getStringParameter(request, "productDescription"),
                                        getConvertedParameter(request, "productCount", Integer::valueOf),
                                        getConvertedParameter(request, "productPrice", BigDecimal::new),
-                                       getCategoryIdByName(request.getParameter("categorySelect")));
+                                       getCategoryIdByName(request.getParameter("categorySelect")),
+                                       false);
 
                 request.setAttribute("productNameValue", "");
                 request.setAttribute("productDescriptionValue", "");
@@ -76,11 +77,13 @@ public class ProductServlet extends HttpServlet {
             } else if (request.getParameter("disableProduct") != null) {
                 ProductEntity pe = productBean.get(Integer.parseInt(request.getParameter("productId")));
                 pe.setDisabled(true);
-                productBean.editProduct(pe.getId(),pe.getName(),pe.getDescription(),pe.getCount(),pe.getPrice(),pe.getCategory().getId(),pe.getDisabled());
+                productBean.editProduct(pe.getId(), pe.getName(), pe.getDescription(), pe.getCount(), pe.getPrice(),
+                                        pe.getCategory().getId(), pe.getDisabled());
             } else if (request.getParameter("enableProduct") != null) {
                 ProductEntity pe = productBean.get(Integer.parseInt(request.getParameter("productId")));
                 pe.setDisabled(false);
-                productBean.editProduct(pe.getId(),pe.getName(),pe.getDescription(),pe.getCount(),pe.getPrice(),pe.getCategory().getId(),pe.getDisabled());
+                productBean.editProduct(pe.getId(), pe.getName(), pe.getDescription(), pe.getCount(), pe.getPrice(),
+                                        pe.getCategory().getId(), pe.getDisabled());
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
                                         getStringParameter(request, "productName"),
@@ -88,7 +91,8 @@ public class ProductServlet extends HttpServlet {
                                         getConvertedParameter(request, "productCount", Integer::valueOf),
                                         getConvertedParameter(request, "productPrice", BigDecimal::new),
                                         getCategoryIdByName(getStringParameter(request, "productCategory")),
-                                        productBean.get(getConvertedParameter(request, "productId", Integer::valueOf)).getDisabled());
+                                        productBean.get(getConvertedParameter(request, "productId",
+                                                                              Integer::valueOf)).getDisabled());
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
                 request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
@@ -111,8 +115,9 @@ public class ProductServlet extends HttpServlet {
         if (request.getParameter("editProduct") != null) {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            if(clientInfo.getErrorMessage()!=null)
+            if (clientInfo.getErrorMessage() != null) {
                 response.getWriter().print(clientInfo.getErrorMessage());
+            }
             clientInfo.setErrorMessage("");
             return;
         }
