@@ -3,8 +3,6 @@
 
 <c:set var="categories" value="${categoryBean.getAll()}"/>
 <c:set var="title" value="Категории" scope="page"/>
-<c:set var="objStack" value="${['Категории','categories.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
 <c:set var="detailsPrefix">/products.jsp?category=</c:set>
 
 <%@include file="template_start.jsp" %>

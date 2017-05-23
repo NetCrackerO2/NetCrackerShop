@@ -4,8 +4,6 @@
 <%@include file="reqauth.jsp" %>
 
 <c:set var="title" value="Заказы" scope="page"/>
-<c:set var="objStack" value="${[title,'orders.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
 <c:set var="orders" value="${orderBean.getByClientId(clientInfo.id)}"/>
 
 <%@include file="template_start.jsp" %>

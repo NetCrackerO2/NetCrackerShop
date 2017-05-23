@@ -2,9 +2,6 @@
 <%@include file="env.jsp" %>
 
 <c:set var="title" value="Поиск" scope="page"/>
-<c:set var="objStack" value="${[title,'search.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
-<c:set var="detailsPrefix">/product.jsp?id=</c:set>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
@@ -48,9 +45,7 @@
                                     >
                                         <c:out value="<Все>"/>
                                     </option>
-                                    <c:if test="${empty categories}">
-                                        <c:set var="categories" value="${categoryBean.getAll()}"/>
-                                    </c:if>
+                                    <c:set var="categories" value="${categoryBean.getAll()}"/>
                                     <c:forEach items="${categories}" var="item">
                                         <option name="<c:out value="${item.name}"/>" class="categoryId"
                                                 value="<c:out value="${item.name}"/>"

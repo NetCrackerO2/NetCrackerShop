@@ -4,8 +4,6 @@
 <%@include file="reqauth.jsp" %>
 
 <c:set var="title" value="Корзина" scope="page"/>
-<c:set var="objStack" value="${[title,'cart_view.jsp']}" scope="page"/>
-<c:set var="pathStack" value="${[objStack]}" scope="page"/>
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
 <c:set var="isEnough" value="true"/>
 
@@ -30,7 +28,6 @@
                     <thead>
                     <tr>
                         <th>Категория</th>
-                        <!--<th>Описание</th>-->
                         <th>Название</th>
                         <th>Количество</th>
                         <th>Цена</th>
@@ -46,7 +43,6 @@
                             <td><c:out value="${item.getCategory().getName()}"/></td>
                             <td><a href="<c:url value='${detailsPrefix}${item.id}'/>"><c:out
                                     value="${item.name}"/></a></td>
-                                <%--<td><c:out value="${item.description}"/></td>--%>
                             <td>
                                 <c:out value="${cartItem.count}"/>
                                 <c:if test="${cartItem.count > item.count}">
@@ -66,7 +62,6 @@
                     </c:forEach>
                     <tr>
                         <td></td>
-                        <!--<td></td>-->
                         <td></td>
                         <td></td>
                         <td>Итого:</td>

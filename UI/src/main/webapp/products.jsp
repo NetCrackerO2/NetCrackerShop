@@ -6,14 +6,11 @@
         <fmt:parseNumber var="categoryId" integerOnly="true" type="number" value="${param.category}"/>
         <c:set var="products" value="${productBean.getByCategory(categoryId)}"/>
         <c:set var="title" value="${categoryBean.get(categoryId).name}" scope="page"/>
-        <%--<c:set var="pathStack" value="${['Categories', categoryBean.get(categoryId).name]}" scope="page"/>--%>
-        <c:set var="objStack" value="${[title,categoryBean.get(categoryId).name,'products.jsp']}" scope="page"/>
-        <c:set var="pathStack" value="${[objStack]}" scope="page"/>
+        <c:set var="urlPostfix">?category=${categoryId}</c:set>
     </c:when>
     <c:otherwise>
         <c:set var="products" value="${productBean.getAll()}"/>
-        <c:set var="title" value="Products" scope="page"/>
-        <c:set var="pathStack" value="${['Products']}" scope="page"/>
+        <c:set var="title" value="Товары" scope="page"/>
     </c:otherwise>
 </c:choose>
 <c:set var="detailsPrefix">/product.jsp?id=</c:set>
@@ -22,7 +19,7 @@
 <c:set var="crumbs">
     <a href="index.jsp">Главная</a>,
     <a href="categories.jsp">Категории</a>,
-    <a href="<c:url value="${detailsPrefix}${categoryId}"/>">${title}</a>
+    <a href="<c:url value="/products.jsp${urlPostfix}"/>">${title}</a>
 </c:set>
 <jsp:include page="menu.jsp">
     <jsp:param name="crumbs" value="${crumbs}"/>

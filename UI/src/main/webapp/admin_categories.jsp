@@ -5,7 +5,6 @@
 <%@include file="reqadmin.jsp" %>
 
 <c:set var="title" value="Админ-панель: Категории" scope="page"/>
-<c:set var="pathStack" value="${['Admin']}" scope="page"/>
 
 <%@include file="template_start.jsp" %>
 <c:set var="crumbs">
