@@ -10,6 +10,7 @@ import clientInfo.AuthorizationInterceptor;
 import clientInfo.ClientInfo;
 import clientInfo.NeedAdmin;
 import models.CategoryEntity;
+import models.ProductEntity;
 
 import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
@@ -72,16 +73,21 @@ public class ProductServlet extends HttpServlet {
             } else if (request.getParameter("removeProduct") != null) {
                 productBean.remove(Integer.parseInt(request.getParameter("productId")));
             } else if (request.getParameter("disableProduct") != null) {
-                productBean.get(Integer.parseInt(request.getParameter("productId"))).setDisabled(true);
+                ProductEntity pe = productBean.get(Integer.parseInt(request.getParameter("productId")));
+                pe.setDisabled(true);
+                productBean.editProduct(pe.getId(),pe.getName(),pe.getDescription(),pe.getCount(),pe.getPrice(),pe.getCategory().getId(),pe.getDisabled());
             } else if (request.getParameter("enableProduct") != null) {
-                productBean.get(Integer.parseInt(request.getParameter("productId"))).setDisabled(false);
+                ProductEntity pe = productBean.get(Integer.parseInt(request.getParameter("productId")));
+                pe.setDisabled(false);
+                productBean.editProduct(pe.getId(),pe.getName(),pe.getDescription(),pe.getCount(),pe.getPrice(),pe.getCategory().getId(),pe.getDisabled());
             } else if (request.getParameter("editProduct") != null) {
                 productBean.editProduct(getConvertedParameter(request, "productId", Integer::valueOf),
                                         getStringParameter(request, "productName"),
                                         getStringParameter(request, "productDescription"),
                                         getConvertedParameter(request, "productCount", Integer::valueOf),
                                         getConvertedParameter(request, "productPrice", Float::valueOf),
-                                        getCategoryIdByName(getStringParameter(request, "productCategory")));
+                                        getCategoryIdByName(getStringParameter(request, "productCategory")),
+                                        productBean.get(getConvertedParameter(request, "productId", Integer::valueOf)).getDisabled());
             } else if (request.getParameter("export") != null) {
                 toXml.export(request.getServletContext().getRealPath("/exported.xml"));
                 request.getRequestDispatcher("admin_exp_imp.jsp").forward(request, response);
