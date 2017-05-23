@@ -49,6 +49,7 @@ public class ClientInfoServlet extends HttpServlet {
             }
         } catch (Exception e) {
             clientInfo.setErrorMessage(e.getMessage());
+            request.getRequestDispatcher("user_profile.jsp").forward(request, response);
         }
     }
 }
