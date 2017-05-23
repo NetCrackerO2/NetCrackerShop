@@ -92,7 +92,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${products}" var="item">
-                                <c:if test="${item.disabled}">
+                                <c:if test="${not item.disabled}">
                                 <tr>
                                     <td>
                                         <c:out value="${item.category.name}"/>
