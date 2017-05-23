@@ -36,7 +36,7 @@
                     <th>Описание</th>
                     <th>Количество</th>
                     <th>Цена (в $)</th>
-                    <th colspan="2">Редактирование</th>
+                    <th colspan="3">Редактирование</th>
                 </tr><!-- Table Header -->
                 </thead>
                 <tbody>
@@ -76,6 +76,10 @@
                             <input type="submit" name="edit" class="btn btn-primary editProductButton"
                                    value="Изменить"/>
                         </td>
+						<td>
+							<a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
+							   class="btn btn-primary">Отключить</a>
+						</td>
                         <td>
                             <c:choose>
                                 <c:when test="${productBean.canRemove(item)}">
