@@ -21,6 +21,8 @@ import java.util.List;
 @Stateless
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ProductBean extends GenericBean<ProductEntity> {
+    private static final int MAX_PRICE = 9999999;
+
     @Inject
     CategoryBean categoryBean;
     @Inject
@@ -100,9 +102,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
         product.setCount(count);
 
-        if (price < 0) {
-            throw new EJBException("Недопустимая стоимость товара: " + price);
-        }
+        roundAndCheckPrice(price);
         product.setPrice(price);
 
         CategoryEntity category = categoryBean.get(categoryId);
@@ -127,6 +127,8 @@ public class ProductBean extends GenericBean<ProductEntity> {
             throw new EJBException("Продукт с таким названием уже существует: " + name);
         }
 
+        roundAndCheckPrice(price);
+
         productEntity.setName(name);
         productEntity.setDescription(description);
         productEntity.setCount(count);
@@ -136,6 +138,16 @@ public class ProductBean extends GenericBean<ProductEntity> {
             throw new EJBException("Такой категории не существует! Id = " + categoryId);
         }
         productEntity.setCategory(category);
+    }
+
+    private void roundAndCheckPrice(float price) {
+        price = (float) (Math.round(price * 100.0) / 100.0);
+        if (Float.isNaN(price)
+                || Float.isInfinite(price)
+                || price <= 0
+                || price > MAX_PRICE) {
+            throw new EJBException("Недопустимая стоимость товара: " + price);
+        }
     }
 
     @Override
