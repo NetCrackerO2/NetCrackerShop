@@ -35,7 +35,7 @@
                     <th>Категория</th>
                     <th>Описание</th>
                     <th>Количество</th>
-                    <th>Цена</th>
+                    <th>Цена (в $)</th>
                     <th colspan="2">Редактирование</th>
                 </tr><!-- Table Header -->
                 </thead>
@@ -70,7 +70,7 @@
                             <c:out value="${item.count}"/>
                         </td>
                         <td name="priceProduct" class="price contenteditable editable">
-                            $<c:out value="${item.price}"/>
+                            <c:out value="${item.price}"/>
                         </td>
                         <td>
                             <input type="submit" name="edit" class="btn btn-primary editProductButton"
