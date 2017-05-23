@@ -42,10 +42,10 @@ public class SearchServlet extends HttpServlet {
                 if (!Objects.equals(request.getParameter("categorySelect"), "<Все>")) {
                     addItem(parameters, "category.name", request.getParameter("categorySelect"));
                 }
-                addMinMaxItem(minMaxParameters,
-                              "price",
-                              request.getParameter("minPriceFilter"),
-                              request.getParameter("maxPriceFilter"));
+                addMinMaxPrice(minMaxParameters,
+                               "price",
+                               request.getParameter("minPriceFilter"),
+                               request.getParameter("maxPriceFilter"));
                 addMinMaxItem(minMaxParameters,
                               "count",
                               request.getParameter("countFilter"),
@@ -87,16 +87,38 @@ public class SearchServlet extends HttpServlet {
                                String parameterName,
                                String parameterMinValue,
                                String parameterMaxValue) {
-        if (
-                parameterName == null
-                || parameterMinValue == null
-                || parameterMaxValue == null
-                || Objects.equals(parameterName, "")
-                || Objects.equals(parameterMinValue, "")
-                || Objects.equals(parameterMaxValue, "")) {
+        if (isEmpty(parameterName)
+                || isEmpty(parameterMinValue)
+                || isEmpty(parameterMaxValue)) {
             return;
         }
 
         minMaxParameters.add(new String[] {parameterName, parameterMinValue, parameterMaxValue});
+    }
+
+    private void addMinMaxPrice(List<String[]> minMaxParameters,
+                                String parameterName,
+                                String parameterMinValue,
+                                String parameterMaxValue) {
+        if (isEmpty(parameterName)
+                || (isEmpty(parameterMinValue) && isEmpty(parameterMaxValue))) {
+            return;
+        }
+
+        if (isEmpty(parameterMinValue)) {
+            parameterMinValue = "0";
+        }
+        if (isEmpty(parameterMaxValue)) {
+            parameterMaxValue = productBean.getMaxPrice().toString();
+        }
+
+        addMinMaxItem(minMaxParameters,
+                      parameterName,
+                      parameterMinValue,
+                      parameterMaxValue);
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.equals("");
     }
 }

@@ -60,12 +60,15 @@
                             </div>
                         </td>
                         <td>
-                            <input name="minPriceFilter" type="text" class="minPrice" value="${minPriceValue}">
+                            <input name="minPriceFilter" type="text" class="minPrice" placeholder="Мин. цена"
+                                   value="${minPriceValue}">
                             <span>-</span>
-                            <input name="maxPriceFilter" type="text" class="maxPrice" value="${maxPriceValue}">
+                            <input name="maxPriceFilter" type="text" class="maxPrice" placeholder="Макс. цена"
+                                   value="${maxPriceValue}">
                         </td>
                         <td>
-                            <input name="countFilter" type="text" class="countMin" value="${countValue}">
+                            <input name="countFilter" type="text" class="countMin" placeholder="Макс. количество"
+                                   value="${countValue}">
                         </tbody>
                     </table>
                     <div class="row text-center">

@@ -182,4 +182,17 @@ public class ProductBean extends GenericBean<ProductEntity> {
             return 0;
         }
     }
+
+    public Float getMaxPrice() {
+        List<ProductEntity> list;
+        try {
+            list = em.createQuery("SELECT e from ProductEntity e order by e.price desc", ProductEntity.class)
+                     .setMaxResults(1)
+                     .getResultList();
+            list.size();
+            return list.get(0).getPrice();
+        } catch (Exception e) {
+            return 0f;
+        }
+    }
 }
