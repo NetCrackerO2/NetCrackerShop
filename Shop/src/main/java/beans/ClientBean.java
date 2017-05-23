@@ -13,6 +13,7 @@ import javax.interceptor.Interceptors;
 @Stateless
 @Interceptors({AuthorizationInterceptor.class, AdminInterceptor.class})
 public class ClientBean extends GenericBean<ClientEntity> {
+    private static final int NAME_MAX_LENGTH = 16;
 
     @Inject
     ClientInfo clientInfo;
@@ -65,6 +66,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if (name.equals("")) {
             throw new EJBException("Недопустимое пустое имя клиента.");
         }
+        checkName(name);
         client.setName(name);
 
         if (defaultAddress.equals("")) {
@@ -99,6 +101,7 @@ public class ClientBean extends GenericBean<ClientEntity> {
         if (entity.getAdmin() && !isAdmin) {
             throw new EJBException("Понижение прав администратора невозможно.");
         }
+        checkName(name);
 
         entity.setName(name);
         entity.setDefaultAddress(defaultAddress);
@@ -136,5 +139,11 @@ public class ClientBean extends GenericBean<ClientEntity> {
         flag = flag && (!entity.getAdmin());
 
         return flag;
+    }
+
+    private void checkName(String name) {
+        if (name.length() > NAME_MAX_LENGTH) {
+            throw new EJBException("Имя должно быть не длиннее 16 символов.");
+        }
     }
 }
