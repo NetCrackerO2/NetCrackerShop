@@ -49,6 +49,10 @@
                                     <c:set var="isEnough" value="false"/>
                                     <font color="red">(на складе <c:out value="${item.count}"/>)</font>
                                 </c:if>
+                                <c:if test="${item.disabled}">
+                                    <c:set var="isEnough" value="false"/>
+                                    <font color="red">(снято с продажи)</font>
+                                </c:if>
                             </td>
                             <td><c:out value="${item.price}"/>$</td>
                             <td>

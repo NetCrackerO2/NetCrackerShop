@@ -54,6 +54,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${products}" var="item">
+                    <c:if test="${not item.disabled}">
                     <tr>
                         <td>
                             <c:out value="${item.name}"/>
@@ -79,6 +80,7 @@
                             </form>
                         </td>
                     </tr>
+                    </c:if>
                 </c:forEach>
                 </tbody>
             </table>

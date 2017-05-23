@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${productBean.getAll()}" var="item">
-                    <tr>
+                    <tr <c:out value="${item.disabled?'class=disabled':''}"/>>
                         <td class="id" name="idProduct">
                             <c:out value="${item.id}"/>
                         </td>
@@ -76,18 +76,18 @@
                             <input type="submit" name="edit" class="btn btn-primary editProductButton"
                                    value="Изменить"/>
                         </td>
-						<td>
-							<c:choose>
+                        <td>
+                            <c:choose>
                                 <c:when test="${item.disabled}">
-									<a href="<c:url value="/productsServlet.jsp?enableProduct=&productId=${item.id}"/>"
-									   class="btn btn-primary">Включить</a>
+                                    <a href="<c:url value="/productsServlet.jsp?enableProduct=&productId=${item.id}"/>"
+                                       class="btn btn-primary">Включить</a>
                                 </c:when>
                                 <c:otherwise>
-									<a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
-									   class="btn btn-primary">Отключить</a>
+                                    <a href="<c:url value="/productsServlet.jsp?disableProduct=&productId=${item.id}"/>"
+                                       class="btn btn-primary">Отключить</a>
                                 </c:otherwise>
                             </c:choose>
-						</td>
+                        </td>
                         <td>
                             <c:choose>
                                 <c:when test="${productBean.canRemove(item)}">
