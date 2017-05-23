@@ -1,12 +1,14 @@
 package models;
 
 
+import java.math.BigDecimal;
+
 public class ProductInOrder {
     private int id;
     private String name;
-    private Float price;
+    private BigDecimal price;
     private String description;
-    private Float shoppingPrice;
+    private BigDecimal shoppingPrice;
     private Integer shoppingCount;
 
 
@@ -26,11 +28,11 @@ public class ProductInOrder {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -42,11 +44,11 @@ public class ProductInOrder {
         this.description = description;
     }
 
-    public Float getShoppingPrice() {
+    public BigDecimal getShoppingPrice() {
         return shoppingPrice;
     }
 
-    public void setShoppingPrice(Float shoppingPrice) {
+    public void setShoppingPrice(BigDecimal shoppingPrice) {
         this.shoppingPrice = shoppingPrice;
     }
 

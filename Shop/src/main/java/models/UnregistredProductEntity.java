@@ -1,21 +1,20 @@
 package models;
 
+import beans.CategoryBean;
+
 import javax.ejb.EJBException;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.CDI;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import beans.CategoryBean;
+import java.math.BigDecimal;
 
 @XmlRootElement(name = "product")
 public class UnregistredProductEntity {
     private int id;
     private String name;
-    private Float price;
+    private BigDecimal price;
     private Integer count;
     private String description;
     private Boolean disabled;
@@ -50,11 +49,11 @@ public class UnregistredProductEntity {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

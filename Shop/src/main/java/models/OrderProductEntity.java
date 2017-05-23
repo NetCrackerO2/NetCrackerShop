@@ -3,6 +3,7 @@ package models;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.math.BigDecimal;
 
 
 @Entity
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class OrderProductEntity {
     private int id;
     private Integer count;
-    private Float price;
+    private BigDecimal price;
     private OrderEntity orderByOrderId;
     private ProductEntity productByProductId;
 
@@ -41,11 +42,11 @@ public class OrderProductEntity {
 
     @Basic
     @Column(name = "price")
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

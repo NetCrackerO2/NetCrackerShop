@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,7 +63,7 @@ public class ProductServlet extends HttpServlet {
                 productBean.addProduct(getStringParameter(request, "productName"),
                                        getStringParameter(request, "productDescription"),
                                        getConvertedParameter(request, "productCount", Integer::valueOf),
-                                       getConvertedParameter(request, "productPrice", Float::valueOf),
+                                       getConvertedParameter(request, "productPrice", BigDecimal::new),
                                        getCategoryIdByName(request.getParameter("categorySelect")));
 
                 request.setAttribute("productNameValue", "");
@@ -85,7 +86,7 @@ public class ProductServlet extends HttpServlet {
                                         getStringParameter(request, "productName"),
                                         getStringParameter(request, "productDescription"),
                                         getConvertedParameter(request, "productCount", Integer::valueOf),
-                                        getConvertedParameter(request, "productPrice", Float::valueOf),
+                                        getConvertedParameter(request, "productPrice", BigDecimal::new),
                                         getCategoryIdByName(getStringParameter(request, "productCategory")),
                                         productBean.get(getConvertedParameter(request, "productId", Integer::valueOf)).getDisabled());
             } else if (request.getParameter("export") != null) {

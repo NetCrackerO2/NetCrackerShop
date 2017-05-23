@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
@@ -116,7 +117,7 @@ public class CartBean extends GenericBean<CartEntity> {
         for (CartEntity entity : cart) {
             ProductEntity product = productBean.get(entity.getProductId());
             int count = entity.getCount();
-            float price = product.getPrice();
+            BigDecimal price = product.getPrice();
 
             if (product.getCount() < count) {
                 throw new EJBException("Нет в наличии необходимого количества "

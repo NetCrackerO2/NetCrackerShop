@@ -7,6 +7,7 @@ import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 
@@ -18,7 +19,7 @@ public class ProductEntity {
 
     private int id;
     private String name;
-    private Float price;
+    private BigDecimal price;
     private Integer count;
     private String description;
     private Boolean disabled;
@@ -53,12 +54,12 @@ public class ProductEntity {
 
     @Basic
     @Column(name = "price")
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPrice(BigDecimal price) {
+        this.price = price.setScale(2, BigDecimal.ROUND_CEILING);
     }
 
     @Basic

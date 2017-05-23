@@ -14,6 +14,7 @@ import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
     public ProductEntity addProduct(String name,
                                     String description,
                                     int count,
-                                    float price,
+                                    BigDecimal price,
                                     int categoryId) throws EJBException {
         ProductEntity product = new ProductEntity();
 
@@ -116,7 +117,13 @@ public class ProductBean extends GenericBean<ProductEntity> {
     }
 
     @NeedAdmin
-    public void editProduct(int id, String name, String description, int count, float price, int categoryId, boolean disabled) {
+    public void editProduct(int id,
+                            String name,
+                            String description,
+                            int count,
+                            BigDecimal price,
+                            int categoryId,
+                            boolean disabled) {
         ProductEntity productEntity = get(id);
 
         if (productEntity == null) {
@@ -141,12 +148,9 @@ public class ProductBean extends GenericBean<ProductEntity> {
         productEntity.setDisabled(disabled);
     }
 
-    private void roundAndCheckPrice(float price) {
-        price = (float) (Math.round(price * 100.0) / 100.0);
-        if (Float.isNaN(price)
-                || Float.isInfinite(price)
-                || price <= 0
-                || price > MAX_PRICE) {
+    private void roundAndCheckPrice(BigDecimal price) {
+        if (price.doubleValue() <= 0
+                || price.doubleValue() > MAX_PRICE) {
             throw new EJBException("Недопустимая стоимость товара: " + price);
         }
     }
@@ -196,7 +200,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
         }
     }
 
-    public Float getMaxPrice() {
+    public BigDecimal getMaxPrice() {
         List<ProductEntity> list;
         try {
             list = em.createQuery("SELECT e from ProductEntity e order by e.price desc", ProductEntity.class)
@@ -205,7 +209,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
             list.size();
             return list.get(0).getPrice();
         } catch (Exception e) {
-            return 0f;
+            return new BigDecimal(0);
         }
     }
 }
