@@ -5,8 +5,19 @@
     <c:when test='${param.category != null}'>
         <fmt:parseNumber var="categoryId" integerOnly="true" type="number" value="${param.category}"/>
         <c:set var="products" value="${productBean.getByCategory(categoryId)}"/>
-        <c:set var="title" value="${categoryBean.get(categoryId).name}" scope="page"/>
         <c:set var="urlPostfix">?category=${categoryId}</c:set>
+
+        <c:choose>
+            <c:when test="${categoryBean.get(categoryId) == null}">
+                <c:set var="title" value="Неизвестно" scope="page"/>
+                <c:set var="urlPostfix" value=""/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="title" value="${categoryBean.get(categoryId).name}" scope="page"/>
+            </c:otherwise>
+        </c:choose>
+
+
     </c:when>
     <c:otherwise>
         <c:set var="products" value="${productBean.getAll()}"/>
@@ -59,7 +70,8 @@
                         <td>
                             <form method="POST" action="/cart.jsp">
                                 <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                                <input class="cntProduct" type="number" name="count" min="1" max="<c:out value='${item.count}'/>"
+                                <input class="cntProduct" type="number" name="count" min="1"
+                                       max="<c:out value='${item.count}'/>"
                                        value="1"/>
                                 <button type=submit name=buy class="btn btn-primary"><img class="icon"
                                                                                           src="../image/cart.png">

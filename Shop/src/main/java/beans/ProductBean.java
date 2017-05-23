@@ -44,7 +44,7 @@ public class ProductBean extends GenericBean<ProductEntity> {
                                          .getProductsById();
             list.size();
             return list;
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException | NoResultException e) {
             return null;
         }
     }
