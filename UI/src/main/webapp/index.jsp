@@ -15,6 +15,9 @@
 
 <section id="content">
     <div class="container">
+        <div class="row index">
+            <img class="indexImg" src="image/index.png" alt="">
+        </div>
     </div>
 </section>
 <%@include file="template_end.jsp" %>
