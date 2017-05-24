@@ -92,35 +92,41 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${products}" var="item">
-                                <c:if test="${item.disabled}">
-                                <tr>
-                                    <td>
-                                        <c:out value="${item.category.name}"/>
-                                    </td>
-                                    <td>
-                                        <c:out value="${item.name}"/>
-                                    </td>
-                                    <td>
-                                        <desc><c:out value="${item.description}"/></desc>
-                                    </td>
-                                    <td>
-                                        <price>$<c:out value="${item.price}"/></price>
-                                    </td>
-                                    <td>
-                                        <count><c:out value="${item.count}"/> шт.</count>
-                                    </td>
-                                    <td>
-                                        <form method="POST" action="/cart.jsp">
-                                            <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
-                                            <input class="cntProduct" type="number" name="count" min="1"
-                                                   max="<c:out value='${item.count}'/>"
-                                                   value="1"/>
-                                            <button type=submit name=buy class="btn btn-primary"><img class="icon"
-                                                                                                      src="../image/cart.png">
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                <c:if test="${not item.disabled}">
+                                    <tr>
+                                        <td>
+                                            <c:out value="${item.category.name}"/>
+                                        </td>
+                                        <td>
+                                            <c:out value="${item.name}"/>
+                                        </td>
+                                        <td>
+                                            <desc><c:out value="${item.description}"/></desc>
+                                        </td>
+                                        <td>
+                                            <price>$<c:out value="${item.price}"/></price>
+                                        </td>
+                                        <td>
+                                            <count><c:out value="${item.count}"/> шт.</count>
+                                        </td>
+                                        <td>
+                                            <c:if test="${item.count > 0}">
+                                                <form method="POST" action="/cart.jsp">
+                                                    <input type="hidden" name="id" value="<c:out value='${item.id}'/>"/>
+                                                    <input class="cntProduct" type="number" name="count" min="1"
+                                                           max="<c:out value='${item.count}'/>"
+                                                           value="1"/>
+                                                    <button type=submit name=buy class="btn btn-primary"><img
+                                                            class="icon"
+                                                            src="../image/cart.png">
+                                                    </button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${item.count == 0}">
+                                                Отсутствует
+                                            </c:if>
+                                        </td>
+                                    </tr>
                                 </c:if>
                             </c:forEach>
                             </tbody>
